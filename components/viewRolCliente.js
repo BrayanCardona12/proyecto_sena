@@ -117,9 +117,6 @@ function ViewRolCliente({ infoListV }) {
             </div>
           </aside>
 
-
-
-
           <div className="seccion_right">
             <div className="nav">
               <button id="menu_btn">

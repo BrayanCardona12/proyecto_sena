@@ -1,10 +1,6 @@
 import CardUser from './cardUser'
 
-
 function ViewCliente({info}) {
-
-
-
     return (
         <>
             <style jsx>
@@ -34,9 +30,6 @@ function ViewCliente({info}) {
                 {info.map((x) => (
                 <CardUser key={x.id} datos={x}/>
                 ))}
-
-
-
             </main>
 
         </>

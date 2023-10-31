@@ -4,18 +4,11 @@ import LogAuth from 'log/logAuth';
 import Link from 'next/link';
 import  '@/styles/Home.module.css'
 
-
-
 export default function BodyHome() {
-
 
   EfectoHome()
 
   const {changeInput, submit, correo, contrasena, rol, error} = LogAuth()
-
- 
-
-
 
   return (
     <>

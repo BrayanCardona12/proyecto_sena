@@ -1,115 +1,14 @@
 import axios from 'axios'
 import { StyleCardProducto } from 'log/Styles'
+import logCardProducto from 'log/logCardProducto'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+
 
 function CardProducto({ vendedor, infoProd, dataCar, cliente }) {
-  const router = useRouter();
 
-  const [error, setError] = useState("")
-  const [statusCar, setStatusCar] = useState()
+  let { changeInput, cantidad, error, addCar, statusCar }= logCardProducto(infoProd, dataCar)
 
-  const [cantidad, setCantidad] = useState(1)
-
-
-  const changeInput = ({ target: { value } }) => {
-    if (value == '') {
-      setCantidad(1)
-      return
-    }
-
-    if (!parseInt(value)
-      || parseInt(value) > parseInt(infoProd.cantidad)
-      || parseInt(value) < 1) {
-      setError("Error el valor ingresado es invalido")
-      setCantidad(value)
-      return
-    }
-
-    setCantidad(value)
-    setError("")
-    return
-
-  }
-
-  useEffect(() => {
-    const validateProductoCar = () => {
-
-      dataCar.map(x => {
-        if (
-          x.idVendedor == parseInt(router.query.id) &&
-          x.idProducto == infoProd.idProducto &&
-          x.idCliente == parseInt(localStorage.getItem('inf')) &&
-          x.estado == 'disponible'
-        ) {
-          setStatusCar(true)
-
-
-        }
-      })
-
-    }
-
-    validateProductoCar()
-
-  }, [])
-
-
-  const addCar = async () => {
-    let validate = true;
-
-    for (const x of dataCar) {
-
-      if (
-        x.idVendedor == parseInt(router.query.id) &&
-        x.idProducto == infoProd.idProducto &&
-        x.idCliente == parseInt(localStorage.getItem('inf')) &&
-        x.estado == 'noDisponible'
-      ) {
-        validate = false;
-
-          (async () => {
-            await axios.put('/api/Crud/insertUpdate/', {
-              idV: x.idVendedor,
-              idP: x.idProducto,
-              idC: parseInt(localStorage.getItem('inf')),
-              estado: 'disponible',
-              cantidadProducto: cantidad
-            });
-          })();
-
-        setStatusCar(true)
-       location.href = `/RolCliente/${router.query.id}?idC=` + localStorage.getItem('inf')
-     
-        break
-
-      }
-    }
-
-    if (validate) {
-      (async () => {
-        await axios.post('/api/CarShop/', {
-          cantidadProducto: cantidad,
-          idVendedor: parseInt(router.query.id),
-          idProducto: infoProd.idProducto,
-          idCliente: parseInt(localStorage.getItem('inf')),
-          estado: 'disponible'
-
-        })
-      })();
-
-      setStatusCar(true)
-      location.href = `/RolCliente/${router.query.id}?idC=` + localStorage.getItem('inf')
   
-    }
-
-
-
-
-  }
-
-
   return (
     <>
       <style jsx>
@@ -129,12 +28,7 @@ function CardProducto({ vendedor, infoProd, dataCar, cliente }) {
           }}
             className="material-icons-sharp btn-e">delete</span>
 
-
-
         </div>) : ''}
-
-
-
 
         <img src={infoProd.imagen} />
 
@@ -169,22 +63,13 @@ function CardProducto({ vendedor, infoProd, dataCar, cliente }) {
                       <input value={cantidad} onChange={changeInput} type='number' placeholder='1' min={1} max={parseInt(infoProd.cantidad)} />
 
                     </>
-
-
                 }
-
-
               </div>
               <b>{error}</b>
-
             </>
-
-
           ) : ''
         }
-
       </div></>
-
   )
 }
 

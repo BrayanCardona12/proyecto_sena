@@ -3,8 +3,8 @@ import CardProducto from "components/CardProducto"
 import Head from "next/head"
 import LogCloseSesion from "log/logCloseSesion"
 import EffectDarkModeStatus from "log/EffectDarkModeStatus"
-import { useEffect, useState } from "react"
-import axios from "axios"
+import { useState } from "react"
+
 import Link from "next/link"
 
 
@@ -16,9 +16,6 @@ function ViewRolVendedor({prod}) {
 
 
   EffectDarkModeStatus(setDarkMode)
-
-
-
 
   return (
     <>
@@ -32,7 +29,6 @@ function ViewRolVendedor({prod}) {
 
 
       <style jsx> {`${StyleHomeCliente()}`} </style>
-
 
       <main id="contMain" className={`${darkMode ? 'variables_modo_oscuro' : ''}`}>
 
@@ -124,9 +120,6 @@ function ViewRolVendedor({prod}) {
             </div>
           </aside>
 
-
-
-
           <div className="seccion_right">
             <div className="nav">
               <button id="menu_btn">
@@ -169,27 +162,17 @@ function ViewRolVendedor({prod}) {
               </div>
             </div>
 
-
-
             <div style={{ width: '100%', display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
              
              {prod.map((x) => (
                <CardProducto infoProd={x} key={x.idProducto} cliente={false} dataCar={[]}  vendedor={true} />
              ))}
              
-             
-              
-
             </div>
-
           </div>
         </div>
 
       </main>
-
-
-
-
     </>
   )
 }

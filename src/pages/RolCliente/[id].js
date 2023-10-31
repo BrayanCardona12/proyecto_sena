@@ -1,18 +1,10 @@
 import axios from 'axios';
 import CardCarritoCompra from 'components/CardCarritoCompra';
 import CardProducto from 'components/CardProducto'
-import { useEffect, useState } from 'react';
-import path from 'path'
-
-
 
 function InfoCatalogo(props) {
 
-
   let { data: { data1, data2, data3 } } = props;
-
-  const [dataCar, setDataCar] = useState(data3)
-  
 
   return (
     <>
@@ -161,7 +153,7 @@ function InfoCatalogo(props) {
           <div id="cont">
             <label className="b2" htmlFor="boton"> X </label>
             <h1>🛒 Carrito 🛒</h1>
-            {dataCar.map((x) => (
+            {data3.map((x) => (
               <CardCarritoCompra key={x.idProducto} datos={x} />
             )
             )}
@@ -171,15 +163,8 @@ function InfoCatalogo(props) {
 
       </div>
     </>
-
-
-
   )
-
-
 }
-
-
 
 InfoCatalogo.getInitialProps = async (ctx) => {
 
@@ -187,12 +172,6 @@ InfoCatalogo.getInitialProps = async (ctx) => {
     const response1 = await axios.get('http://localhost:3000/api/Crud/selectProductos/' + ctx.query.id);
     const response2 = await axios.put('http://localhost:3000/api/CarShop/');
     const response3 = await axios.patch('http://localhost:3000/api/CarShop/', { idC: parseInt(ctx.query.idC), idV: parseInt(ctx.query.id) });
-
-
-
-//https://qzvrlqj3-3000.use2.devtunnels.ms/
-// 'x-forwarded-proto': 'https',
-// 'x-forwarded-host': 'qzvrlqj3-3000.use2.devtunnels.ms',
 
     const data1 = response1.data;
     const data2 = response2.data;
@@ -209,9 +188,9 @@ InfoCatalogo.getInitialProps = async (ctx) => {
       data: JSON.parse(JSON.stringify(info))
     };
   } catch (error) {
-    // Manejar errores apropiadamente
+
     console.error(error);
-    return { data: {} }; // Otra acción en caso de error
+    return { data: {} };
   }
 }
 
