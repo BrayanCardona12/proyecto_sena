@@ -1,15 +1,22 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { StyleHomeCliente } from 'log/Styles'
 import Head from 'next/head'
 import LogCloseSesion from 'log/logCloseSesion'
 import EffectDarkModeStatus from 'log/EffectDarkModeStatus'
 import CardUser from './cardUser'
+import debounce from 'just-debounce-it'
+import logFilterProdUsersInput from 'log/logFilterProdUsersInput'
+
 
 function ViewRolCliente({ infoListV }) {
 
-  const { closeSesion } = LogCloseSesion()
+  let { closeSesion } = LogCloseSesion()
 
-  const [darkMode, setDarkMode] = useState(false)
+  let [darkMode, setDarkMode] = useState(false)
+
+  //LogFilterUser
+
+  let { Change, textInputFilter, cardFilter } = logFilterProdUsersInput(infoListV)
 
   EffectDarkModeStatus(setDarkMode)
 
@@ -159,14 +166,19 @@ function ViewRolCliente({ infoListV }) {
               </div>
             </div>
 
-
+            <input value={textInputFilter} onChange={Change} type="text" className="input-filter" placeholder="Ohm Parfum..." />
             <div style={{ width: '100%', display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
 
 
-
-              {infoListV.map((x) => (
+              {cardFilter.length != 0 ? cardFilter.map((x) => (
                 <CardUser key={x.id} datos={x} />
-              ))}
+              )) : infoListV.map((x) => (
+                <CardUser key={x.id} datos={x} />
+              ))
+              }
+
+
+
             </div>
 
           </div>

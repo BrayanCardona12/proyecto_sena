@@ -1,10 +1,13 @@
 import axios from 'axios';
 import CardCarritoCompra from 'components/CardCarritoCompra';
 import CardProducto from 'components/CardProducto'
+import logFilterProdUsersInput from 'log/logFilterProdUsersInput';
 
 function InfoCatalogo(props) {
 
   let { data: { data1, data2, data3 } } = props;
+
+  let { Change, textInputFilter, cardFilter } = logFilterProdUsersInput(data1)
 
   return (
     <>
@@ -132,18 +135,33 @@ function InfoCatalogo(props) {
 
         }
 
+        
+    .input-filter {
+      width: 100%;
+      font-size: 1.2rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      border: 2px dashed rgb(73, 73, 73);
+    }
+
 
 
 
   `
         }</style>
 
+      <input value={textInputFilter} onChange={Change} type="text" className="input-filter" placeholder="Ohm Parfum..." />
+
       <div className='body' >
 
-        {data1.map((x) => (
+        {cardFilter.length != 0 ?
+          cardFilter.map((x) => (
+            <CardProducto key={x.idProducto} dataCar={data2} cliente={true} infoProd={x} vendedor={false} />
+          ))
 
-          <CardProducto key={x.idProducto} dataCar={data2} cliente={true} infoProd={x} vendedor={false} />
-        ))}
+          : data1.map((x) => (
+
+            <CardProducto key={x.idProducto} dataCar={data2} cliente={true} infoProd={x} vendedor={false} />
+          ))}
 
         <input className='input' type="checkbox" id="boton" />
         <label className="b1" htmlFor="boton">🛒</label>

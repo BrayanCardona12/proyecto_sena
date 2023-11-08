@@ -6,6 +6,7 @@ import EffectDarkModeStatus from "log/EffectDarkModeStatus"
 import { useState } from "react"
 
 import Link from "next/link"
+import logFilterProdUsersInput from "log/logFilterProdUsersInput"
 
 
 function ViewRolVendedor({prod}) {
@@ -13,6 +14,8 @@ function ViewRolVendedor({prod}) {
   const { closeSesion } = LogCloseSesion()
 
   const [darkMode, setDarkMode] = useState(false)
+
+  let { Change, textInputFilter, cardFilter } = logFilterProdUsersInput(prod)
 
 
   EffectDarkModeStatus(setDarkMode)
@@ -161,10 +164,17 @@ function ViewRolVendedor({prod}) {
                 </div>
               </div>
             </div>
+            
+            <input value={textInputFilter} onChange={Change} type="text" className="input-filter" placeholder="Ohm Parfum..." />
 
             <div style={{ width: '100%', display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
              
-             {prod.map((x) => (
+             {cardFilter.length != 0 ? cardFilter.map((x) => (
+                <CardProducto infoProd={x} key={x.idProducto} cliente={false} dataCar={[]}  vendedor={true} />
+        
+              )) :
+             
+             prod.map((x) => (
                <CardProducto infoProd={x} key={x.idProducto} cliente={false} dataCar={[]}  vendedor={true} />
              ))}
              

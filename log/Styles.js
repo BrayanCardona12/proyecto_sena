@@ -1300,6 +1300,14 @@ export function StyleHomeCliente() {
         color: #FFF;
     }
     
+
+    .input-filter {
+        width: 100%;
+        margin: 9px;
+        font-size: 1.2rem;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        border: 2px dashed rgb(73, 73, 73);
+      }
     `
 }
  
