@@ -1,26 +1,28 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 
 export default function logRegister() {
 
     const router = useRouter()
     const [error, setError] = useState()
+
     const [loading, setLoading] = useState(false)
-    
+
     const [datosInput, setDatosInput] = useState({
         nombre: '',
-        imagen:'',
+        imagen: '',
         apellido: '',
-        telefono: 3214223,
+        codInt:0,
+        telefono: 31264534,
         edad: 32,
         pais: 'CO',
         ciudad: '',
         direccion: '',
         rol: '1',
         correo: '',
-        estado:'activo',
+        estado: 'activo',
         contrasena: ''
     })
 
@@ -28,13 +30,13 @@ export default function logRegister() {
         e.preventDefault()
         setLoading(true)
 
-        const { data } = await axios.put('/api/Login', {correo: datosInput.correo})
+        const { data } = await axios.put('/api/Login', { correo: datosInput.correo })
 
         if (data != '') {
             setError('Error, Usuario Existente')
             setLoading(false)
             return
-          }
+        }
 
         for (const k in datosInput) {
 
@@ -86,14 +88,15 @@ export default function logRegister() {
     }
 
 
-  return {
-    submit,
-     changeInput,
-     datosInput,
-     setDatosInput,
-     error,
-     loading
-     }
+
+
+    return {
+        submit,
+        changeInput,
+        datosInput,
+        setDatosInput,
+        error,
+        loading
+    }
 }
 
- 

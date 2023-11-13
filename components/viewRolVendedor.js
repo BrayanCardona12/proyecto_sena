@@ -3,13 +3,14 @@ import CardProducto from "components/CardProducto"
 import Head from "next/head"
 import LogCloseSesion from "log/logCloseSesion"
 import EffectDarkModeStatus from "log/EffectDarkModeStatus"
-import { useState } from "react"
-
+import { useRef, useState } from "react"
 import Link from "next/link"
 import logFilterProdUsersInput from "log/logFilterProdUsersInput"
 
 
-function ViewRolVendedor({prod}) {
+
+function ViewRolVendedor({prod, infoUser}) {
+
 
   const { closeSesion } = LogCloseSesion()
 
@@ -17,8 +18,8 @@ function ViewRolVendedor({prod}) {
 
   let { Change, textInputFilter, cardFilter } = logFilterProdUsersInput(prod)
 
-
   EffectDarkModeStatus(setDarkMode)
+
 
   return (
     <>
@@ -154,14 +155,15 @@ function ViewRolVendedor({prod}) {
 
               <div className="perfil">
                 <div className="informacion">
-                  <p>Hola, <b>Brayan</b></p>
+                  <p>Hola, <b>{infoUser.map(x => x.nombre)}</b></p>
                   <small>
                     Vendedor
                   </small>
                 </div>
-                <div className="foto_perfil">
-                  <img src="/logo.png" alt="foto perfil" />
-                </div>
+                <Link href={'/ActUser/'+infoUser.map(x => x.id)} style={{position:'relative'}} className="foto_perfil">
+                  <img src={infoUser.map(x => x.imagen)} alt="foto perfil" />
+                  <span style={{position:'absolute', borderRadius:'10px',zIndex:'10', bottom:'0', right:'0'}} className="material-icons-sharp"> edit </span>
+                </Link>
               </div>
             </div>
             
@@ -172,7 +174,7 @@ function ViewRolVendedor({prod}) {
              {cardFilter.length != 0 ? cardFilter.map((x) => (
                 <CardProducto infoProd={x} key={x.idProducto} cliente={false} dataCar={[]}  vendedor={true} />
         
-              )) :
+              )) : prod.length == 0? <h1>Noy hay productos registrados</h1>:
              
              prod.map((x) => (
                <CardProducto infoProd={x} key={x.idProducto} cliente={false} dataCar={[]}  vendedor={true} />

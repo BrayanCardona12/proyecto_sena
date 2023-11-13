@@ -153,12 +153,11 @@ function InfoCatalogo(props) {
 
       <div className='body' >
 
-        {cardFilter.length != 0 ?
+        {
+        cardFilter.length != 0 ?
           cardFilter.map((x) => (
             <CardProducto key={x.idProducto} dataCar={data2} cliente={true} infoProd={x} vendedor={false} />
-          ))
-
-          : data1.map((x) => (
+          )) : data1.length == 0 ? <h1>No hay productos disponibles</h1>: data1.map((x) => (
 
             <CardProducto key={x.idProducto} dataCar={data2} cliente={true} infoProd={x} vendedor={false} />
           ))}
@@ -171,7 +170,7 @@ function InfoCatalogo(props) {
           <div id="cont">
             <label className="b2" htmlFor="boton"> X </label>
             <h1>🛒 Carrito 🛒</h1>
-            {data3.map((x) => (
+            {data3.length == 0 ? <h2>No hay productos disponibles</h2> :data3.map((x) => (
               <CardCarritoCompra key={x.idProducto} datos={x} />
             )
             )}

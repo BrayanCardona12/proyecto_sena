@@ -23,7 +23,7 @@ function CardUser({ datos }) {
     align-items: center;
     background-color: rgb(216, 154, 61);
     text-align: center;
-  
+    position: relative;
     border-radius: 10px;
   
   }
@@ -32,21 +32,57 @@ function CardUser({ datos }) {
     width: 40%;
   }
 
+  .wasa {
+    background-color: #25D366;
+    padding: 4px;
+
+    border-radius: 10px;
+    font-size:1.3rem;
+
+
+  }
+
+  .email {
+    background-color: rgb(201, 75, 40);
+    padding: 4px;
+
+    border-radius: 10px;
+    font-size:1.3rem;
+  }
+
+  .c-se {
+    position: absolute;
+    right:0;
+    bottom:0;
+  }
+
 
 
 `}
       </style>
 
-      <Link href={`/RolCliente/${datos.id}/?idC=`+ localStorage.getItem('inf')}>
-        <div className="cont-user">
-          <img src={datos.imagen} />
-          <div className="cont-user-info">
-            <h1>{datos.nombre}</h1>
-            <h3>Vendedor | {datos.pais}</h3>
-            <p>{datos.correo}</p>
+
+      <div style={{ position: 'relative' }}>
+        <Link href={`/RolCliente/${datos.id}/?idC=` + localStorage.getItem('inf')}>
+          <div className="cont-user">
+            <img src={datos.imagen} />
+            <div className="cont-user-info">
+              <h1>{datos.nombre}</h1>
+              <h3>Vendedor | {datos.pais}</h3>
+              <p>{datos.correo}</p>
+            </div>
+
           </div>
+        </Link>
+        <div className='c-se'>
+          <span className='email'>📬</span>
+          <a target='_blank' href={`https://api.whatsapp.com/send?phone=${datos.codInt}${datos.telefono}`} className='wasa'>
+          📞
+        </a>
         </div>
-      </Link>
+        
+      </div>
+
 
     </>
 

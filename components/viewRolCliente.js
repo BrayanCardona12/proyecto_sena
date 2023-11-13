@@ -1,10 +1,9 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { StyleHomeCliente } from 'log/Styles'
 import Head from 'next/head'
 import LogCloseSesion from 'log/logCloseSesion'
 import EffectDarkModeStatus from 'log/EffectDarkModeStatus'
 import CardUser from './cardUser'
-import debounce from 'just-debounce-it'
 import logFilterProdUsersInput from 'log/logFilterProdUsersInput'
 
 
