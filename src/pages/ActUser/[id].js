@@ -23,6 +23,8 @@ function actUser(props) {
         contrasena: ''
     })
 
+    let correo = useRef()
+
     const [inputCod, setInputCod] = useState('')
 
     const codRamdon = useRef(Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000)
@@ -32,28 +34,42 @@ function actUser(props) {
 
     useEffect(() => {
         setDatosInput({ ...props.data[0] })
+        correo.current = props.data[0].correo
     }, [])
 
     const changeInput = ({ target: { name, value } }) => {
         setDatosInput({ ...datosInput, [name]: value })
     }
 
-    const sendEmail = (e) => {
+    const sendEmail = async (e) => {
         e.preventDefault();
         //---------------------------------------
-
-
-
         //.....
 
 
         // ⬆ se hace la validacion de los campos. (💡, puede ser una funcion aparte, para que se pueda usar en el otro onclick...)
+        if (correo.current == datosInput.correo) {
+            ; (async () => {
+                await axios.post(`http://localhost:4055/send/${datosInput.correo}/${codRamdon.current}`)
+            })();
+            setStatusBtnSend(false)
+            setError('')
+            return
 
-
-        (async () => {
-            await axios.post(`http://localhost:4055/send/${datosInput.correo}/${codRamdon.current}`)
-        })();
-        setStatusBtnSend(false)
+        } else {
+            const { data } = await axios.put('/api/Login', { correo: datosInput.correo })
+            if (data != '') {
+                setError('Error, Usuario Existente')
+                return
+            } else {
+                ; (async () => {
+                    await axios.post(`http://localhost:4055/send/${datosInput.correo}/${codRamdon.current}`)
+                })();
+                setStatusBtnSend(false)
+                setError('')
+                return
+            }
+        }
 
     }
 
@@ -62,12 +78,12 @@ function actUser(props) {
 
         if (inputCod == codRamdon.current) {
             // se actualiza y regresa a la pagina anterior
-           let alerta = confirm('El código ingresado es correcto, ¿desea continuar con el proceso de actualización de datos?')
+            let alerta = confirm('El código ingresado es correcto, ¿desea continuar con el proceso de actualización de datos?')
 
-           alerta ? await axios.put(`/api/RegisterUsers/`, {...datosInput, id: parseInt(router.query.id)}) : ''
-           router.push('/')
-        }else {
-            console.log('paile, no fue');
+            alerta ? await axios.put(`/api/RegisterUsers/`, { ...datosInput, id: parseInt(router.query.id) }) : ''
+            router.push('/')
+        } else {
+            setError('Error, código incorrecto');
         }
 
         return

@@ -23,8 +23,8 @@ export default async function CarritoCompra(req, res) {
     async function findCarCliente(req, res) {
         let { idC, idV } = req.body
 
-        const [datos] = await pool.query(`SELECT imagen, cantidad, nombre, precio, carrito.cantidadProducto, carrito.idCliente, carrito.idVendedor, carrito.idProducto FROM producto inner join carrito on producto.idProducto = carrito.idProducto where carrito.idCliente = ${idC} and carrito.idVendedor = ${idV} AND carrito.estado = 'disponible' AND producto.estado = 'disponible';
-        `)
+        const [datos] = await pool.query(`SELECT imagen, cantidad, nombre, precio, carrito.cantidadProducto, carrito.idCliente, carrito.idVendedor, carrito.idProducto FROM producto inner join carrito on producto.idProducto = carrito.idProducto where carrito.idCliente = ? and carrito.idVendedor = ? AND carrito.estado = 'disponible' AND producto.estado = 'disponible';`, [idC, idV])
+    
         return res.status(200).json(datos)
     }
 

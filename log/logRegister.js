@@ -10,11 +10,21 @@ export default function logRegister() {
 
     const [loading, setLoading] = useState(false)
 
+    // Cositas del register
+    const [inputCod, setInputCod] = useState('')
+
+    const codRamdon = useRef(Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000)
+
+
+    const [statusBtnSend, setStatusBtnSend] = useState(true)
+
+    //-----------------------
+
     const [datosInput, setDatosInput] = useState({
         nombre: '',
         imagen: '',
         apellido: '',
-        codInt:0,
+        codInt: 57,
         telefono: 31264534,
         edad: 32,
         pais: 'CO',
@@ -26,17 +36,13 @@ export default function logRegister() {
         contrasena: ''
     })
 
-    const submit = async (e) => {
-        e.preventDefault()
+
+
+    // funciones de verificacion de codigo
+
+    const sendEmail = async (e) => {
+        e.preventDefault();
         setLoading(true)
-
-        const { data } = await axios.put('/api/Login', { correo: datosInput.correo })
-
-        if (data != '') {
-            setError('Error, Usuario Existente')
-            setLoading(false)
-            return
-        }
 
         for (const k in datosInput) {
 
@@ -47,41 +53,73 @@ export default function logRegister() {
             }
         }
 
-        await axios.post('/api/RegisterUsers', datosInput)
-
-
-        if (parseInt(datosInput.rol) == 1) {
-            localStorage.setItem('auth', 'trueC')
-            let { correo, contrasena, rol } = datosInput
-
-            const { data } = await axios.post('/api/Login', { correo, contrasena, rol })
-            const info = data[0]
-
-            localStorage.setItem('inf', info.id)
-            router.push('/RolCliente')
-
+        const { data } = await axios.put('/api/Login', { correo: datosInput.correo })
+        if (data != '') {
+            setError('Error, Usuario Existente')
             setLoading(false)
+            return
+        }else {
+            await axios.post(`http://localhost:4055/send/${datosInput.correo}/${codRamdon.current}`)
+            setStatusBtnSend(false)
+            setLoading(false)
+            setError('')
             return
         }
 
-        if (parseInt(datosInput.rol) == 2) {
-            localStorage.setItem('auth', 'trueV')
-            let { correo, contrasena, rol } = datosInput
 
-            const { data } = await axios.post('/api/Login', { correo, contrasena, rol })
-            const info = data[0]
-
-            localStorage.setItem('inf', info.id)
-            router.push('/RolVendedor')
-            setLoading(false)
-            return
-        }
-
-        setError('Error')
-        setLoading(false)
-        return
 
     }
+
+    const clickCodVerf = async (e) => {
+        e.preventDefault();
+        setLoading(true)
+
+        if (inputCod == codRamdon.current) {
+            await axios.post('/api/RegisterUsers', datosInput)
+
+
+            if (parseInt(datosInput.rol) == 1) {
+                localStorage.setItem('auth', 'trueC')
+                let { correo, contrasena, rol } = datosInput
+
+                const { data } = await axios.post('/api/Login', { correo, contrasena, rol })
+                const info = data[0]
+
+                localStorage.setItem('inf', info.id)
+                router.push('/RolCliente')
+
+                setLoading(false)
+                return
+            }
+
+            if (parseInt(datosInput.rol) == 2) {
+                localStorage.setItem('auth', 'trueV')
+                let { correo, contrasena, rol } = datosInput
+
+                const { data } = await axios.post('/api/Login', { correo, contrasena, rol })
+                const info = data[0]
+
+                localStorage.setItem('inf', info.id)
+                router.push('/RolVendedor')
+                setLoading(false)
+                return
+            }
+
+            setError('Error')
+            setLoading(false)
+            return
+           
+        } else {
+            setError('Error, código incorrecto');
+            setLoading(false)
+        }
+
+        return
+    }
+
+    ///---------------------------------
+
+
 
     const changeInput = ({ target: { name, value } }) => {
         setDatosInput({ ...datosInput, [name]: value })
@@ -91,12 +129,18 @@ export default function logRegister() {
 
 
     return {
-        submit,
         changeInput,
         datosInput,
         setDatosInput,
         error,
-        loading
+        loading,
+        statusBtnSend,
+        setStatusBtnSend,
+        codRamdon,
+        inputCod,
+        setInputCod,
+        sendEmail,
+        clickCodVerf
     }
 }
 

@@ -23,9 +23,7 @@ export default async function RegisterUsers(req, res) {
         let {id, nombre, imagen, apellido, codInt , telefono , edad, pais , ciudad, direccion, correo, estado, contrasena}  = req.body
         
     
-        await pool.query( `
-        UPDATE usuarios SET nombre = '${nombre}', imagen = '${imagen}', apellido = '${apellido}', codInt = '${codInt}', telefono = '${telefono}', edad = ${edad}, pais = '${pais}', ciudad = '${ciudad}', direccion = '${direccion}',  correo = '${correo}', estado = '${estado}', contrasena = '${contrasena}' WHERE id = ${id};
-      `)
+        await pool.query( `UPDATE usuarios SET nombre = ?, imagen = ?,  apellido = ?, codInt = ?, telefono = ?, edad = ?,  pais = ?,  ciudad = ?, direccion = ?,  correo = ?, estado = ?, contrasena = ? WHERE id = ? ;`, [nombre, imagen, apellido, codInt , telefono , edad, pais , ciudad, direccion, correo, estado, contrasena, id])
 
         return res.status(200).json()
     }

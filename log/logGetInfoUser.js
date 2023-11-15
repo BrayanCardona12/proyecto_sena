@@ -17,7 +17,7 @@ function logGetInfoUser() {
     }, [])
 
 
-    return { info: datos }
+    return { information: datos }
 }
 
 export default logGetInfoUser

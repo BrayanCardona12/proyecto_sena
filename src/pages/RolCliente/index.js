@@ -1,5 +1,6 @@
 import ViewRolCliente from 'components/viewRolCliente'
 import getListVendedores from 'log/getListVendedores'
+import logGetInfoUser from 'log/logGetInfoUser'
 import LogSesionStatus from 'log/logSesionStatus'
 
 
@@ -11,11 +12,13 @@ function HomeCliente() {
 
   const {info} = getListVendedores()
 
+  const  {information} = logGetInfoUser()
+
 
 
   return (
 
-    <>{sesionActive ? <ViewRolCliente infoListV={info}/> : ''} </>
+    <>{sesionActive ? <ViewRolCliente infoListV={info} infoUser={information}/> : ''} </>
     
   )
 

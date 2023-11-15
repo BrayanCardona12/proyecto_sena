@@ -155,13 +155,13 @@ function ViewRolVendedor({prod, infoUser}) {
 
               <div className="perfil">
                 <div className="informacion">
-                  <p>Hola, <b>{infoUser.map(x => x.nombre)}</b></p>
+                  <p>Hola, <b>{!infoUser[0] ? 'unknown': infoUser[0].nombre}</b></p>
                   <small>
                     Vendedor
                   </small>
                 </div>
                 <Link href={'/ActUser/'+infoUser.map(x => x.id)} style={{position:'relative'}} className="foto_perfil">
-                  <img src={infoUser.map(x => x.imagen)} alt="foto perfil" />
+                  <img src={!infoUser[0] ? 'unknown': infoUser[0].imagen} alt="foto perfil" />
                   <span style={{position:'absolute', borderRadius:'10px',zIndex:'10', bottom:'0', right:'0'}} className="material-icons-sharp"> edit </span>
                 </Link>
               </div>

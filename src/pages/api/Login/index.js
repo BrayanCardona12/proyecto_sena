@@ -6,8 +6,7 @@ export default async function auth(req, res) {
 
     let { correo, contrasena, rol } = req.body
 
-    let query = `SELECT * from usuarios where correo = '${correo}' AND contrasena = '${contrasena}' AND rol = ${rol} AND estado = 'activo';`
-    const [datos] = await pool.query(query)
+    const [datos] = await pool.query("SELECT * from usuarios where correo = ? AND contrasena = ? AND rol = ? AND estado = 'activo';", [correo, contrasena, rol])
 
     return res.status(200).json(datos)
 
@@ -18,8 +17,7 @@ export default async function auth(req, res) {
 
     let { correo } = req.body
 
-    let query = `SELECT * from usuarios where correo = '${correo}' AND estado = 'activo';`
-    const [datos] = await pool.query(query)
+    const [datos] = await pool.query("SELECT * from usuarios where correo = ? AND estado = 'activo';", [correo])
 
     return res.status(200).json(datos)
 
@@ -29,8 +27,7 @@ export default async function auth(req, res) {
 
     let { id } = req.query
 
-    let query = `SELECT * from usuarios where id = ${id};`
-    const [datos] = await pool.query(query)
+    const [datos] = await pool.query("SELECT * from usuarios where id = ? ;", [id])
  
 
     return res.status(200).json(datos)

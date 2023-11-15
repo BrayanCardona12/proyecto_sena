@@ -2,7 +2,10 @@ import logRegister from "log/logRegister"
 
 export default function RegistroUsuarios() {
 
-  let { submit, changeInput, datosInput, error, loading } = logRegister()
+  let { changeInput, datosInput, setDatosInput, error, loading, statusBtnSend,
+     setStatusBtnSend,codRamdon,inputCod, setInputCod, sendEmail, clickCodVerf } = logRegister()
+
+
 
   return (
     <>
@@ -46,7 +49,7 @@ export default function RegistroUsuarios() {
       </style>
       <main className='cont-form-register'>
 
-        <form onSubmit={submit} className="form-register">
+        <form className="form-register">
 
           <h1 >Registro de Usuarios</h1>
           <input onChange={changeInput} value={datosInput.imagen} name="imagen" placeholder="Imagen..." type="text" />
@@ -302,16 +305,28 @@ export default function RegistroUsuarios() {
           <input onChange={changeInput} value={datosInput.ciudad} name="ciudad" placeholder="Ciudad" type="text" />
           <input onChange={changeInput} value={datosInput.direccion} name="direccion" placeholder="Dirección" type="text" />
 
+     
+
+
           <select onChange={changeInput} value={datosInput.rol} name='rol' id="tipo">
             <option value="1">Cliente</option>
             <option value="2">Vendedor</option>
           </select>
 
-          <input onChange={changeInput} value={datosInput.correo} name="correo" placeholder="Correo" type="email" />
-          <input onChange={changeInput} value={datosInput.contrasena} name="contrasena" placeholder="Contraseña" type="password" />
-          {error ? <b>{error}</b> : ''}
-          {loading ? <p className="btn-send-register" style={{ backgroundColor: 'gray' }}>Enviar</p> : <button className="btn-send-register">Enviar</button>}
+          
+          {statusBtnSend ? <input onChange={changeInput} value={datosInput.correo} name="correo" placeholder="Correo" type="email" /> : <input onChange={changeInput} value={datosInput.correo} disabled name="correo" placeholder="Correo" type="email" />}
+                <input onChange={changeInput} value={datosInput.contrasena} name="contrasena" placeholder="Contraseña" type="password" />
+                {error ? <b>{error}</b> : ''}
 
+                {statusBtnSend ? <button style={{ backgroundColor: 'green' }} onClick={sendEmail} className="btn-send-register">Enviarsi</button>
+                    : <>
+                        <i>Ingresa el codigo de verificacion enviado al correo electronico indicado en este formulario para continuar con la actualización de datos</i>
+                        <input type='text' placeholder='codigo' value={inputCod} onChange={(e) => {
+                            setInputCod(e.target.value)
+                        }} /> 
+                        {loading ? <img src="https://i.gifer.com/ZKZg.gif" style={{maxWidth:'60px'}}/> :  <input type='submit' onClick={clickCodVerf} value={'dd'} />}
+                        
+                    </>}
         </form>
 
       </main >

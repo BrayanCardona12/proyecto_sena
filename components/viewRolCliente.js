@@ -5,9 +5,10 @@ import LogCloseSesion from 'log/logCloseSesion'
 import EffectDarkModeStatus from 'log/EffectDarkModeStatus'
 import CardUser from './cardUser'
 import logFilterProdUsersInput from 'log/logFilterProdUsersInput'
+import Link from 'next/link'
 
 
-function ViewRolCliente({ infoListV }) {
+function ViewRolCliente({ infoListV, infoUser }) {
 
   let { closeSesion } = LogCloseSesion()
 
@@ -154,14 +155,15 @@ function ViewRolCliente({ infoListV }) {
 
               <div className="perfil">
                 <div className="informacion">
-                  <p>Hola, <b>Brayan</b></p>
+                  <p>Hola, <b>{!infoUser[0] ? 'unknown': infoUser[0].nombre}</b></p>
                   <small>
                     Cliente
                   </small>
                 </div>
-                <div className="foto_perfil">
-                  <img src="/logo.png" alt="foto perfil" />
-                </div>
+                <Link href={!infoUser[0] ? '/':'/ActUser/'+infoUser[0].id} style={{position:'relative'}} className="foto_perfil">
+                  <img src={!infoUser[0] ? 'unknown': infoUser[0].imagen} alt="foto perfil" />
+                  <span style={{position:'absolute', borderRadius:'10px',zIndex:'10', bottom:'0', right:'0'}} className="material-icons-sharp"> edit </span>
+                </Link>
               </div>
             </div>
 

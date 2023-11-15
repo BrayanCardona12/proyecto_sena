@@ -144,6 +144,18 @@ function InfoCatalogo(props) {
     }
 
 
+    .nave {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: rgb(198, 198, 198);
+    }
+
+    .nave span:hover {
+      border: 1px solid black
+    }
 
 
   `
@@ -151,16 +163,24 @@ function InfoCatalogo(props) {
 
       <input value={textInputFilter} onChange={Change} type="text" className="input-filter" placeholder="Ohm Parfum..." />
 
+      <div className="nave">
+        <span>Precio +</span>
+        <span>Precio -</span>
+        <span>Categoria 🠻</span>
+        <span>Cantidad</span>
+        <span>Calificaciones 👌</span>
+      </div>
+
       <div className='body' >
 
         {
-        cardFilter.length != 0 ?
-          cardFilter.map((x) => (
-            <CardProducto key={x.idProducto} dataCar={data2} cliente={true} infoProd={x} vendedor={false} />
-          )) : data1.length == 0 ? <h1>No hay productos disponibles</h1>: data1.map((x) => (
+          cardFilter.length != 0 ?
+            cardFilter.map((x) => (
+              <CardProducto key={x.idProducto} dataCar={data2} cliente={true} infoProd={x} vendedor={false} />
+            )) : data1.length == 0 ? <h1>No hay productos disponibles</h1> : data1.map((x) => (
 
-            <CardProducto key={x.idProducto} dataCar={data2} cliente={true} infoProd={x} vendedor={false} />
-          ))}
+              <CardProducto key={x.idProducto} dataCar={data2} cliente={true} infoProd={x} vendedor={false} />
+            ))}
 
         <input className='input' type="checkbox" id="boton" />
         <label className="b1" htmlFor="boton">🛒</label>
@@ -170,7 +190,7 @@ function InfoCatalogo(props) {
           <div id="cont">
             <label className="b2" htmlFor="boton"> X </label>
             <h1>🛒 Carrito 🛒</h1>
-            {data3.length == 0 ? <h2>No hay productos disponibles</h2> :data3.map((x) => (
+            {data3.length == 0 ? <h2>No hay productos disponibles</h2> : data3.map((x) => (
               <CardCarritoCompra key={x.idProducto} datos={x} />
             )
             )}

@@ -6,7 +6,7 @@ export default async function getInfoProducto(req, res) {
 
         let { id } = req.query
 
-        let [data] = await pool.query("SELECT * FROM producto where idProducto = " + id)
+        let [data] = await pool.query("SELECT * FROM producto where idProducto = ?", [id])
         return res.status(200).json(data)
     }
 
@@ -16,9 +16,9 @@ export default async function getInfoProducto(req, res) {
         let { id } = req.query
         let { nombre, categoria, descripcion, cantidad, precio, imagen, estado } = req.body
 
-        let consul = `UPDATE producto SET nombre = '${nombre}', categoria = '${categoria}',  descripcion = '${descripcion}',  cantidad = ${cantidad}, precio = ${precio}, imagen = '${imagen}', estado = '${estado}'  where idProducto = ${id}`
 
-        let [data] = await pool.query(consul)
+
+        let [data] = await pool.query('UPDATE producto SET nombre = ? , categoria = ? ,  descripcion = ? ,  cantidad = ? , precio = ? , imagen = ? , estado = ?  where idProducto = ?', [nombre, categoria, descripcion, cantidad, precio, imagen, estado, id])
         return res.status(200).json(data)
     }
 
@@ -26,10 +26,7 @@ export default async function getInfoProducto(req, res) {
 
         let { id } = req.query
 
-        let consul = `UPDATE producto SET estado = 'noDisponible' WHERE idProducto = ${id}`
-
-
-        await pool.query(consul)
+        await pool.query("UPDATE producto SET estado = 'noDisponible' WHERE idProducto = ?", [id])
         return res.status(200).json({})
     }
 

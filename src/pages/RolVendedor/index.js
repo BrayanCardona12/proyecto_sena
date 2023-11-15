@@ -8,12 +8,12 @@ function HomeVendedor() {
  
   const { sesionActive } = LogSesionStatus('trueV')
   const { productos } = getProductos()
-  const  {info} = logGetInfoUser()
+  const  {information} = logGetInfoUser()
 
 
   return (
 
-    <>{sesionActive ? <ViewRolVendedor prod={productos} infoUser={info} /> : ''} </>
+    <>{sesionActive ? <ViewRolVendedor prod={productos} infoUser={information} /> : ''} </>
 
   )
 }

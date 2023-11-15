@@ -75,7 +75,7 @@ function CardUser({ datos }) {
           </div>
         </Link>
         <div className='c-se'>
-          <span className='email'>📬</span>
+          <a href={`mailto:${datos.correo}`} className='email'>📬</a>
           <a target='_blank' href={`https://api.whatsapp.com/send?phone=${datos.codInt}${datos.telefono}`} className='wasa'>
           📞
         </a>
