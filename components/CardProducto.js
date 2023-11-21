@@ -2,11 +2,14 @@ import axios from 'axios'
 import { StyleCardProducto } from 'log/Styles'
 import logCardProducto from 'log/logCardProducto'
 import Link from 'next/link'
+import { formatter } from "log/formatterInt"
 
 
 function CardProducto({ vendedor, infoProd, dataCar, cliente }) {
 
   let { changeInput, cantidad, error, addCar, statusCar }= logCardProducto(infoProd, dataCar)
+
+ 
 
   
   return (
@@ -37,7 +40,7 @@ function CardProducto({ vendedor, infoProd, dataCar, cliente }) {
           <h2>{infoProd.nombre}</h2>
           <p>{infoProd.descripcion}</p>
           <h3>Cantidad: {infoProd.cantidad}</h3>
-          <b>{infoProd.precio}</b>
+          <b>{formatter.format(infoProd.precio)}</b>
         </div>
         {
           cliente ? (

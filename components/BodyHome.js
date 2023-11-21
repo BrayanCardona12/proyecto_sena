@@ -48,12 +48,10 @@ export default function BodyHome() {
         
           <input type="submit" value="login now" className="btn btn-margin" />
           {error? <b style={{color:'red', fontSize:'1.3rem'}}>{error}</b>: ''}
-          <p className="forget">Olvidate la contraseña <a href="#">Click Aqui</a></p>
+          <p className="forget">Olvidaste la contraseña <Link href="/forgotPass">Click Aqui</Link></p>
           <p className="forget">No tienes una cuenta <Link href="/Registro_Usuarios">Crear Una</Link></p>
         </form>
       </div>
-
-
 
       <section className="home">
         <div className="slides-container">

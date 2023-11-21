@@ -93,17 +93,32 @@ function actUser(props) {
         <>
             <style jsx>
                 {`
-                .form-actInsert {
+   
+
+
+                    input {
+                        width: 100%;
+                    }
+
+                  .cont-form {
                     width: 50%;
+                margin:auto;
+                    min-height: 100vh;
                     display: flex;
+                    align-items: center;
                     flex-direction: column;
-                    gap: 12px;
+                    justify-content: center;
                   }
+
+
+
+                  
                 `}
             </style>
-            <form className="form-actInsert">
+            <form className=" cont-form">
 
                 <h1 >Actualizar Información Personal</h1>
+                <img style={{width:'30%', borderRadius:'10px'}} src={datosInput.imagen}/>
                 <input onChange={changeInput} value={datosInput.imagen} name="imagen" placeholder="Imagen..." type="text" />
                 <input onChange={changeInput} value={datosInput.nombre} name="nombre" placeholder="Nombres" type="text" />
                 <input onChange={changeInput} value={datosInput.apellido} name="apellido" placeholder="Apellidos" type="text" />

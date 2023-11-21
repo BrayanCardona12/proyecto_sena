@@ -63,35 +63,35 @@ function ViewRolVendedor({prod, infoUser}) {
                 <span className="material-icons-sharp">
                   person_outline
                 </span>
-                <h3>Usuario</h3>
+                <h3>.....</h3>
               </a>
 
               <a href="#">
                 <span className="material-icons-sharp">
                   receipt_long
                 </span>
-                <h3>Historial</h3>
+                <h3>Mis Clientes</h3>
               </a>
 
               <a href="#">
                 <span className="material-icons-sharp">
                   insights
                 </span>
-                <h3>Analytics</h3>
+                <h3>Analiticas</h3>
               </a>
 
               <a href="#">
                 <span className="material-icons-sharp">
                   mail_outline
                 </span>
-                <h3>Email</h3>
+                <h3>Pedidos</h3>
               </a>
 
               <a href="#">
                 <span className="material-icons-sharp">
                   inventory
                 </span>
-                <h3>Lista de Venta</h3>
+                <h3>.....</h3>
               </a>
 
               <Link href="/RolVendedor/insertarproductos">
@@ -105,14 +105,14 @@ function ViewRolVendedor({prod, infoUser}) {
                 <span className="material-icons-sharp">
                   settings
                 </span>
-                <h3>Configuración</h3>
+                <h3>.....</h3>
               </a>
 
               <a href="#">
                 <span className="material-icons-sharp">
                   add
                 </span>
-                <h3>New Login</h3>
+                <h3>.....</h3>
               </a>
 
               <a onClick={() => closeSesion()}>

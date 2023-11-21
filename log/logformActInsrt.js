@@ -10,7 +10,7 @@ function logformActInsrt() {
     let [producto, setProducto] = useState({
         imagen: "",
         nombre: "",
-        categoria:"",
+        categoria:"Perfume",
         descripcion: "",
         cantidad:0,
         estado:"disponible",

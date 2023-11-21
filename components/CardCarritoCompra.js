@@ -1,3 +1,4 @@
+import { formatter } from "log/formatterInt"
 import logCardCarritoCompra from "log/logCardCarritoCompra"
 
 
@@ -13,6 +14,8 @@ function CardCarritoCompra({ datos }) {
     Change
   } = logCardCarritoCompra(datos)
 
+
+  
 
 
   return (
@@ -100,11 +103,11 @@ display: inline;
           </div>
           <img src={datos.imagen} />
           <div className="card-user-info">
-            <h1>{datos.nombre}</h1>
-            <p>Valor Unitario: ${datos.precio}</p>
+            <h2>{datos.nombre}</h2>
+            <p>Valor Unitario: {formatter.format(datos.precio)}</p>
             <p className="card-user-info-p">Cantidad: </p>
             <input disabled value={datos.cantidadProducto} />
-            <h2>Total: ${parseInt(datos.precio) * parseInt(datos.cantidadProducto)}</h2>
+            <h4>Total: {formatter.format( parseInt(datos.precio) * parseInt(datos.cantidadProducto))}</h4>
           </div>
         </div>
           :

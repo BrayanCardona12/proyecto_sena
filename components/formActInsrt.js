@@ -2,6 +2,7 @@ import logformActInsrt from "log/logformActInsrt"
 
 
 
+
 function FormActInsrt() {
 
     let { Submit, Change, producto } = logformActInsrt()
@@ -34,7 +35,19 @@ function FormActInsrt() {
                 <input className='form-control' type="text" onChange={Change} name="nombre" value={producto.nombre} />
 
                 <label htmlFor="categoria" className='form-label'>Categoria:</label>
-                <input className='form-control' type="text" onChange={Change} name="categoria" value={producto.categoria} />
+
+                <select onChange={Change} value={producto.categoria} name='categoria' className="form-control">
+                    <option value="Perfume">Perfume</option>
+                    <option value="Colonia">Colonia</option>
+                    <option value="Joyeria">Joyeria</option>
+                    <option value="Maquillaje">Maquillaje</option>
+                    <option value="Cuidado de piel">Cuidado de piel</option>
+                    <option value="Labial">Labial</option>
+                    <option value="Desodorante">Desodorante</option>
+                    <option value="Delineador">Delineador</option>
+                    <option value="Protección Solar">Protección Solar</option>
+                    <option value="Tratamiento Facial">Tratamiento Facial</option>
+                </select>
 
 
                 <label className='form-label' htmlFor="descripcion">Descripcion:</label>

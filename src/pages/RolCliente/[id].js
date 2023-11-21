@@ -2,12 +2,15 @@ import axios from 'axios';
 import CardCarritoCompra from 'components/CardCarritoCompra';
 import CardProducto from 'components/CardProducto'
 import logFilterProdUsersInput from 'log/logFilterProdUsersInput';
+import logOtherMethodsFilter from 'log/logOtherMethodsFilter';
 
 function InfoCatalogo(props) {
 
   let { data: { data1, data2, data3 } } = props;
 
-  let { Change, textInputFilter, cardFilter } = logFilterProdUsersInput(data1)
+  let { Change, textInputFilter, cardFilter, setCardFilter} = logFilterProdUsersInput(data1)
+
+  let { filterPriceDown, filterPriceUp, filterStockUp, filterStockDown, filterCategoria, total } = logOtherMethodsFilter(data1, cardFilter, setCardFilter)
 
   return (
     <>
@@ -28,11 +31,15 @@ function InfoCatalogo(props) {
           align-items: center;
           justify-content: center;
           flex-wrap: wrap;
-          gap: 40px
+          gap: 30px
         }
 
         .input {
           display: none;
+        }
+
+        details span {
+          display: block;
         }
 
         .b1 {
@@ -164,11 +171,36 @@ function InfoCatalogo(props) {
       <input value={textInputFilter} onChange={Change} type="text" className="input-filter" placeholder="Ohm Parfum..." />
 
       <div className="nave">
-        <span>Precio +</span>
-        <span>Precio -</span>
-        <span>Categoria 🠻</span>
-        <span>Cantidad</span>
-        <span>Calificaciones 👌</span>
+        <details >
+          <summary>Precio</summary>
+          <span onClick={filterPriceUp}>Precio +</span>
+          <span onClick={filterPriceDown}>Precio -</span>
+        </details>
+
+        <details >
+          <summary>Categoria</summary>
+          <span onClick={filterCategoria}>Todo</span>
+          <span onClick={filterCategoria}>Maquillaje</span>
+          <span onClick={filterCategoria}>Cuidado de piel</span>
+          <span onClick={filterCategoria}>Colonia</span>
+          <span onClick={filterCategoria}>Perfume</span>
+          <span onClick={filterCategoria}>Joyeria</span>
+          <span onClick={filterCategoria}>Labial</span>
+          <span onClick={filterCategoria}>Delineador</span>
+          <span onClick={filterCategoria}>Protección Solar</span>
+          <span onClick={filterCategoria}>Tratamiento Facial</span>
+          <span onClick={filterCategoria}>Desodorante</span>
+        </details>
+        <details >
+          <summary>Stock</summary>
+          <span onClick={filterStockUp}>Stock +</span>
+          <span onClick={filterStockDown}>Stock -</span>
+        </details>
+        <span onClick={() => {
+          location.reload()
+        }}>Borrar Filtros</span>
+        <span>Pedidos Realizados</span>
+        <span>Clientes Favoritos</span>
       </div>
 
       <div className='body' >
@@ -185,7 +217,6 @@ function InfoCatalogo(props) {
         <input className='input' type="checkbox" id="boton" />
         <label className="b1" htmlFor="boton">🛒</label>
 
-
         <div className="ccc">
           <div id="cont">
             <label className="b2" htmlFor="boton"> X </label>
@@ -195,9 +226,12 @@ function InfoCatalogo(props) {
             )
             )}
 
+            {data3.length != 0 ? <>
+              <p>Total Compra: {total(data3)}</p>
+              <button style={{ backgroundColor: 'green', color: 'white', padding: '9px', margin: 'auto', display: 'block' }}>Comprar</button>
+            </> : ''}
           </div>
         </div>
-
       </div>
     </>
   )

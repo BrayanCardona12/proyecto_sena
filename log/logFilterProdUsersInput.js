@@ -26,7 +26,7 @@ function logFilterProdUsersInput(infoList) {
     }
   
 
-  return { Change, textInputFilter, cardFilter}
+  return { Change, textInputFilter, cardFilter, setCardFilter}
 }
 
 export default logFilterProdUsersInput
