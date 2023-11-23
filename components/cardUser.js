@@ -69,7 +69,7 @@ function CardUser({ datos }) {
             <div className="cont-user-info">
               <h1>{datos.nombre}</h1>
               <h3>Vendedor | {datos.pais}</h3>
-              <p>{datos.correo}</p>
+              <p>{"N.I: " + datos.numDoc}</p>
             </div>
 
           </div>

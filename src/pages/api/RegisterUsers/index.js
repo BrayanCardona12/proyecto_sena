@@ -20,10 +20,9 @@ export default async function RegisterUsers(req, res) {
 
     async function updatetUsers(req, res) {
 
-        let {id, nombre, imagen, apellido, codInt , telefono , edad, pais , ciudad, direccion, correo, estado, contrasena}  = req.body
-        
-    
-        await pool.query( `UPDATE usuarios SET nombre = ?, imagen = ?,  apellido = ?, codInt = ?, telefono = ?, edad = ?,  pais = ?,  ciudad = ?, direccion = ?,  correo = ?, estado = ?, contrasena = ? WHERE id = ? ;`, [nombre, imagen, apellido, codInt , telefono , edad, pais , ciudad, direccion, correo, estado, contrasena, id])
+        let { id, nombre, imagen, apellido, codInt, telefono, edad, pais, ciudad, direccion, correo, estado, contrasena,  tipoDoc, numDoc, imgDavi, imgNequi } = req.body
+
+        await pool.query(`UPDATE usuarios SET nombre = ?, imagen = ?,  apellido = ?, codInt = ?, telefono = ?, edad = ?,  pais = ?,  ciudad = ?, direccion = ?,  correo = ?, estado = ?, contrasena = ?,  tipoDoc = ?, numDoc = ?, imgDavi = ?, imgNequi = ? WHERE id = ? ;`, [nombre, imagen, apellido, codInt, telefono, edad, pais, ciudad, direccion, correo, estado, contrasena, tipoDoc, numDoc, imgDavi, imgNequi , id])
 
         return res.status(200).json()
     }

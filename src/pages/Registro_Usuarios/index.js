@@ -2,8 +2,8 @@ import logRegister from "log/logRegister"
 
 export default function RegistroUsuarios() {
 
-  let { changeInput, datosInput, setDatosInput, error, loading, statusBtnSend,
-     setStatusBtnSend,codRamdon,inputCod, setInputCod, sendEmail, clickCodVerf } = logRegister()
+  let { changeInput, datosInput, error, loading, statusBtnSend
+    , inputCod, setInputCod, sendEmail, clickCodVerf } = logRegister()
 
 
 
@@ -53,8 +53,21 @@ export default function RegistroUsuarios() {
 
           <h1 >Registro de Usuarios</h1>
           <input onChange={changeInput} value={datosInput.imagen} name="imagen" placeholder="Imagen..." type="text" />
-          <input onChange={changeInput} value={datosInput.nombre} name="nombre" placeholder="Nombres" type="text" />
-          <input onChange={changeInput} value={datosInput.apellido} name="apellido" placeholder="Apellidos" type="text" />
+          <input onChange={changeInput} value={datosInput.nombre} name="nombre" placeholder="Nombre" type="text" />
+          <input onChange={changeInput} value={datosInput.apellido} name="apellido" placeholder="Apellido" type="text" />
+
+          <select onChange={changeInput} value={datosInput.tipo} name='tipoDoc' id="tipoDoc">
+            <option value="Cédula de Ciudadania">Cedula de Ciudadania</option>
+            <option value="Cédula Extranjera">Cédula Extranjera</option>
+            <option value="Pasaporte">Pasaporte</option>
+            <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+          </select>
+
+          <input name="numDoc" type="text" onChange={changeInput} placeholder="Numero de Documento" value={datosInput.numDoc} />
+
+
+
+
           <div style={{ width: '100%' }}>
             <input min={1} max={400} style={{ width: '20%' }} onChange={changeInput} name="codInt" placeholder="Codigo Internacional" value={datosInput.codInt} autoComplete="postal-code" type="number" />
 
@@ -305,28 +318,37 @@ export default function RegistroUsuarios() {
           <input onChange={changeInput} value={datosInput.ciudad} name="ciudad" placeholder="Ciudad" type="text" />
           <input onChange={changeInput} value={datosInput.direccion} name="direccion" placeholder="Dirección" type="text" />
 
-     
-
-
           <select onChange={changeInput} value={datosInput.rol} name='rol' id="tipo">
             <option value="1">Cliente</option>
             <option value="2">Vendedor</option>
           </select>
 
-          
-          {statusBtnSend ? <input onChange={changeInput} value={datosInput.correo} name="correo" placeholder="Correo" type="email" /> : <input onChange={changeInput} value={datosInput.correo} disabled name="correo" placeholder="Correo" type="email" />}
-                <input onChange={changeInput} value={datosInput.contrasena} name="contrasena" placeholder="Contraseña" type="password" />
-                {error ? <b>{error}</b> : ''}
+          {datosInput.rol == '2' ? <>
+            <i>Como quieres ser vendendor, es necesario que adjuntes al </i>
+            <i>menos dos QR (Daviplata o Nequi) para que te puedan depositar:</i>
+            <input name="imgDavi" onChange={changeInput} type="text" placeholder="Imagen Davi" value={datosInput.imgDavi} />
+            <input name="imgNequi" onChange={changeInput} type="text" placeholder="Imagen Nequi" value={datosInput.imgNequi} />
+          </> : ''}
 
-                {statusBtnSend ? <button style={{ backgroundColor: 'green' }} onClick={sendEmail} className="btn-send-register">Enviarsi</button>
-                    : <>
-                        <i>Ingresa el codigo de verificacion enviado al correo electronico indicado en este formulario para continuar con la actualización de datos</i>
-                        <input type='text' placeholder='codigo' value={inputCod} onChange={(e) => {
-                            setInputCod(e.target.value)
-                        }} /> 
-                        {loading ? <img src="https://i.gifer.com/ZKZg.gif" style={{maxWidth:'60px'}}/> :  <input type='submit' onClick={clickCodVerf} value={'dd'} />}
-                        
-                    </>}
+
+          {statusBtnSend ? <input onChange={changeInput} value={datosInput.correo} name="correo" placeholder="Correo" type="email" /> : <input onChange={changeInput} value={datosInput.correo} disabled name="correo" placeholder="Correo" type="email" />}
+          <input onChange={changeInput} value={datosInput.contrasena} name="contrasena" placeholder="Contraseña" type="password" />
+          {error ? <b>{error}</b> : ''}
+
+          {statusBtnSend ?
+
+            loading ? <img src="https://i.gifer.com/ZKZg.gif" style={{ maxWidth: '60px' }} /> :
+              <button style={{ backgroundColor: 'green' }} onClick={sendEmail} className="btn-send-register">Enviarsi</button>
+
+
+            : <>
+              <i>Ingresa el codigo de verificacion enviado al correo electronico indicado en este formulario para continuar con la actualización de datos</i>
+              <input type='text' placeholder='codigo' value={inputCod} onChange={(e) => {
+                setInputCod(e.target.value)
+              }} />
+              {loading ? <img src="https://i.gifer.com/ZKZg.gif" style={{ maxWidth: '60px' }} /> : <input type='submit' onClick={clickCodVerf} value={'dd'} />}
+
+            </>}
         </form>
 
       </main >

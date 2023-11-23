@@ -1,11 +1,16 @@
 import logformActInsrt from "log/logformActInsrt"
+import { useState } from "react"
 
 
 
 
 function FormActInsrt() {
 
-    let { Submit, Change, producto } = logformActInsrt()
+    let { Submit, Change, producto, inputMarca, setInputMarca, changeMarca } = logformActInsrt()
+
+  
+
+
 
     return (
         <div>
@@ -49,6 +54,17 @@ function FormActInsrt() {
                     <option value="Tratamiento Facial">Tratamiento Facial</option>
                 </select>
 
+                <details>
+                    <summary>Marca: {producto.marca}</summary>
+                    <span style={{ display: 'block' }} onClick={changeMarca}>Yanbal</span>
+                    <span style={{ display: 'block' }} onClick={changeMarca}>Avon</span>
+                    <span style={{ display: 'block' }} onClick={changeMarca}>Carmel</span>
+                    <span style={{ display: 'block' }} onClick={changeMarca}>Esika</span>
+                    <span style={{ display: 'block' }} onClick={changeMarca}>Cyzone</span>
+                    <span style={{ display: 'block' }} onClick={() => { setInputMarca(true)}}>otro...</span>
+                </details>
+
+                {inputMarca ? <><input name='marca' value={producto.marca} onChange={Change}/> <span onClick={() => {setInputMarca(false)}}>✅</span></> : ''}
 
                 <label className='form-label' htmlFor="descripcion">Descripcion:</label>
                 <textarea className='form-control' value={producto.descripcion} onChange={Change} name="descripcion" rows="2" />

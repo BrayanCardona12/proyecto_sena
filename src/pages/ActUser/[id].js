@@ -7,11 +7,20 @@ import React, { useEffect, useRef, useState } from 'react'
 function actUser(props) {
     const router = useRouter()
 
+
+
     const [datosInput, setDatosInput] = useState({
         nombre: '',
         imagen: '',
         apellido: '',
         codInt: 0,
+
+        tipoDoc: 'Cédula de Ciudadania',
+        numDoc: '',
+        imgDavi: 'vacio',
+        imgNequi: 'vacio',
+
+
         telefono: 31264534,
         edad: 32,
         pais: 'CO',
@@ -118,10 +127,25 @@ function actUser(props) {
             <form className=" cont-form">
 
                 <h1 >Actualizar Información Personal</h1>
-                <img style={{width:'30%', borderRadius:'10px'}} src={datosInput.imagen}/>
+                <img style={{ width: '30%', borderRadius: '10px' }} src={datosInput.imagen} />
                 <input onChange={changeInput} value={datosInput.imagen} name="imagen" placeholder="Imagen..." type="text" />
                 <input onChange={changeInput} value={datosInput.nombre} name="nombre" placeholder="Nombres" type="text" />
                 <input onChange={changeInput} value={datosInput.apellido} name="apellido" placeholder="Apellidos" type="text" />
+
+                <select onChange={changeInput} value={datosInput.tipo} name='tipoDoc' id="tipoDoc">
+                    <option value="Cédula de Ciudadania">Cedula de Ciudadania</option>
+                    <option value="Cédula Extranjera">Cédula Extranjera</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                </select>
+
+                <input name="numDoc" type="text" onChange={changeInput} placeholder="Numero de Documento" value={datosInput.numDoc} />
+
+
+
+
+
+
                 <div style={{ width: '100%' }}>
                     <input min={1} max={400} style={{ width: '20%' }} onChange={changeInput} name="codInt" placeholder="Codigo Internacional" value={datosInput.codInt} autoComplete="postal-code" type="number" />
 
@@ -371,6 +395,13 @@ function actUser(props) {
 
                 <input onChange={changeInput} value={datosInput.ciudad} name="ciudad" placeholder="Ciudad" type="text" />
                 <input onChange={changeInput} value={datosInput.direccion} name="direccion" placeholder="Dirección" type="text" />
+
+                {datosInput.rol == '2' ? <>
+                    <i>Como eres vendendor, puedes modificar tus</i>
+                    <i>medios de pago (Daviplata o Nequi):</i>
+                    <input name="imgDavi" onChange={changeInput} type="text" placeholder="Imagen Davi" value={datosInput.imgDavi} />
+                    <input name="imgNequi" onChange={changeInput} type="text" placeholder="Imagen Nequi" value={datosInput.imgNequi} />
+                </> : ''}
 
 
                 {statusBtnSend ? <input onChange={changeInput} value={datosInput.correo} name="correo" placeholder="Correo" type="email" /> : <input onChange={changeInput} value={datosInput.correo} disabled name="correo" placeholder="Correo" type="email" />}

@@ -14,11 +14,11 @@ export default async function getInfoProducto(req, res) {
     async function updateProd(req, res) {
 
         let { id } = req.query
-        let { nombre, categoria, descripcion, cantidad, precio, imagen, estado } = req.body
+        let { nombre, categoria, descripcion, cantidad, precio, imagen, estado, marca } = req.body
 
 
 
-        let [data] = await pool.query('UPDATE producto SET nombre = ? , categoria = ? ,  descripcion = ? ,  cantidad = ? , precio = ? , imagen = ? , estado = ?  where idProducto = ?', [nombre, categoria, descripcion, cantidad, precio, imagen, estado, id])
+        let [data] = await pool.query('UPDATE producto SET nombre = ? , categoria = ? ,  descripcion = ? ,  cantidad = ? , precio = ? , imagen = ? , estado = ?, marca = ?  where idProducto = ?', [nombre, categoria, descripcion, cantidad, precio, imagen, estado, marca ,id])
         return res.status(200).json(data)
     }
 

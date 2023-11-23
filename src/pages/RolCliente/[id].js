@@ -3,14 +3,25 @@ import CardCarritoCompra from 'components/CardCarritoCompra';
 import CardProducto from 'components/CardProducto'
 import logFilterProdUsersInput from 'log/logFilterProdUsersInput';
 import logOtherMethodsFilter from 'log/logOtherMethodsFilter';
+import { useParams } from 'next/navigation';
+import { useRouter } from 'next/router';
+import { useRef } from 'react';
+
 
 function InfoCatalogo(props) {
 
-  let { data: { data1, data2, data3 } } = props;
+  let { data: { data1, data2, data3, identCli } } = props;
 
-  let { Change, textInputFilter, cardFilter, setCardFilter} = logFilterProdUsersInput(data1)
+  let { Change, textInputFilter, cardFilter, setCardFilter } = logFilterProdUsersInput(data1)
 
   let { filterPriceDown, filterPriceUp, filterStockUp, filterStockDown, filterCategoria, total } = logOtherMethodsFilter(data1, cardFilter, setCardFilter)
+
+
+  const router = useRouter()
+
+  let par = useParams()
+  let parametros = useRef({ idV: par.id, idC: identCli})
+
 
   return (
     <>
@@ -225,10 +236,13 @@ function InfoCatalogo(props) {
               <CardCarritoCompra key={x.idProducto} datos={x} />
             )
             )}
-
+          
             {data3.length != 0 ? <>
               <p>Total Compra: {total(data3)}</p>
-              <button style={{ backgroundColor: 'green', color: 'white', padding: '9px', margin: 'auto', display: 'block' }}>Comprar</button>
+              <button onClick={(e) => {
+                e.preventDefault()
+                router.push(`/factura/${parametros.current.idV}/${parametros.current.idC}`)
+              }} style={{ backgroundColor: 'green', color: 'white', padding: '9px', margin: 'auto', display: 'block' }}>Comprar</button>
             </> : ''}
           </div>
         </div>
@@ -251,7 +265,8 @@ InfoCatalogo.getInitialProps = async (ctx) => {
     const info = {
       data1,
       data2,
-      data3
+      data3,
+      identCli: ctx.query.idC
     }
 
 
@@ -260,7 +275,7 @@ InfoCatalogo.getInitialProps = async (ctx) => {
     };
   } catch (error) {
 
-    console.error(error);
+
     return { data: {} };
   }
 }

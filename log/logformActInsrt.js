@@ -11,6 +11,7 @@ function logformActInsrt() {
         imagen: "",
         nombre: "",
         categoria:"Perfume",
+        marca:"Carmel",
         descripcion: "",
         cantidad:0,
         estado:"disponible",
@@ -44,6 +45,12 @@ function logformActInsrt() {
         
     }
 
+    let [inputMarca, setInputMarca] = useState(false)
+
+    const changeMarca = (e) => {
+        Change({ target: { name: "marca", value: e.target.textContent } })
+    }
+
 
 
     const Submit = async (e) => {
@@ -66,7 +73,7 @@ function logformActInsrt() {
 
 
 
-  return {Submit, Change, producto, setProducto}
+  return {Submit, Change, producto, inputMarca, setInputMarca, changeMarca}
 }
 
 export default logformActInsrt

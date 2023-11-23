@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { StyleHomeCliente } from 'log/Styles'
 import Head from 'next/head'
@@ -6,6 +7,7 @@ import EffectDarkModeStatus from 'log/EffectDarkModeStatus'
 import CardUser from './cardUser'
 import logFilterProdUsersInput from 'log/logFilterProdUsersInput'
 import Link from 'next/link'
+import { ToastContainer, toast } from 'react-toast'
 
 
 function ViewRolCliente({ infoListV, infoUser }) {
@@ -50,7 +52,12 @@ function ViewRolCliente({ infoListV, infoUser }) {
                 </span>
               </div>
             </div>
-
+            <p onClick={() => {
+              toast.error('Ups, un error', {
+                backgroundColor: '#CC2C2C',
+                color: 'white',
+              })
+            }}>dfgd</p>
             <div className="sidebar">
               <a href="#" className="active">
                 <span className="material-icons-sharp">
@@ -155,18 +162,18 @@ function ViewRolCliente({ infoListV, infoUser }) {
 
               <div className="perfil">
                 <div className="informacion">
-                  <p>Hola, <b>{!infoUser[0] ? 'unknown': infoUser[0].nombre}</b></p>
+                  <p>Hola, <b>{!infoUser[0] ? 'unknown' : infoUser[0].nombre}</b></p>
                   <small>
                     Cliente
                   </small>
                 </div>
-                <Link href={!infoUser[0] ? '/':'/ActUser/'+infoUser[0].id} style={{position:'relative'}} className="foto_perfil">
-                  <img src={!infoUser[0] ? 'unknown': infoUser[0].imagen} alt="foto perfil" />
-                  <span style={{position:'absolute', borderRadius:'10px',zIndex:'10', bottom:'0', right:'0'}} className="material-icons-sharp"> edit </span>
+                <Link href={!infoUser[0] ? '/' : '/ActUser/' + infoUser[0].id} style={{ position: 'relative' }} className="foto_perfil">
+                  <img src={!infoUser[0] ? 'unknown' : infoUser[0].imagen} alt="foto perfil" />
+                  <span style={{ position: 'absolute', borderRadius: '10px', zIndex: '10', bottom: '0', right: '0' }} className="material-icons-sharp"> edit </span>
                 </Link>
               </div>
             </div>
-
+            <ToastContainer delay={2000} position='top-center' />
             <input value={textInputFilter} onChange={Change} type="text" className="input-filter" placeholder="Ohm Parfum..." />
             <div style={{ width: '100%', display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
 

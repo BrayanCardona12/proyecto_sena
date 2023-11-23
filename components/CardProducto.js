@@ -39,6 +39,7 @@ function CardProducto({ vendedor, infoProd, dataCar, cliente }) {
           <i>{infoProd.categoria}</i>
           <h2>{infoProd.nombre}</h2>
           <p>{infoProd.descripcion}</p>
+          <h3>{infoProd.marca}</h3>
           <h3>Cantidad: {infoProd.cantidad}</h3>
           <b>{formatter.format(infoProd.precio)}</b>
         </div>

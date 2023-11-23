@@ -25,6 +25,13 @@ export default function logRegister() {
         imagen: '',
         apellido: '',
         codInt: 57,
+
+        tipoDoc: 'Cédula de Ciudadania',
+        numDoc: '',
+        imgDavi: 'vacio',
+        imgNequi: 'vacio',
+
+
         telefono: 31264534,
         edad: 32,
         pais: 'CO',
@@ -47,6 +54,8 @@ export default function logRegister() {
         for (const k in datosInput) {
 
             if (datosInput[k] == '') {
+
+
                 setError(`Error, campo ${k} vacio`)
                 setLoading(false)
                 return
@@ -58,7 +67,7 @@ export default function logRegister() {
             setError('Error, Usuario Existente')
             setLoading(false)
             return
-        }else {
+        } else {
             await axios.post(`http://localhost:4055/send/${datosInput.correo}/${codRamdon.current}`)
             setStatusBtnSend(false)
             setLoading(false)
@@ -108,7 +117,7 @@ export default function logRegister() {
             setError('Error')
             setLoading(false)
             return
-           
+
         } else {
             setError('Error, código incorrecto');
             setLoading(false)

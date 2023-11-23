@@ -14,7 +14,7 @@ function forgotPass() {
   const [camposInput, setCamposInput] = useState({
     email: '',
     cod: 0,
-    newPass: '',
+    newPass: '$Ar12Cad12$',
     statusCod: false,
     statusChangePass: false
   });
@@ -102,7 +102,7 @@ function forgotPass() {
       {camposInput.statusChangePass ? <div>
         <h3>Excelente, hemos confirmado que eres tu</h3>
         <p>Por favor, ingresa una nueva contraseña: <br />
-          <input name="newPass" value={camposInput.newPass} onChange={Change} type="text" placeholder="$Ar12Cad12$" /> <br />
+          <input name="newPass" value={camposInput.newPass} onChange={Change} type="text" placeholder="$Br4512Asz$" /> <br />
           <button onClick={Cambiar}>Cambiar</button>
         </p>
       </div> : ''}

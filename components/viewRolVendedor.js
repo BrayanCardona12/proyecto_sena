@@ -80,12 +80,12 @@ function ViewRolVendedor({prod, infoUser}) {
                 <h3>Analiticas</h3>
               </a>
 
-              <a href="#">
+              <Link href={"/RolVendedor/pedidos/"  + localStorage.getItem('inf')}>
                 <span className="material-icons-sharp">
                   mail_outline
                 </span>
                 <h3>Pedidos</h3>
-              </a>
+              </Link>
 
               <a href="#">
                 <span className="material-icons-sharp">
