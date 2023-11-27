@@ -73,12 +73,12 @@ function ViewRolVendedor({prod, infoUser}) {
                 <h3>Mis Clientes</h3>
               </a>
 
-              <a href="#">
+              <Link href={"/graficas/"  + localStorage.getItem('inf')}>
                 <span className="material-icons-sharp">
                   insights
                 </span>
                 <h3>Analiticas</h3>
-              </a>
+              </Link>
 
               <Link href={"/RolVendedor/pedidos/"  + localStorage.getItem('inf')}>
                 <span className="material-icons-sharp">

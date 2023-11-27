@@ -52,12 +52,7 @@ function ViewRolCliente({ infoListV, infoUser }) {
                 </span>
               </div>
             </div>
-            <p onClick={() => {
-              toast.error('Ups, un error', {
-                backgroundColor: '#CC2C2C',
-                color: 'white',
-              })
-            }}>dfgd</p>
+            
             <div className="sidebar">
               <a href="#" className="active">
                 <span className="material-icons-sharp">

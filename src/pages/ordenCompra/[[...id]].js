@@ -1,6 +1,125 @@
+import axios from "axios";
+import { formatter } from "log/formatterInt"
+import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 
-export default function FacturaComp() {
+function facturaEjem(props) {
+
+
+
+    let { data: { data1, data2, data3 } } = props;
+
+    const total = (d) => {
+        let total = 0
+        for (let i of d) {
+            total += i.precio * i.cantidadProducto
+        }
+
+        return formatter.format(total)
+    }
+
+    const total2 = (d) => {
+        let total = 0
+        for (let i of d) {
+            total += i.precio * i.cantidadProducto
+        }
+
+        return total
+    }
+
+    const router = useRouter()
+    let para = useParams()
+    let [loading, setLoading] = useState(false)
+
+    const idsPPedidos = (d) => {
+        let ids = ''
+        for (let i of d) {
+            ids += `${i.idProducto},`
+        }
+
+        ids = ids.substring(0, ids.length - 1);
+
+        return ids
+    }
+
+    const cantidaddd = (d) => {
+        let ids = ''
+        for (let i of d) {
+            ids += `${i.cantidadProducto},`
+        }
+
+        ids = ids.substring(0, ids.length - 1);
+
+        return ids
+    }
+
+    const valorUnitt = (d) => {
+        let ids = ''
+        for (let i of d) {
+            ids += `${i.precio},`
+        }
+
+        ids = ids.substring(0, ids.length - 1);
+
+        return ids
+    }
+
+    const fechass = () => {
+
+        const fechaActual = new Date();
+
+        const fechaVencimiento = new Date(fechaActual);
+
+        fechaVencimiento.setDate(fechaVencimiento.getDate() + 10);
+
+        const formatoFecha = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        const fechaVencimientoFormateada = fechaVencimiento.toLocaleDateString('es-CO', formatoFecha);
+
+        return {
+            FActual: fechaActual.toLocaleDateString('es-CO', formatoFecha),
+            FVencimiento: fechaVencimientoFormateada
+        }
+    }
+
+    const comprarr = () => {
+        let alerta = confirm('Esta a punto de realizar una compra, ¿está seguro de quererla realizar?')
+
+        if (alerta) {
+            setLoading(true)
+                ; (async () => {
+
+                    await axios.post('/api/compra/', {
+                        idV: parseInt(para.id[0]),
+                        idC: parseInt(para.id[1]),
+                        idProductos: idsPPedidos(data3),
+                        estadoP: 'Solicitado',
+                        totalP: total2(data3),
+                        fechaS: fechass().FActual,
+                        fechaV: fechass().FVencimiento,
+                        envio: data2[0].pais != 'CO' ? 'si' : 'no',
+                        cant: cantidaddd(data3),
+                        valUnit: valorUnitt(data3),
+                        
+                    })
+
+
+                    await axios.put('/api/compra/', {
+                        idV: parseInt(para.id[0]),
+                        idC: parseInt(para.id[1]),
+                    })
+
+                    setLoading(false)
+                })();
+
+            router.push('/RolCliente/pedidos/?idC='+ parseInt(para.id[1]))
+        }
+    }
+
+
+
+
     return (
         <>
 
@@ -632,98 +751,35 @@ footer p {
 
 
 
-            <div style={{ fontSize: '.8rem' }} role='directory' className='html'>
+            <div  >
 
                 <main className="hidetax hidenote hidedate body">
-                    <div className="control-bar">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-2-4">
-                                    <div className="slogan">Comprobante de Compra</div>
 
-                                </div>
-                                <div className="col-4 text-right">
-                                    <a onClick={() => { window.print() }}>Imprimir</a>
-                                </div>
-
-                            </div>
-
-                        </div>
-
+                    <div className="col-2">
+                        <h1>Resumen de Compra:</h1>
                     </div>
 
-                    <header className="row">
-                        <div className="logoholder text-center">
-                            <img src="https://obedalvarado.pw/demo/sales_invoice/assets/img/logo.png" />
-                        </div>
-
-
-                        <div className="me">
-                            <p>
-                                <strong>SGVC</strong><br />
-                                Mosquera<br />
-                                Cundinamarca.<br />
-
-                            </p>
-                        </div>
-
-                        <div className="info">
-                            <p>
-                                Web: <a href="https://sgvc.vercel.app">sgvc.vercel.app</a><br />
-                                E-mail: <a href="mailto:sgvc-ventas@gmail.com">sgvc-ventas@gmail.com</a><br />
-                                Tel: 3214223303<br />
-                                Twitter: @SGVC-COP
-                            </p>
-                        </div>
-
-                        <div className="bank">
-                            <p>
-
-                                Dirección: Cl. 92 #11-51, Bogotá <br />
-                                NIT: 876061234-2
-                            </p>
-                        </div>
-
-
-                    </header>
-
-
-                    <div className="row section">
+                    <div style={{ display: 'flex' }} className="row section">
 
                         <div className="col-2">
-                            <h1>Detalle de Venta</h1>
-                        </div>
-
-
-                        <div style={{ fontSize: ' .8rem' }} className="col-2 text-right details">
-                            <p>
-                                ID-Pedido: 3423142412<br />
-                                ID-Factura: 1698907083<br />
-                                Fecha-Emisión: 21/11/2023<br />
-                                Fecha-Vencimiento: 30/01/2024
-                            </p>
-                        </div>
-
-
-                        <div style={{ fontSize: '.8rem' }} className="col-2">
                             <p className="client">
                                 <strong>Vendedor:</strong><br />
-                                Martha Ordoñez<br />
-                                CC 105604789<br />
-                                Cra 6a n4 33 este<br />
-                                3128495567
+                                {`Nombre: ${data1[0].nombre}  ${data1[0].apellido}`}<br />
+                                {data1[0].tipoDoc + ': ' + data1[0].numDoc}<br />
+                                {'Dirección: ' + data1[0].direccion}<br />
+                                {'Telefono:' + data1[0].telefono}
                             </p>
                         </div>
 
-                        <div style={{ fontSize: '.8rem' }} className="col-2">
+                        <div className="col-2">
 
 
                             <p className="client">
                                 <strong>Cliente:</strong><br />
-                                Pedro Sanchez<br />
-                                CC 1234234<br />
-                                Cra. 11a #94-25/45, Bogotá, DC<br />
-                                3213242344
+                                {`Nombre: ${data2[0].nombre}  ${data2[0].apellido}`}<br />
+                                {data2[0].tipoDoc + ': ' + data2[0].numDoc}<br />
+                                {'Dirección: ' + data2[0].direccion}<br />
+                                {'Telefono:' + data2[0].telefono}
                             </p>
 
 
@@ -739,65 +795,28 @@ footer p {
                                     <th width="10%">Cant.</th>
                                     <th width="15%">Valor Unit.</th>
                                     <th width="15%">Valor Total.</th>
+                                    <th width="15%">IVA.</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td width="5%"> <span >12345</span></td>
-                                    <td width="60%"><span >Omh Black 120ml</span></td>
-                                    <td className="amount">3</td>
-                                    <td className="rate">78545</td>
+                                {
+                                    data3.map(x => (
+                                        <tr key={x.idProducto}>
+                                            <td width="5%"> <span >{x.idProducto}</span></td>
+                                            <td width="60%"><span >{x.nombre}</span></td>
+                                            <td className="amount">{x.cantidadProducto}</td>
+                                            <td className="rate">{formatter.format(x.precio)}</td>
 
-                                    <td className="sum">345600</td>
-                                </tr>
+                                            <td className="sum">{formatter.format(parseInt(x.precio) * parseInt(x.cantidadProducto))}</td>
+                                            <td>19%</td>
+                                        </tr>
+                                    ))
+                                }
 
 
-                                <tr>
-                                    <td width="5%"> <span >12345</span></td>
-                                    <td width="60%"><span >Omh Black 120ml</span></td>
-                                    <td className="amount">3</td>
-                                    <td className="rate">78545</td>
 
-                                    <td className="sum">345600</td>
-                                </tr>
-
-                                <tr>
-                                    <td width="5%"> <span >12345</span></td>
-                                    <td width="60%"><span >Omh Black 120ml</span></td>
-                                    <td className="amount">3</td>
-                                    <td className="rate">78545</td>
-
-                                    <td className="sum">345600</td>
-                                </tr>
-
-                                <tr>
-                                    <td width="5%"> <span >12345</span></td>
-                                    <td width="60%"><span >Omh Black 120ml</span></td>
-                                    <td className="amount">3</td>
-                                    <td className="rate">78545</td>
-
-                                    <td className="sum">345600</td>
-                                </tr>
                             </tbody>
                         </table>
-
-                    </div>
-
-
-                    <h2>Metodos de Pago:</h2>
-                    <div className="cont-qrr">
-
-                        <div className="qrCont">
-                            <h5>Daviplata:</h5>
-                            <img className="imgQR" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMiqk1bghSz0lzNSMgpqf0klvOjKlZ3YZcog&usqp=CAU" />
-                        </div>
-
-                        <div className="qrCont">
-                            <h5>Nequi:</h5>
-                            <img className="imgQR" src="https://assets-global.website-files.com/63be0fb85664b94d14287a6c/6401fc25143dd78c61d1ffe4_QR-app-medianoche.png" />
-                        </div>
-
-
 
                     </div>
 
@@ -807,36 +826,55 @@ footer p {
                             <tbody>
                                 <tr>
                                     <td><strong>Sub-Total:</strong></td>
-                                    <td id="total_price">324356</td>
+                                    <td id="total_price">{total(data3)}</td>
 
                                 </tr>
 
                                 <tr>
                                     <td><strong>Envio:</strong></td>
-                                    <td id="total_price">0</td>
+                                    <td id="total_price">{data2[0].pais != 'CO' ? formatter.format(25000) : formatter.format(0)}</td>
                                 </tr>
 
                                 <tr className="borderrr">
                                     <td><strong>T-Pagar:</strong></td>
-                                    <td id="total_price">345345</td>
+                                    <td id="total_price">{data2[0].pais != 'CO' ? formatter.format(parseInt(total2(data3)) + 30000) : total(data3)}</td>
                                 </tr>
 
                             </tbody>
                         </table>
                     </div>
 
-                    <footer className="row">
-                        <div className="col-1 text-center">
-                            <p className="notaxrelated">El monto de la factura incluye el impuesto sobre las ventas.</p>
-
-                        </div>
-                    </footer>
 
                 </main >
 
+                {loading ? <img src="https://i.gifer.com/ZKZg.gif" style={{ maxWidth: '60px' }} /> : <button onClick={comprarr} style={{ display: 'block', margin: 'auto', backgroundColor: '#35e252', fontSize: '3rem', borderRadius: '10px' }}>COMPRAR</button>}
             </div>
 
         </>
     )
+}
+
+export default facturaEjem
+
+facturaEjem.getInitialProps = async (ctx) => {
+
+    const response3 = await axios.patch('http://localhost:3000/api/CarShop/', { idC: parseInt(ctx.query.id[1]), idV: parseInt(ctx.query.id[0]) });
+    const response2 = await axios.get(`http://localhost:3000/api/Login?id=${ctx.query.id[1]}`);
+    const response1 = await axios.get(`http://localhost:3000/api/Login?id=${ctx.query.id[0]}`);
+    const data1 = response1.data;
+    const data2 = response2.data;
+    const data3 = response3.data;
+
+    const info = {
+        data1,
+        data2,
+        data3
+    }
+
+
+
+    return {
+        data: JSON.parse(JSON.stringify(info))
+    };
 }
 

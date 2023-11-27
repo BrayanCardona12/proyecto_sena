@@ -30,13 +30,13 @@ function pedidos(props) {
     }
 
     let colores = {
-        Solicitado: '#ABABAB',
-        Verificando_Pago: '#7D9743',
-        Aprobado: 'green',
-        Preparando: '#F18926',
-        Enviando: '#A78146',
-        Entregado: '#51FF00',
-        Cancelado: 'red',
+        Solicitado: '#ADD8E6',
+        Verificando_Pago: '#FFFF99',
+        Aprobado: '#00FF00',
+        Preparando: '#98FB98',
+        Enviando: '#FFA500',
+        Entregado: '#008000',
+        Cancelado: '#FF0000',
     }
 
 
@@ -89,13 +89,13 @@ h1 {
             <div className="body">
                 <ToastContainer delay={2000} position='top-right' />
                 <div className="nav">
-                    <div style={{ backgroundColor: '#ABABAB' }} className="Solicitado">Solicitado</div>
-                    <div style={{ backgroundColor: '#7D9743' }} className="VerificandoP">Verificando_Pago</div>
-                    <div style={{ backgroundColor: 'green' }} className="Aprobado">Aprobado</div>
-                    <div style={{ backgroundColor: '#F18926' }} className="Preparando">Preparando</div>
-                    <div style={{ backgroundColor: '#A78146' }} className="Enviando">Enviando</div>
-                    <div style={{ backgroundColor: '#51FF00' }} className="Entregado">Entregado</div>
-                    <div style={{ backgroundColor: 'red' }} className="Cancelado">Cancelado</div>
+                    <div style={{ backgroundColor: colores.Solicitado }} className="Solicitado">Solicitado</div>
+                    <div style={{ backgroundColor: colores.Verificando_Pago }} className="Verificando_Pago">Verificando_Pago</div>
+                    <div style={{ backgroundColor: colores.Aprobado }} className="Aprobado">Aprobado</div>
+                    <div style={{ backgroundColor: colores.Preparando }} className="Preparando">Preparando</div>
+                    <div style={{ backgroundColor: colores.Enviando }} className="Enviando">Enviando</div>
+                    <div style={{ backgroundColor: colores.Entregado }} className="Entregado">Entregado</div>
+                    <div style={{ backgroundColor: colores.Cancelado }} className="Cancelado">Cancelado</div>
                 </div>
 
                 <div className="cont-pedidos">
@@ -127,10 +127,11 @@ h1 {
                                         <td>{formatter.format(x.totalP)}</td>
                                         <td>{x.fechaS}</td>
                                         <td>{x.fechaV}</td>
-                                        <td ><details >
+                                        <td >
+                                            <details >
                                             <summary>{x.estadoP}</summary>
 
-                                            <span style={{ display: 'block' }} onClick={(e) => clickEstado(e, x.idPedido)}>Verificando Pago</span>
+                                            <span style={{ display: 'block' }} onClick={(e) => clickEstado(e, x.idPedido)}>Verificando_Pago</span>
                                             <span style={{ display: 'block' }} onClick={(e) => clickEstado(e, x.idPedido)}>Aprobado</span>
                                             <span style={{ display: 'block' }} onClick={(e) => clickEstado(e, x.idPedido)}>Preparando</span>
                                             <span style={{ display: 'block' }} onClick={(e) => clickEstado(e, x.idPedido)}>Enviando</span>

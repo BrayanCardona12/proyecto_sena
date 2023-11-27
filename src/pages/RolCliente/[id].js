@@ -3,6 +3,7 @@ import CardCarritoCompra from 'components/CardCarritoCompra';
 import CardProducto from 'components/CardProducto'
 import logFilterProdUsersInput from 'log/logFilterProdUsersInput';
 import logOtherMethodsFilter from 'log/logOtherMethodsFilter';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
@@ -210,7 +211,7 @@ function InfoCatalogo(props) {
         <span onClick={() => {
           location.reload()
         }}>Borrar Filtros</span>
-        <span>Pedidos Realizados</span>
+        <Link href={'/RolCliente/pedidos?idC=' + identCli}>Pedidos Realizados</Link>
         <span>Clientes Favoritos</span>
       </div>
 
@@ -241,7 +242,7 @@ function InfoCatalogo(props) {
               <p>Total Compra: {total(data3)}</p>
               <button onClick={(e) => {
                 e.preventDefault()
-                router.push(`/factura/${parametros.current.idV}/${parametros.current.idC}`)
+                router.push(`/ordenCompra/${parametros.current.idV}/${parametros.current.idC}`)
               }} style={{ backgroundColor: 'green', color: 'white', padding: '9px', margin: 'auto', display: 'block' }}>Comprar</button>
             </> : ''}
           </div>

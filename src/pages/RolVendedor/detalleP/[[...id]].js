@@ -24,11 +24,11 @@ function detalleP(props) {
         return total
     }
 
-  return (
-    <>
+    return (
+        <>
 
-    <style jsx>{
-        `
+            <style jsx>{
+                `
 
 
 .html {
@@ -651,118 +651,118 @@ display: none !important
 border-top: 1px rgb(0, 157, 128) solid ;
 }
 `
-    }</style>
+            }</style>
 
 
 
-    <div  >
+            <div  >
 
-        <main className="hidetax hidenote hidedate body">
+                <main className="hidetax hidenote hidedate body">
 
-            <div className="col-2">
-                <h1>Detalle - Pedido:</h1>
-                <h5>ID-Pedido: {data3[0].idPedido}</h5>
-            </div>
+                    <div className="col-2">
+                        <h1>Detalle - Pedido:</h1>
+                        <h5>ID-Pedido: {data3[0].idPedido}</h5>
+                    </div>
 
-            <div style={{ display: 'flex' }} className="row section">
+                    <div style={{ display: 'flex' }} className="row section">
 
-                <div className="col-2">
-                    <p className="client">
-                        <strong>Vendedor:</strong><br />
-                        {`Nombre: ${data2[0].nombre}  ${data2[0].apellido}`}<br />
-                        {data2[0].tipoDoc + ': ' + data2[0].numDoc}<br />
-                        {'Dirección: ' + data2[0].direccion}<br />
-                        {'Telefono:' + data2[0].telefono}
-                    </p>
-                </div>
+                        <div className="col-2">
+                            <p className="client">
+                                <strong>Vendedor:</strong><br />
+                                {`Nombre: ${data2[0].nombre}  ${data2[0].apellido}`}<br />
+                                {data2[0].tipoDoc + ': ' + data2[0].numDoc}<br />
+                                {'Dirección: ' + data2[0].direccion}<br />
+                                {'Telefono:' + data2[0].telefono}
+                            </p>
+                        </div>
 
-                <div className="col-2">
-
-
-                    <p className="client">
-                        <strong>Cliente:</strong><br />
-                        {`Nombre: ${data1[0].nombre}  ${data1[0].apellido}`}<br />
-                        {data1[0].tipoDoc + ': ' + data1[0].numDoc}<br />
-                        {'Dirección: ' + data1[0].direccion}<br />
-                        {'Telefono:' + data1[0].telefono}
-                    </p>
+                        <div className="col-2">
 
 
-                </div>
-            </div>
+                            <p className="client">
+                                <strong>Cliente:</strong><br />
+                                {`Nombre: ${data1[0].nombre}  ${data1[0].apellido}`}<br />
+                                {data1[0].tipoDoc + ': ' + data1[0].numDoc}<br />
+                                {'Dirección: ' + data1[0].direccion}<br />
+                                {'Telefono:' + data1[0].telefono}
+                            </p>
 
-            <div className="invoicelist-body">
-                <table>
-                    <thead>
-                        <tr>
-                            <th width="5%">Código</th>
-                            <th width="60%">Descripción</th>
-                            <th width="10%">Cant.</th>
-                            <th width="15%">Valor Unit.</th>
-                            <th width="15%">Valor Total.</th>
-                            <th width="15%">IVA.</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            data3.map(x => (
-                                <tr key={x.idProducto}>
-                                    <td width="5%"> <span >{x.idProducto}</span></td>
-                                    <td width="60%"><span >{x.nombre}</span></td>
-                                    <td className="amount">{x.cantidad}</td>
-                                    <td className="rate">{formatter.format(x.valorUnit)}</td>
 
-                                    <td className="sum">{formatter.format(parseInt(x.valorUnit) * parseInt(x.cantidad))}</td>
-                                    <td>19%</td>
+                        </div>
+                    </div>
+
+                    <div className="invoicelist-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th width="5%">Código</th>
+                                    <th width="60%">Descripción</th>
+                                    <th width="10%">Cant.</th>
+                                    <th width="15%">Valor Unit.</th>
+                                    <th width="15%">Valor Total.</th>
+                                    <th width="15%">IVA.</th>
                                 </tr>
-                            ))
-                        }
+                            </thead>
+                            <tbody>
+                                {
+                                    data3.map(x => (
+                                        <tr key={x.idProducto}>
+                                            <td width="5%"> <span >{x.idProducto}</span></td>
+                                            <td width="60%"><span >{x.nombre}</span></td>
+                                            <td className="amount">{x.cantidad}</td>
+                                            <td className="rate">{formatter.format(x.valorUnit)}</td>
+
+                                            <td className="sum">{formatter.format(parseInt(x.valorUnit) * parseInt(x.cantidad))}</td>
+                                            <td>19%</td>
+                                        </tr>
+                                    ))
+                                }
 
 
 
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                    <div className="invoicelist-footer">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Sub-Total:</strong></td>
+                                    <td id="total_price">{total(data3)}</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Envio:</strong></td>
+                                    <td id="total_price">{data2[0].pais != 'CO' ? formatter.format(25000) : formatter.format(0)}</td>
+                                </tr>
+
+                                <tr className="borderrr">
+                                    <td><strong>T-Pagar:</strong></td>
+                                    <td id="total_price">{data2[0].pais != 'CO' ? formatter.format(parseInt(total2(data3)) + 30000) : total(data3)}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </main >
 
             </div>
 
-
-            <div className="invoicelist-footer">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td><strong>Sub-Total:</strong></td>
-                            <td id="total_price">{total(data3)}</td>
-
-                        </tr>
-
-                        <tr>
-                            <td><strong>Envio:</strong></td>
-                            <td id="total_price">{data2[0].pais != 'CO' ? formatter.format(25000) : formatter.format(0)}</td>
-                        </tr>
-
-                        <tr className="borderrr">
-                            <td><strong>T-Pagar:</strong></td>
-                            <td id="total_price">{data2[0].pais != 'CO' ? formatter.format(parseInt(total2(data3)) + 30000) : total(data3)}</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-
-
-        </main >
-
-         </div>
-
-</>
-  )
+        </>
+    )
 }
 
 export default detalleP
 
 detalleP.getInitialProps = async (ctx) => {
 
-   const response3 = await axios.delete('http://localhost:3000/api/compra/?idP=' +parseInt(ctx.query.id[2]));
+    const response3 = await axios.delete('http://localhost:3000/api/compra/?idP=' + parseInt(ctx.query.id[2]));
     const response2 = await axios.get(`http://localhost:3000/api/Login?id=${ctx.query.id[1]}`);
     const response1 = await axios.get(`http://localhost:3000/api/Login?id=${ctx.query.id[0]}`);
     const data1 = response1.data;

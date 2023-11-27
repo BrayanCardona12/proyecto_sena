@@ -14,7 +14,7 @@ export default async function compra(req, res) {
         let listaCant = cant.split(',')
         let listaValUnit = valUnit.split(',')
 
-        // ['6', '1', '2']
+      
 
         let q = `INSERT INTO pedidosDetalle (idDetalle, idProd, cantidad, valorUnit) VALUES `
 
@@ -46,12 +46,18 @@ export default async function compra(req, res) {
 
     async function getPedidoVend(req, res) {
 
-        let { idV } = req.query
+        let { idV, idC } = req.query
+        if (idV) {
+            let [datos] = await pool.query("SELECT idPedido, idC, usuarios.nombre, usuarios.codInt ,usuarios.telefono, usuarios.correo, totalP, fechaS, fechaV, estadoP FROM pedidos JOIN usuarios ON pedidos.idC = usuarios.id where pedidos.idV =  ? ;", [parseInt(idV)])
+            return res.status(200).json(datos)
+        }
+
+        if (idC) {
+            let [datos] = await pool.query("SELECT idPedido, idV, idC ,usuarios.nombre, usuarios.codInt ,usuarios.telefono, usuarios.correo, totalP, fechaS, fechaV, estadoP  FROM pedidos JOIN usuarios ON pedidos.idV = usuarios.id where pedidos.idC =  ? ;", [parseInt(idC)])
+            return res.status(200).json(datos)
+        }
 
 
-
-        let [datos] = await pool.query("SELECT idPedido, idC, usuarios.nombre, usuarios.codInt ,usuarios.telefono, usuarios.correo, totalP, fechaS, fechaV, estadoP FROM pedidos JOIN usuarios ON pedidos.idC = usuarios.id where pedidos.idV =  ? ;", [parseInt(idV)])
-        return res.status(200).json(datos)
     }
 
     async function actEstadoPedido(req, res) {
@@ -66,7 +72,6 @@ export default async function compra(req, res) {
     async function findlistDetallePr(req, res) {
 
         let { idP } = req.query
-
 
 
         let [datos] = await pool.query("SELECT idProducto, nombre, pedidosdetalle.cantidad, pedidos.idPedido ,pedidosdetalle.valorUnit FROM producto JOIN pedidosdetalle ON producto.idProducto = pedidosdetalle.idProd JOIN pedidos ON pedidos.idPedido = pedidosdetalle.idDetalle where pedidos.idPedido = ? ;", [parseInt(idP)])
