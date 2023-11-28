@@ -1,6 +1,8 @@
 import axios from 'axios'
+import { uploadFile } from 'firebaseConfig/config'
 import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
+import { toast } from 'react-toast'
 
 
 export default function logRegister() {
@@ -21,8 +23,9 @@ export default function logRegister() {
     //-----------------------
 
     const [datosInput, setDatosInput] = useState({
-        nombre: '',
+
         imagen: '',
+        nombre: '',
         apellido: '',
         codInt: 57,
 
@@ -44,6 +47,31 @@ export default function logRegister() {
     })
 
 
+
+    //
+
+    const [file1, setFile1] = useState(null)
+    const [file2, setFile2] = useState(null)
+    const [file3, setFile3] = useState(null)
+
+    const changeFile1 = (e) => {
+        setFile1(e.target.files[0]);
+        setDatosInput({ ...datosInput, imagen: e.target.files[0].name.toString() });
+    }
+
+
+    const changeFile2 = (e) => {
+        setFile2(e.target.files[0]);
+        setDatosInput({ ...datosInput, imgDavi: e.target.files[0].name.toString() });
+    }
+
+    const changeFile3 = (e) => {
+        setFile3(e.target.files[0]);
+        setDatosInput({ ...datosInput, imgNequi: e.target.files[0].name.toString() });
+    }
+
+
+    //_______________________________
 
     // funciones de verificacion de codigo
 
@@ -84,7 +112,21 @@ export default function logRegister() {
         setLoading(true)
 
         if (inputCod == codRamdon.current) {
-            await axios.post('/api/RegisterUsers', datosInput)
+
+            toast.warn('⌛ Cargando...')
+
+            if (parseInt(datosInput.rol) == 1) {
+                let url1 = await uploadFile(file1)
+                await axios.post('/api/RegisterUsers', { ...datosInput, imagen: url1 })
+
+            } else {
+                let url1 = await uploadFile(file1)
+                let url2 = await uploadFile(file2)
+                let url3 = await uploadFile(file3)
+                await axios.post('/api/RegisterUsers', { ...datosInput, imagen: url1, imgDavi: url2, imgNequi: url3 })
+
+            }
+
 
 
             if (parseInt(datosInput.rol) == 1) {
@@ -149,7 +191,10 @@ export default function logRegister() {
         inputCod,
         setInputCod,
         sendEmail,
-        clickCodVerf
+        clickCodVerf,
+        changeFile1,
+        changeFile2,
+        changeFile3
     }
 }
 

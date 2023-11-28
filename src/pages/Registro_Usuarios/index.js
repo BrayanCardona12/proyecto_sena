@@ -1,11 +1,14 @@
 import logRegister from "log/logRegister"
+import { useState } from "react"
+import { ToastContainer } from "react-toast"
 
 export default function RegistroUsuarios() {
 
   let { changeInput, datosInput, error, loading, statusBtnSend
-    , inputCod, setInputCod, sendEmail, clickCodVerf } = logRegister()
+    , inputCod, setInputCod, sendEmail, clickCodVerf, changeFile1,  changeFile2,
+    changeFile3 } = logRegister()
 
-
+  
 
   return (
     <>
@@ -48,11 +51,12 @@ export default function RegistroUsuarios() {
         `}
       </style>
       <main className='cont-form-register'>
+      <ToastContainer delay={3000} position='top-right'/>
 
         <form className="form-register">
 
           <h1 >Registro de Usuarios</h1>
-          <input onChange={changeInput} value={datosInput.imagen} name="imagen" placeholder="Imagen..." type="text" />
+          <input onChange={changeFile1} placeholder="Imagen..." type="file" />
           <input onChange={changeInput} value={datosInput.nombre} name="nombre" placeholder="Nombre" type="text" />
           <input onChange={changeInput} value={datosInput.apellido} name="apellido" placeholder="Apellido" type="text" />
 
@@ -326,8 +330,8 @@ export default function RegistroUsuarios() {
           {datosInput.rol == '2' ? <>
             <i>Como quieres ser vendendor, es necesario que adjuntes al </i>
             <i>menos dos QR (Daviplata o Nequi) para que te puedan depositar:</i>
-            <input name="imgDavi" onChange={changeInput} type="text" placeholder="Imagen Davi" value={datosInput.imgDavi} />
-            <input name="imgNequi" onChange={changeInput} type="text" placeholder="Imagen Nequi" value={datosInput.imgNequi} />
+            <input name="imgDavi" onChange={changeFile2} type="file" placeholder="Imagen Davi"  />
+            <input name="imgNequi" onChange={changeFile3} type="file" placeholder="Imagen Nequi"  />
           </> : ''}
 
 

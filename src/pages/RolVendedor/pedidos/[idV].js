@@ -114,7 +114,7 @@ h1 {
                                 <th>Estado</th>
                             </tr>
                             {
-                                data.map(x => (
+                             data.map(x => (
                                     <tr  style={{backgroundColor: `${colores[x.estadoP]}`}} key={x.idPedido}>
                                         <td onClick={() => {router.push('/RolVendedor/detalleP/' + x.idC + '/' + localStorage.getItem('inf') + '/' + x.idPedido)}}>👁 Ver</td>
                                         <td>{x.idPedido}</td>
@@ -146,6 +146,7 @@ h1 {
 
                         </tbody>
                     </table>
+                    {data.length == 0 ? <h3 style={{textAlign:'center'}}>Tabla Vacia...</h3> : ''}
 
                 </div>
             </div>

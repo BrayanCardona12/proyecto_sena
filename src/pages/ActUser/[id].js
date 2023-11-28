@@ -1,8 +1,11 @@
 import axios from 'axios'
+import { uploadFile } from 'firebaseConfig/config'
+
 
 
 import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
+import { ToastContainer, toast } from 'react-toast'
 
 function actUser(props) {
     const router = useRouter()
@@ -33,6 +36,8 @@ function actUser(props) {
     })
 
     let correo = useRef()
+
+    const [file, setFile] = useState(null)
 
     const [inputCod, setInputCod] = useState('')
 
@@ -85,18 +90,44 @@ function actUser(props) {
     const clickCodVerf = async (e) => {
         e.preventDefault();
 
+
+
         if (inputCod == codRamdon.current) {
+
             // se actualiza y regresa a la pagina anterior
             let alerta = confirm('El código ingresado es correcto, ¿desea continuar con el proceso de actualización de datos?')
 
-            alerta ? await axios.put(`/api/RegisterUsers/`, { ...datosInput, id: parseInt(router.query.id) }) : ''
-            router.push('/')
+            if (alerta) {
+
+                if (file == null) {
+                    toast.warn('⌛ Cargando...')
+                    await axios.put(`/api/RegisterUsers/`, { ...datosInput, id: parseInt(router.query.id) })
+                    router.push('/')
+
+                } else {
+                    toast.warn('⌛ Cargando...')
+
+                    let url = await uploadFile(file)
+
+
+                    await axios.put(`/api/RegisterUsers/`, { ...datosInput, id: parseInt(router.query.id), imagen: url })
+                    router.push('/')
+                }
+
+            }
+
+
+
+
+
         } else {
             setError('Error, código incorrecto');
         }
 
         return
     }
+
+
 
     return (
         <>
@@ -125,10 +156,11 @@ function actUser(props) {
                 `}
             </style>
             <form className=" cont-form">
+                <ToastContainer delay={3000} position='top-right'/>
 
                 <h1 >Actualizar Información Personal</h1>
                 <img style={{ width: '30%', borderRadius: '10px' }} src={datosInput.imagen} />
-                <input onChange={changeInput} value={datosInput.imagen} name="imagen" placeholder="Imagen..." type="text" />
+                <input onChange={(e) => { setFile(e.target.files[0]) }} name="imagen" placeholder="Imagen..." type="file" />
                 <input onChange={changeInput} value={datosInput.nombre} name="nombre" placeholder="Nombres" type="text" />
                 <input onChange={changeInput} value={datosInput.apellido} name="apellido" placeholder="Apellidos" type="text" />
 

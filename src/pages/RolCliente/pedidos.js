@@ -122,6 +122,7 @@ h1 {
 
             </tbody>
           </table>
+          {data.length == 0 ? <h3 style={{textAlign:'center'}}>Tabla Vacia...</h3> : ''}
 
         </div>
       </div>

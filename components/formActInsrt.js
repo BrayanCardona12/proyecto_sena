@@ -1,14 +1,15 @@
 import logformActInsrt from "log/logformActInsrt"
 import { useState } from "react"
+import { ToastContainer } from "react-toast"
 
 
 
 
 function FormActInsrt() {
 
-    let { Submit, Change, producto, inputMarca, setInputMarca, changeMarca } = logformActInsrt()
+    let { Submit, Change, producto, inputMarca, setInputMarca, changeMarca, setFileImg } = logformActInsrt()
 
-  
+
 
 
 
@@ -27,14 +28,16 @@ function FormActInsrt() {
             </style>
 
             <form className="form-actInsert" onSubmit={Submit}>
-
+                <ToastContainer delay={4000} position="top-right" />
                 <h1 className='text-center'>Form</h1>
 
 
 
 
                 <label htmlFor="imagen" className='form-label' >Imagen:</label>
-                <input className='form-control' onChange={Change} type="text" value={producto.imagen} name="imagen" />
+                <input className='form-control' onChange={(e) => {
+                    setFileImg(e.target.files[0])
+                }} type="file" name="imagen" />
 
                 <label htmlFor="nombre" className='form-label'>Nombre:</label>
                 <input className='form-control' type="text" onChange={Change} name="nombre" value={producto.nombre} />
@@ -61,10 +64,10 @@ function FormActInsrt() {
                     <span style={{ display: 'block' }} onClick={changeMarca}>Carmel</span>
                     <span style={{ display: 'block' }} onClick={changeMarca}>Esika</span>
                     <span style={{ display: 'block' }} onClick={changeMarca}>Cyzone</span>
-                    <span style={{ display: 'block' }} onClick={() => { setInputMarca(true)}}>otro...</span>
+                    <span style={{ display: 'block' }} onClick={() => { setInputMarca(true) }}>otro...</span>
                 </details>
 
-                {inputMarca ? <><input name='marca' value={producto.marca} onChange={Change}/> <span onClick={() => {setInputMarca(false)}}>✅</span></> : ''}
+                {inputMarca ? <><input name='marca' value={producto.marca} onChange={Change} /> <span onClick={() => { setInputMarca(false) }}>✅</span></> : ''}
 
                 <label className='form-label' htmlFor="descripcion">Descripcion:</label>
                 <textarea className='form-control' value={producto.descripcion} onChange={Change} name="descripcion" rows="2" />
