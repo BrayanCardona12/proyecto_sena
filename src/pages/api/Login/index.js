@@ -28,26 +28,43 @@ export default async function auth(req, res) {
     let { id } = req.query
 
     const [datos] = await pool.query("SELECT * from usuarios where id = ? ;", [id])
- 
+
 
     return res.status(200).json(datos)
 
   }
 
+  async function updatePass(req, res) {
+
+    let { correo, pass } = req.query
+
+    const [datos] = await pool.query("UPDATE usuarios SET contrasena = ? WHERE correo = ? ", [pass, correo])
+
+
+    return res.status(200).json(datos)
+
+  }
+
+
   switch (req.method) {
-    
+
     case 'GET':
 
       return await getInfoUsers(req, res)
-    
+
     case 'POST':
 
       return await verificarDatos(req, res)
-    
+
     case 'PUT':
       return await verificarRegister(req, res)
 
+    case 'PATCH':
+      return await updatePass(req, res)
+
   }
+
+
 
 
 }

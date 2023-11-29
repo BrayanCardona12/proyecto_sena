@@ -40,7 +40,7 @@ export default async function grafico(req, res) {
         let { idV } = req.query
 
 
-        let [datos] = await pool.query("SELECT nombre, cantidad FROM producto WHERE idVendedor = ? ORDER BY idProducto DESC LIMIT 8;", [parseInt(idV)])
+        let [datos] = await pool.query("SELECT nombre, cantidad FROM producto WHERE idVendedor = ? AND estado != 'noDisponible' ORDER BY idProducto DESC LIMIT 8;", [parseInt(idV)])
         return res.status(200).json(datos)
     }
 

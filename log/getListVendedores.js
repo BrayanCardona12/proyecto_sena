@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toast';
 
 function getListVendedores() {
 
@@ -8,19 +9,25 @@ function getListVendedores() {
 
     useEffect(() => {
         async function getInfoVendedores() {
-            const { data } = await axios.get('/api/RegisterUsers')
-            setInfo(data);
-            
+            try {
+                const { data } = await axios.get('/api/RegisterUsers')
+                setInfo(data);
+            } catch (error) {
+                toast.error('Error, por favor intentalo mas tarde')
+                console.log(error);
+            }
+
+
         }
-    
+
         getInfoVendedores()
         return
-    
-    
+
+
     }, [])
 
 
-  return {info}
+    return { info }
 }
 
 export default getListVendedores

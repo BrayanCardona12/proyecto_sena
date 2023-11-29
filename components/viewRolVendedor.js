@@ -28,6 +28,8 @@ function ViewRolVendedor({prod, infoUser}) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
         <title>Vista | Vendedor</title>
       </Head>
 
@@ -59,20 +61,8 @@ function ViewRolVendedor({prod, infoUser}) {
                 <h3>Panel</h3>
               </a>
 
-              <a href="nosotros.html">
-                <span className="material-icons-sharp">
-                  person_outline
-                </span>
-                <h3>.....</h3>
-              </a>
 
-              <a href="#">
-                <span className="material-icons-sharp">
-                  receipt_long
-                </span>
-                <h3>Mis Clientes</h3>
-              </a>
-
+           
               <Link href={"/graficas/"  + localStorage.getItem('inf')}>
                 <span className="material-icons-sharp">
                   insights
@@ -87,13 +77,7 @@ function ViewRolVendedor({prod, infoUser}) {
                 <h3>Pedidos</h3>
               </Link>
 
-              <a href="#">
-                <span className="material-icons-sharp">
-                  inventory
-                </span>
-                <h3>.....</h3>
-              </a>
-
+            
               <Link href="/RolVendedor/insertarproductos">
                 <span className="material-icons-sharp">
                   add
@@ -101,19 +85,7 @@ function ViewRolVendedor({prod, infoUser}) {
                 <h3>Insertar Producto</h3>
               </Link>
 
-              <a href="#">
-                <span className="material-icons-sharp">
-                  settings
-                </span>
-                <h3>.....</h3>
-              </a>
-
-              <a href="#">
-                <span className="material-icons-sharp">
-                  add
-                </span>
-                <h3>.....</h3>
-              </a>
+           
 
               <a onClick={() => closeSesion()}>
                 <span className="material-icons-sharp">

@@ -1,81 +1,101 @@
-import axios from 'axios';
-import { formatter } from 'log/formatterInt';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { ToastContainer, toast } from 'react-toast';
+
+    // return (
+    //     <div>
+
+    //         <style jsx>
+    //             {`
+    //             .form-actInsert {
+    //                 width: 50%;
+    //                 display: flex;
+    //                 flex-direction: column;
+    //                 gap: 12px;
+    //               }
+    //             `}
+    //         </style>
+
+    //         <form className="form-actInsert" onSubmit={Submit}>
+    //             <ToastContainer delay={4000} position="top-right" />
+    //             <h1 className='text-center'>Form</h1>
+
+    //             <label htmlFor="imagen" className='form-label' >Imagen:</label>
+    //             <input className='form-control' onChange={(e) => {
+    //                 setFileImg(e.target.files[0])
+    //             }} type="file" name="imagen" />
+
+    //             <label htmlFor="nombre" className='form-label'>Nombre:</label>
+    //             <input className='form-control' type="text" onChange={Change} name="nombre" value={producto.nombre} />
+
+    //             <label htmlFor="categoria" className='form-label'>Categoria:</label>
+
+    //             <select onChange={Change} value={producto.categoria} name='categoria' className="form-control">
+    //                 <option value="Perfume">Perfume</option>
+    //                 <option value="Colonia">Colonia</option>
+    //                 <option value="Joyeria">Joyeria</option>
+    //                 <option value="Maquillaje">Maquillaje</option>
+    //                 <option value="Cuidado de piel">Cuidado de piel</option>
+    //                 <option value="Labial">Labial</option>
+    //                 <option value="Desodorante">Desodorante</option>
+    //                 <option value="Delineador">Delineador</option>
+    //                 <option value="Protección Solar">Protección Solar</option>
+    //                 <option value="Tratamiento Facial">Tratamiento Facial</option>
+    //             </select>
+
+    //             <details>
+    //                 <summary>Marca: {producto.marca}</summary>
+    //                 <span style={{ display: 'block' }} onClick={changeMarca}>Yanbal</span>
+    //                 <span style={{ display: 'block' }} onClick={changeMarca}>Avon</span>
+    //                 <span style={{ display: 'block' }} onClick={changeMarca}>Carmel</span>
+    //                 <span style={{ display: 'block' }} onClick={changeMarca}>Esika</span>
+    //                 <span style={{ display: 'block' }} onClick={changeMarca}>Cyzone</span>
+    //                 <span style={{ display: 'block' }} onClick={() => { setInputMarca(true) }}>otro...</span>
+    //             </details>
+
+    //             {inputMarca ? <><input name='marca' value={producto.marca} onChange={Change} /> <span onClick={() => { setInputMarca(false) }}>✅</span></> : ''}
+
+    //             <label className='form-label' htmlFor="descripcion">Descripcion:</label>
+    //             <textarea className='form-control' value={producto.descripcion} onChange={Change} name="descripcion" rows="2" />
 
 
-function pedidos(props) {
-
-    let { data } = props
-
-    let router = useRouter()
-
-    const clickEstado = (e, idP) => {
-        let alerta = confirm('¿Estas seguro de que quieres actualizar el estado de este pedido?')
-
-        if (alerta) {
-            ; (async () => {
-                await axios.patch('/api/compra/', { idP: parseInt(idP), estado: e.target.textContent })
-
-            })();
-
-            toast.success('Pedido actualizado con exito', { backgroundColor: 'green' })
-
-            setTimeout(() => {
-                location.reload()
-            }, 2000)
-        }
+    //             <label htmlFor="cantidad" className='form-label'>Cantidad Disponible:</label>
+    //             <input className='form-control' type="number" onChange={Change} name="cantidad" value={producto.cantidad} />
 
 
-    }
-
-    let colores = {
-        Solicitado: '#B0B0B0',
-        Verificando_Pago: '#FFA07A',
-        Aprobado: '#FFD700',
-        Preparando: '#A4D3A5',
-        Enviando: '#FFA500',
-        Entregado: '#98FB98',
-        Cancelado: '#FF6347',
-    }
-
-    let [datos, setDatos] = useState([...data])
+    //             <label htmlFor="precio" className='form-label' >Precio:</label>
+    //             <input className='form-control' onChange={Change} type="number" value={producto.precio} name="precio" />
 
 
-    const filterCategoria = (e) => {
-
-        let sss = data.filter(x => x.estadoP.toLowerCase() == e.target.textContent.toLowerCase())
-        setDatos(sss)
 
 
-    }
+    //             <button className="btn btn-success  my-2 mx-auto d-block w-25">Guardar Producto</button>
 
-    return (
-        <>
+    //         </form>
+    //     </div>
+    // )
 
-            <Head>
-                <meta charset="UTF-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>Pedidos Vendedor</title>
+      return (
+    <>
 
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+      <Head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Home Vendedor</title>
 
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-                <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
-                <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
-                <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
 
 
-            </Head>
-            <style jsx>
-                {`
+      </Head>
+      <style jsx>
+        {`
         
         /*========== VARIABLES CSS ==========*/
 :root {
@@ -1161,7 +1181,6 @@ body.showCart .cartTab {
 
 .pedidoVen .estado_menu--dp {
     display: none;
-    visibility: hidden;
     position: absolute;
     background-color: #f9f9f9;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -1174,7 +1193,6 @@ body.showCart .cartTab {
 
 .pedidoVen .estado_menu:hover .estado_menu--dp {
     display: block;
-    visibility: visible;
 }
 
 @media (max-width: 1205px) {
@@ -1195,134 +1213,238 @@ body.showCart .cartTab {
     }
 }
         
-.nave {
-       display: flex;
-         justify-content: space-between;
-         align-items: center;
-     }
-
-     .nave div {
-         width: 100%;
-         text-align: center;
-         padding: 3px 5px;
-     }
         
         `}
-            </style>
-            <div className='nave' >
-                <div onClick={filterCategoria} style={{ backgroundColor: colores.Solicitado }} className="Solicitado">Solicitado</div>
-                <div onClick={filterCategoria} style={{ backgroundColor: colores.Verificando_Pago }} className="Verificando_Pago">Verificando_Pago</div>
-                <div onClick={filterCategoria} style={{ backgroundColor: colores.Aprobado }} className="Aprobado">Aprobado</div>
-                <div onClick={filterCategoria} style={{ backgroundColor: colores.Preparando }} className="Preparando">Preparando</div>
-                <div onClick={filterCategoria} style={{ backgroundColor: colores.Enviando }} className="Enviando">Enviando</div>
-                <div onClick={filterCategoria} style={{ backgroundColor: colores.Entregado }} className="Entregado">Entregado</div>
-                <div onClick={filterCategoria} style={{ backgroundColor: colores.Cancelado }} className="Cancelado">Cancelado</div>
-                <div onClick={() => {
-                    setDatos(props.data)
-                }} style={{ backgroundColor: 'darkgray' }} className="Cancelado">Todo</div>
+      </style>
+
+      <div className="html">
+
+
+        <main classNameName="body">
+
+
+        <h1 style={{textAlign:'center'}}>--Aqui lo del filtro--</h1>
+  
+
+
+          <section style={{display:'flex'}} className="pedidoVen container">
+            <h1 style={{width:'10%'}}>.</h1>
+            <table id="example" className="table table-striped display responsive nowrap" style={{ width: '90%' }}>
+              <thead>
+                <tr>
+                  <th>/</th>
+                  <th>ID Pedido</th>
+                  <th>ID Cliente</th>
+                  <th>Nombre Cliente</th>
+                  <th>Contacto</th>
+                  <th>Total</th>
+                  <th>Fecha Solicitada</th>
+                  <th>Fecha Vencimiento</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <a href="" className="ver_icon">
+                      <i className="fa-regular fa-eye"></i>
+                    </a>
+                  </td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>Brayan</td>
+                  <td>
+                    <div className="social_icons pedido_icon">
+                      <a href="#" className="yt"><i className='bx bxl-gmail'></i></a>
+                      <a href="#" className="what"><i className='bx bxl-whatsapp'></i></a>
+                    </div>
+                  </td>
+                  <td>$ 246.000</td>
+                  <td>22/11/2023</td>
+                  <td>22/12/2023</td>
+                  <td>
+                    <div className="estado_menu">
+                      <span>Seleccionar Estado</span>
+                      <ul className="estado_menu--dp" id="estadoPedido">
+                        <li>Solicitado</li>
+                        <li>Preparando</li>
+                        <li>Aprobado</li>
+                        <li>Verificando Pago</li>
+                        <li>Enviando</li>
+                        <li>Entregado</li>
+                        <li>Cancelado</li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="" className="ver_icon">
+                      <i className="fa-regular fa-eye"></i>
+                    </a>
+                  </td>
+                  <td>2</td>
+                  <td>1</td>
+                  <td>Brayan</td>
+                  <td>
+                    <div className="social_icons pedido_icon">
+                      <a href="#" className="yt"><i className='bx bxl-gmail'></i></a>
+                      <a href="#" className="what"><i className='bx bxl-whatsapp'></i></a>
+                    </div>
+                  </td>
+                  <td>$ 73.320</td>
+                  <td>25/11/2023</td>
+                  <td>22/12/2023</td>
+                  <td>
+                    <div className="estado_menu">
+                      <span>Seleccionar Estado</span>
+                      <ul className="estado_menu--dp" id="estadoPedido">
+                        <li>Solicitado</li>
+                        <li>Preparando</li>
+                        <li>Aprobado</li>
+                        <li>Verificando Pago</li>
+                        <li>Enviando</li>
+                        <li>Entregado</li>
+                        <li>Cancelado</li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </section>
+
+          <script src="../js/vendedor.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+          <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+          <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+          <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+          <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+
+
+
+
+
+
+        </main>
+
+      </div>
+
+
+
+    </>
+  )
+
+
+  return (
+    <>
+        <style jsx>{`
+
+* {
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+text-align: center;
+}
+.body {
+width: 100%;
+min-height: 100vh;
+ background-color: rgb(140, 140, 140);
+}
+
+.nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.nav div {
+width: 100%;
+text-align: center;
+padding: 3px 5px;
+}
+
+.cont-pedidos {
+width: 100%;
+margin: auto;
+margin-top: 60px;
+max-width: 800px;
+background-color: aliceblue;
+min-height: 100vh;}
+
+`}</style>
+
+
+        <div className="body">
+            <ToastContainer delay={2000} position='top-right' />
+            <div className="nav">
+                <div style={{ backgroundColor: colores.Solicitado }} className="Solicitado">Solicitado</div>
+                <div style={{ backgroundColor: colores.Verificando_Pago }} className="Verificando_Pago">Verificando_Pago</div>
+                <div style={{ backgroundColor: colores.Aprobado }} className="Aprobado">Aprobado</div>
+                <div style={{ backgroundColor: colores.Preparando }} className="Preparando">Preparando</div>
+                <div style={{ backgroundColor: colores.Enviando }} className="Enviando">Enviando</div>
+                <div style={{ backgroundColor: colores.Entregado }} className="Entregado">Entregado</div>
+                <div style={{ backgroundColor: colores.Cancelado }} className="Cancelado">Cancelado</div>
             </div>
 
+            <div className="cont-pedidos">
+                <h1>Lista - Pedidos</h1>
+                <table style={{ margin: 'auto' }} border="1">
+                    <tbody>
+                        <tr>
+                            <th>/</th>
+                            <th>ID-Pedido</th>
+                            <th>ID-Cliente</th>
+                            <th>NomCliente</th>
+                            <th>Contacto</th>
+                            <th>Total</th>
+                            <th>F-Solicitud</th>
+                            <th>F-Vencimiento</th>
+                            <th>Estado</th>
+                        </tr>
+                        {
+                         data.map(x => (
+                                <tr  style={{backgroundColor: `${colores[x.estadoP]}`}} key={x.idPedido}>
+                                    <td onClick={() => {router.push('/RolVendedor/detalleP/' + x.idC + '/' + localStorage.getItem('inf') + '/' + x.idPedido)}}>👁 Ver</td>
+                                    <td>{x.idPedido}</td>
+                                    <td>{x.idC}</td>
+                                    <td>{x.nombre}</td>
+                                    <td>
+                                        <a target='_blank' href={`https://api.whatsapp.com/send?phone=${x.codInt}${x.telefono}`}>📱</a>
+                                        <a href={`mailto:${x.correo}`}>📬</a>
+                                    </td>
+                                    <td>{formatter.format(x.totalP)}</td>
+                                    <td>{x.fechaS}</td>
+                                    <td>{x.fechaV}</td>
+                                    <td >
+                                        <details >
+                                        <summary>{x.estadoP}</summary>
 
-            <div className="html">
+                                        <span style={{ display: 'block' }} onClick={(e) => clickEstado(e, x.idPedido)}>Verificando_Pago</span>
+                                        <span style={{ display: 'block' }} onClick={(e) => clickEstado(e, x.idPedido)}>Aprobado</span>
+                                        <span style={{ display: 'block' }} onClick={(e) => clickEstado(e, x.idPedido)}>Preparando</span>
+                                        <span style={{ display: 'block' }} onClick={(e) => clickEstado(e, x.idPedido)}>Enviando</span>
+                                        <span style={{ display: 'block' }} onClick={(e) => clickEstado(e, x.idPedido)}>Entregado</span>
+                                        <span style={{ display: 'block' }} onClick={(e) => clickEstado(e, x.idPedido)}>Cancelado</span>
+                                    </details>
 
-                <ToastContainer delay={8000} position='top-right' />
-
-                <main classNameName="body">
-
-                    <section className="pedidoVen container">
-                        <h1 style={{ textAlign: 'center' }}>Lista | Pedidos</h1>
-                        <table id="example" className="table table-striped display responsive nowrap" style={{ width: '90%' }}>
-                            <thead>
-                                <tr>
-                                    <th>/</th>
-                                    <th>ID Pedido</th>
-                                    <th>ID Cliente</th>
-                                    <th>Nombre Cliente</th>
-                                    <th>Contacto</th>
-                                    <th>Total</th>
-                                    <th>Fecha Solicitada</th>
-                                    <th>Fecha Vencimiento</th>
-                                    <th>Estado</th>
+                                    </td>
                                 </tr>
-                            </thead>
+                            ))
+                        }
 
-                            <tbody>
-                                {
-                                    datos.map(x => (
-                                        <tr key={x.idPedido}>
-                                            <td onClick={() => { router.push('/RolVendedor/detalleP/' + x.idC + '/' + localStorage.getItem('inf') + '/' + x.idPedido) }}>
-
-                                                <i className="fa-regular fa-eye"></i>
-
-                                            </td>
-                                            <td>{x.idPedido}</td>
-                                            <td>{x.idC}</td>
-                                            <td>{x.nombre}</td>
-                                            <td>
-                                                <div className="social_icons pedido_icon">
-                                                    <a href={`mailto:${x.correo}`} className="yt"><i className='bx bxl-gmail'></i></a>
-                                                    <a target='_blank' href={`https://api.whatsapp.com/send?phone=${x.codInt}${x.telefono}`} className="what"><i className='bx bxl-whatsapp'></i></a>
-                                                </div>
-                                            </td>
-                                            <td>{formatter.format(x.totalP)}</td>
-                                            <td>{x.fechaS}</td>
-                                            <td>{x.fechaV}</td>
-                                            <td style={{ backgroundColor: `${colores[x.estadoP]}` }}>
-                                                <div className="estado_menu">
-                                                    <span>{x.estadoP}</span>
-                                                    <ul className="estado_menu--dp" id="estadoPedido">
-                                                        <li onClick={(e) => clickEstado(e, x.idPedido)}>Solicitado</li>
-                                                        <li onClick={(e) => clickEstado(e, x.idPedido)}>Preparando</li>
-                                                        <li onClick={(e) => clickEstado(e, x.idPedido)}>Aprobado</li>
-                                                        <li onClick={(e) => clickEstado(e, x.idPedido)}>Verificando_Pago</li>
-                                                        <li onClick={(e) => clickEstado(e, x.idPedido)}>Enviando</li>
-                                                        <li onClick={(e) => clickEstado(e, x.idPedido)}>Entregado</li>
-                                                        <li onClick={(e) => clickEstado(e, x.idPedido)}>Cancelado</li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))
-                                }
-
-
-
-                            </tbody>
-                        </table>
-                        {data.length == 0 ? <h3 style={{ textAlign: 'center' }}>Tabla Vacia...</h3> : ''}
-
-                    </section>
-
-
-
-
-
-
-
-
-
-                </main>
+                    </tbody>
+                </table>
+                {data.length == 0 ? <h3 style={{textAlign:'center'}}>Tabla Vacia...</h3> : ''}
 
             </div>
-
-
-
-        </>
-    )
-}
-
-export default pedidos
-
-pedidos.getInitialProps = async (ctx) => {
-    try {
-        const response1 = await axios.get('http://localhost:3000/api/compra/?idV=' + ctx.query.idV);
-
-        return {
-            data: response1.data
-        };
-    } catch (error) {
-
-
-        return { data: {} };
-    }
-}
+        </div>
+    </>
+)

@@ -29,6 +29,7 @@ function ViewRolCliente({ infoListV, infoUser }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
         <title>Vista | Cliente</title>
       </Head>
 
@@ -53,77 +54,7 @@ function ViewRolCliente({ infoListV, infoUser }) {
               </div>
             </div>
             
-            <div className="sidebar">
-              <a href="#" className="active">
-                <span className="material-icons-sharp">
-                  dashboard
-                </span>
-                <h3>Panel</h3>
-              </a>
-
-              <a href="nosotros.html">
-                <span className="material-icons-sharp">
-                  person_outline
-                </span>
-                <h3>Usuario</h3>
-              </a>
-
-              <a href="#">
-                <span className="material-icons-sharp">
-                  receipt_long
-                </span>
-                <h3>Historial</h3>
-              </a>
-
-              <a href="#">
-                <span className="material-icons-sharp">
-                  insights
-                </span>
-                <h3>Analytics</h3>
-              </a>
-
-              <a href="#">
-                <span className="material-icons-sharp">
-                  mail_outline
-                </span>
-                <h3>Email</h3>
-              </a>
-
-              <a href="#">
-                <span className="material-icons-sharp">
-                  inventory
-                </span>
-                <h3>Lista de Venta</h3>
-              </a>
-
-              <a href="#">
-                <span className="material-icons-sharp">
-                  report_gmailerrorred
-                </span>
-                <h3>Reporte</h3>
-              </a>
-
-              <a href="#">
-                <span className="material-icons-sharp">
-                  settings
-                </span>
-                <h3>Configuración</h3>
-              </a>
-
-              <a href="#">
-                <span className="material-icons-sharp">
-                  add
-                </span>
-                <h3>New Login</h3>
-              </a>
-
-              <a onClick={() => closeSesion()}>
-                <span className="material-icons-sharp">
-                  logout
-                </span>
-                <h3>Cerrar Sesión</h3>
-              </a>
-            </div>
+           
           </aside>
 
           <div className="seccion_right">
@@ -154,6 +85,7 @@ function ViewRolCliente({ infoListV, infoUser }) {
 
 
               </div>
+          
 
               <div className="perfil">
                 <div className="informacion">
@@ -167,9 +99,16 @@ function ViewRolCliente({ infoListV, infoUser }) {
                   <span style={{ position: 'absolute', borderRadius: '10px', zIndex: '10', bottom: '0', right: '0' }} className="material-icons-sharp"> edit </span>
                 </Link>
               </div>
+              <a onClick={() => closeSesion()}>
+                <span className="material-icons-sharp">
+                  logout
+                </span>
+                
+              </a>
             </div>
             <ToastContainer delay={2000} position='top-center' />
             <input value={textInputFilter} onChange={Change} type="text" className="input-filter" placeholder="Ohm Parfum..." />
+            <h1 style={{textAlign:'center'}}>Lista | Vendedores</h1>
             <div style={{ width: '100%', display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
 
 

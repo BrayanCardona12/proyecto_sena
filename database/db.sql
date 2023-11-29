@@ -1,3 +1,5 @@
+create database bdp;
+
 CREATE TABLE usuarios(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     imagen text not null,

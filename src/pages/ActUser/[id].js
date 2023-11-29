@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { uploadFile } from 'firebaseConfig/config'
+import Head from 'next/head'
 
 
 
@@ -64,67 +65,87 @@ function actUser(props) {
         // ⬆ se hace la validacion de los campos. (💡, puede ser una funcion aparte, para que se pueda usar en el otro onclick...)
         if (correo.current == datosInput.correo) {
             ; (async () => {
-                await axios.post(`http://localhost:4055/send/${datosInput.correo}/${codRamdon.current}`)
+                try {
+                    await axios.post(`http://localhost:4055/send/${datosInput.correo}/${codRamdon.current}`)
+                } catch (ee) {
+                    toast.error('Error, por favor inténtalo mas tarde')
+                    console.log(ee);
+                    return
+                }
+
             })();
             setStatusBtnSend(false)
             setError('')
             return
 
         } else {
-            const { data } = await axios.put('/api/Login', { correo: datosInput.correo })
-            if (data != '') {
-                setError('Error, Usuario Existente')
-                return
-            } else {
-                ; (async () => {
-                    await axios.post(`http://localhost:4055/send/${datosInput.correo}/${codRamdon.current}`)
-                })();
-                setStatusBtnSend(false)
-                setError('')
-                return
+            try {
+                const { data } = await axios.put('/api/Login', { correo: datosInput.correo })
+                if (data != '') {
+                    setError('Error, Usuario Existente')
+                    return
+                } else {
+                    ; (async () => {
+                        await axios.post(`http://localhost:4055/send/${datosInput.correo}/${codRamdon.current}`)
+                    })();
+                    setStatusBtnSend(false)
+                    setError('')
+                    return
+                }
+            } catch (ee) {
+                toast.error('Error, por favor inténtalo mas tarde')
+                console.log(ee);
             }
+
         }
 
     }
 
     const clickCodVerf = async (e) => {
+
         e.preventDefault();
 
+        try {
+            if (inputCod == codRamdon.current) {
+
+                // se actualiza y regresa a la pagina anterior
+                let alerta = confirm('El código ingresado es correcto, ¿desea continuar con el proceso de actualización de datos?')
+
+                if (alerta) {
+
+                    if (file == null) {
+                        toast.warn('⌛ Cargando...')
+                        await axios.put(`/api/RegisterUsers/`, { ...datosInput, id: parseInt(router.query.id) })
+                        router.push('/')
+
+                    } else {
+                        toast.warn('⌛ Cargando...')
+
+                        let url = await uploadFile(file)
 
 
-        if (inputCod == codRamdon.current) {
+                        await axios.put(`/api/RegisterUsers/`, { ...datosInput, id: parseInt(router.query.id), imagen: url })
+                        router.push('/')
+                    }
 
-            // se actualiza y regresa a la pagina anterior
-            let alerta = confirm('El código ingresado es correcto, ¿desea continuar con el proceso de actualización de datos?')
-
-            if (alerta) {
-
-                if (file == null) {
-                    toast.warn('⌛ Cargando...')
-                    await axios.put(`/api/RegisterUsers/`, { ...datosInput, id: parseInt(router.query.id) })
-                    router.push('/')
-
-                } else {
-                    toast.warn('⌛ Cargando...')
-
-                    let url = await uploadFile(file)
-
-
-                    await axios.put(`/api/RegisterUsers/`, { ...datosInput, id: parseInt(router.query.id), imagen: url })
-                    router.push('/')
                 }
 
+
+
+
+
+            } else {
+                setError('Error, código incorrecto');
             }
 
-
-
-
-
-        } else {
-            setError('Error, código incorrecto');
+            return
+        } catch (ee) {
+            toast.error('Error, por favor inténtalo mas tarde')
+            console.log(ee);
         }
 
-        return
+
+
     }
 
 
@@ -155,23 +176,30 @@ function actUser(props) {
                   
                 `}
             </style>
-            <form className=" cont-form">
-                <ToastContainer delay={3000} position='top-right'/>
+            <Head>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+            </Head>
+            <form style={{ width: '100%', maxWidth: '920px', margin: 'auto' }}>
+                <ToastContainer delay={6000} position='top-right' />
 
-                <h1 >Actualizar Información Personal</h1>
-                <img style={{ width: '30%', borderRadius: '10px' }} src={datosInput.imagen} />
-                <input onChange={(e) => { setFile(e.target.files[0]) }} name="imagen" placeholder="Imagen..." type="file" />
-                <input onChange={changeInput} value={datosInput.nombre} name="nombre" placeholder="Nombres" type="text" />
-                <input onChange={changeInput} value={datosInput.apellido} name="apellido" placeholder="Apellidos" type="text" />
+                <h1 className='text-center'>Actualizar Información Personal</h1>
 
-                <select onChange={changeInput} value={datosInput.tipo} name='tipoDoc' id="tipoDoc">
+                <img style={{ width: '20%', borderRadius: '10px', display: 'block', margin: 'auto' }} src={datosInput.imagen} />
+                <label>Imagen</label>
+                <input className='form-control' onChange={(e) => { setFile(e.target.files[0]) }} name="imagen" placeholder="Imagen..." type="file" />
+                <label>Nombre:</label>
+                <input className='form-control' onChange={changeInput} value={datosInput.nombre} name="nombre" placeholder="Nombres" type="text" />
+                <label>Apellido:</label>
+                <input className='form-control' onChange={changeInput} value={datosInput.apellido} name="apellido" placeholder="Apellidos" type="text" />
+                <label>Tipo de Documento:</label>
+                <select className='form-control' onChange={changeInput} value={datosInput.tipo} name='tipoDoc' id="tipoDoc">
                     <option value="Cédula de Ciudadania">Cedula de Ciudadania</option>
                     <option value="Cédula Extranjera">Cédula Extranjera</option>
                     <option value="Pasaporte">Pasaporte</option>
                     <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
                 </select>
-
-                <input name="numDoc" type="text" onChange={changeInput} placeholder="Numero de Documento" value={datosInput.numDoc} />
+                <label>No de Documento:</label>
+                <input className='form-control' name="numDoc" type="text" onChange={changeInput} placeholder="Numero de Documento" value={datosInput.numDoc} />
 
 
 
@@ -179,15 +207,16 @@ function actUser(props) {
 
 
                 <div style={{ width: '100%' }}>
-                    <input min={1} max={400} style={{ width: '20%' }} onChange={changeInput} name="codInt" placeholder="Codigo Internacional" value={datosInput.codInt} autoComplete="postal-code" type="number" />
-
-                    <input style={{ width: '65%' }} onChange={changeInput} value={datosInput.telefono} name="telefono" placeholder="Teléfono" autoComplete="postal-code" type="number" />
+                    <label>Código Internacional:</label>
+                    <input className='form-control' min={1} max={400} style={{ width: '20%' }} onChange={changeInput} name="codInt" placeholder="Codigo Internacional" value={datosInput.codInt} autoComplete="postal-code" type="number" />
+                    <label>Telefono:</label>
+                    <input className='form-control' style={{ width: '65%' }} onChange={changeInput} value={datosInput.telefono} name="telefono" placeholder="Teléfono" autoComplete="postal-code" type="number" />
 
                 </div>
-
-                <input onChange={changeInput} value={datosInput.edad} name="edad" placeholder="Edad" type="number" />
-
-                <select onChange={changeInput} value={datosInput.pais} name="pais" >
+                <label>Edad:</label>
+                <input className='form-control' onChange={changeInput} value={datosInput.edad} name="edad" placeholder="Edad" type="number" />
+                <label>País:</label>
+                <select className='form-control' onChange={changeInput} value={datosInput.pais} name="pais" >
                     <option value="">Country</option>
                     <option value="AF">Afghanistan</option>
                     <option value="AL">Albania</option>
@@ -424,26 +453,29 @@ function actUser(props) {
                     <option value="ZM">Zambia</option>
                     <option value="ZW">Zimbabwe</option>
                 </select>
-
-                <input onChange={changeInput} value={datosInput.ciudad} name="ciudad" placeholder="Ciudad" type="text" />
-                <input onChange={changeInput} value={datosInput.direccion} name="direccion" placeholder="Dirección" type="text" />
+                <label>Ciudad:</label>
+                <input className='form-control' onChange={changeInput} value={datosInput.ciudad} name="ciudad" placeholder="Ciudad" type="text" />
+                <label>Dirección:</label>
+                <input className='form-control' onChange={changeInput} value={datosInput.direccion} name="direccion" placeholder="Dirección" type="text" />
 
                 {datosInput.rol == '2' ? <>
                     <i>Como eres vendendor, puedes modificar tus</i>
                     <i>medios de pago (Daviplata o Nequi):</i>
-                    <input name="imgDavi" onChange={changeInput} type="text" placeholder="Imagen Davi" value={datosInput.imgDavi} />
-                    <input name="imgNequi" onChange={changeInput} type="text" placeholder="Imagen Nequi" value={datosInput.imgNequi} />
+                    <img style={{ maxWidth: '100px' }} src={datosInput.imgDavi} />
+                    <img style={{ maxWidth: '100px' }} src={datosInput.imgNequi} />
+                    <input className='form-control' name="imgDavi" disabled onChange={changeInput} type="text" placeholder="Imagen Davi" value={datosInput.imgDavi} />
+                    <input className='form-control' name="imgNequi" disabled onChange={changeInput} type="text" placeholder="Imagen Nequi" value={datosInput.imgNequi} />
                 </> : ''}
 
 
-                {statusBtnSend ? <input onChange={changeInput} value={datosInput.correo} name="correo" placeholder="Correo" type="email" /> : <input onChange={changeInput} value={datosInput.correo} disabled name="correo" placeholder="Correo" type="email" />}
-                <input onChange={changeInput} value={datosInput.contrasena} name="contrasena" placeholder="Contraseña" type="password" />
+                {statusBtnSend ? <> <label>Correo:</label> <input className='form-control' onChange={changeInput} value={datosInput.correo} name="correo" placeholder="Correo" type="email" /></> : <input onChange={changeInput} value={datosInput.correo} disabled name="correo" placeholder="Correo" type="email" />}
+                <><label>Contraseña:</label></> <input className='form-control' onChange={changeInput} value={datosInput.contrasena} name="contrasena" placeholder="Contraseña" type="password" />
                 {error ? <b>{error}</b> : ''}
 
                 {statusBtnSend ? <button style={{ backgroundColor: 'green' }} onClick={sendEmail} className="btn-send-register">Enviar</button>
                     : <>
                         <i>Ingresa el codigo de verificacion enviado al correo electronico indicado en este formulario para continuar con la actualización de datos</i>
-                        <input type='text' placeholder='codigo' value={inputCod} onChange={(e) => {
+                        <input className='form-control' type='text' placeholder='codigo' value={inputCod} onChange={(e) => {
                             setInputCod(e.target.value)
                         }} />
                         <input type='submit' onClick={clickCodVerf} value={'dd'} />

@@ -1,7 +1,7 @@
 import axios from "axios"
 import { uploadFile } from "firebaseConfig/config"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { toast } from "react-toast"
 
 function logformActInsrt() {
@@ -22,6 +22,8 @@ function logformActInsrt() {
 
     })
 
+    let [im, setIm] = useState('https://i0.wp.com/css-tricks.com/wp-content/uploads/2017/08/card-skeleton@2x.png?w=300&ssl=1')
+
     useEffect(() => {
         setProducto({ ...producto, idVendedor: parseInt(localStorage.getItem('inf')) })
 
@@ -30,6 +32,7 @@ function logformActInsrt() {
 
             let [info] = data
             setProducto({ ...info })
+            setIm(info.imagen)
         }
 
         if (router.query.id) {
@@ -60,6 +63,14 @@ function logformActInsrt() {
     const Submit = async (e) => {
         e.preventDefault()
 
+        for (const k in producto) {
+            
+            if (producto[k].length == 0) {
+                toast.error(`Error, campo ${k} vacio`)
+                return
+            }
+        }
+
         if (router.query.id) {
 
             if (fileImg == null) {
@@ -89,7 +100,7 @@ function logformActInsrt() {
 
 
 
-    return { Submit, Change, producto, inputMarca, setInputMarca, changeMarca, setProducto, setFileImg }
+    return { Submit, Change, producto, inputMarca, setInputMarca, changeMarca, setProducto, setFileImg, router, setIm, im}
 }
 
 export default logformActInsrt

@@ -3,8 +3,10 @@ import {StylesHome} from 'log/Styles'
 import LogAuth from 'log/logAuth';
 import Link from 'next/link';
 import  '@/styles/Home.module.css'
+import { ToastContainer } from 'react-toast';
 
 export default function BodyHome() {
+
 
   EfectoHome()
 
@@ -18,13 +20,11 @@ export default function BodyHome() {
        </style>
 
       <header className="header">
+        <ToastContainer delay={8000} position='top-right'/>
         <Link href={"/RolCliente"} className='logo'>
-        <i className="fa-solid fa-store"></i> Yanbal</Link>
+        <i className="fa-solid fa-store"></i> SGVC</Link>
 
-        <form action="" className="search-form">
-          <input type="search" placeholder="Buscar aqui..." id="search-box" />
-          <label htmlFor="search-box" className="fas fa-search"></label>
-        </form>
+  
 
         <div className="icons">
          
@@ -58,44 +58,42 @@ export default function BodyHome() {
 
           <div className="slide actives">
             <div className="contenido">
-              <span>New Arrivals</span>
-              <h3>Flexible chair</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Repellat earum quidem excepturi quae
-                maiores quas numquam.
+              <span>Nuevas Fragancias</span>
+              <h3>Ccori Perfum</h3>
+              <p>Un perfume para mujer ambarado floral. Un elixir dorado con notas suntuosas de rosa blanca, canela dulce y un toque de chocolate.
               </p>
-              <Link href={'RolVendedor'} className='btn'>Comprar Ahora</Link>
+              <b id='btn-1' className="btn">Comprar Ahora</b>
             
             </div>
             <div className="image">
-              <img style={{maxWidth:"500px", width:'100%', objectFit:'contain'}} src="https://i.ebayimg.com/thumbs/images/g/CIYAAOSwyexkwqtr/s-l640.jpg" alt="null" />
+              <img style={{maxWidth:"500px", width:'100%', objectFit:'contain'}} src="https://emprendimiento.yanbal.com/assets/images/photos/global/ccori_ccoricristal_ccorirose.jpg" alt="null" />
             </div>
           </div>
 
           <div className="slide">
             <div className="contenido">
-              <span>New Arrivals</span>
-              <h3>Flexible chair</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Repellat earum quidem excepturi quae
-                maiores quas numquam.
+              <span>Nuevos Prodcutos</span>
+              <h3>Catalogos</h3>
+              <p>Podras interactuar con diversidad de catalogos, tenemos una amblia cantidad, descubrelos
               </p>
-              <a href="#" className="btn">Comprar Ahora</a>
+              <b id='btn-3' className="btn">Comprar Ahora</b>
             </div>
             <div className="image">
-              <img src="https://http2.mlstatic.com/D_NQ_NP_971153-MLC54491012080_032023-O.webp" alt="null" />
+              <img src="https://belcorpcolombia.vtexassets.com/arquivos/ids/872505/200114517-producto1.jpg?v=638054443717230000" alt="null" />
             </div>
           </div>
 
           <div className="slide">
             <div className="contenido ">
-              <span>New Arrivals</span>
-              <h3>Flexible chair</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Repellat earum quidem excepturi quae
-                maiores quas numquam.
+              <span>Variedad de Productos</span>
+              <h3>diverse</h3>
+
+              <p>Podras encontrar diversidad de productos, perfectos para alegrar tu dia o el de alguien mas.
               </p>
-              <a href="#" className="btn btn-shopin">Comprar Ahora</a>
+              <b id="btn-2" className="btn btn-shopin">Comprar Ahora</b>
             </div>
             <div className="image">
-              <img src="https://vasari.vteximg.com.br/arquivos/ids/215218-500-500/MZC175912-BL-30.jpg?v=638162380611400000" />
+              <img src="https://datosmujer.cl/wp-content/uploads/pack-maquillaje.jpg" />
             </div>
           </div>
 
@@ -107,37 +105,7 @@ export default function BodyHome() {
       </section>
 
 
-      <section className="contenedor">
-        <h2 className="title">Ofertas</h2>
-        <div className="banner-container">
-          <div className="banner">
-            <img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/73ba5f3153d14878b735aa2f5cd4b540_9366/Tenis_Treziod_2_Azul_IG0659_HM1.jpg" alt="" />
-            <div className="banner-content">
-              <span>oferta limitada</span>
-              <h3>upto 50% off</h3>
-              <a href="#" className="btn">Comprar</a>
-            </div>
-          </div>
-
-          <div className="banner">
-            <img src="https://cdn.shopify.com/s/files/1/0529/4125/8945/products/W-217H-9AVDF_1.jpg?v=1655393067&width=600" alt="" />
-            <div className="banner-content">
-              <span>oferta limitada</span>
-              <h3>upto 50% off</h3>
-              <a href="#" className="btn">Comprar</a>
-            </div>
-          </div>
-
-          <div className="banner">
-            <img src="https://belcorpcolombia.vtexassets.com/arquivos/ids/916881-800-800?v=638242461883170000&width=800&height=800&aspect=true" alt="" />
-            <div className="banner-content">
-              <span>oferta limitada</span>
-              <h3>upto 50% off</h3>
-              <a href="#" className="btn">Comprar</a>
-            </div>
-          </div>
-        </div>
-      </section>
+     
     </>
 
   )
