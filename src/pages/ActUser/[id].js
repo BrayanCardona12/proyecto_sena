@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { uploadFile } from 'firebaseConfig/config'
 import Head from 'next/head'
+import Link from 'next/link'
 
 
 
@@ -179,6 +180,10 @@ function actUser(props) {
             <Head>
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
             </Head>
+            <Link href={datosInput.rol == '2' ? '/RolVendedor' : '/RolCliente'}>
+            regresar
+            
+            </Link>
             <form style={{ width: '100%', maxWidth: '920px', margin: 'auto' }}>
                 <ToastContainer delay={6000} position='top-right' />
 

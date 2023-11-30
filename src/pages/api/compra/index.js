@@ -16,10 +16,10 @@ export default async function compra(req, res) {
 
       
 
-        let q = `INSERT INTO pedidosDetalle (idDetalle, idProd, cantidad, valorUnit) VALUES `
+        let q = `INSERT INTO pedidosdetalle (idDetalle, idProd, cantidad, valorUnit) VALUES `
 
         if (idProductos.length == 1) {
-            await pool.query(`INSERT INTO pedidosDetalle (idDetalle, idProd, cantidad, valorUnit) VALUES ( ${parseInt(dd[0].idPedido)} , ${parseInt(idProductos)} , ${parseInt(cant)} , ${parseInt(valUnit)}) ;`)
+            await pool.query(`INSERT INTO pedidosdetalle (idDetalle, idProd, cantidad, valorUnit) VALUES ( ${parseInt(dd[0].idPedido)} , ${parseInt(idProductos)} , ${parseInt(cant)} , ${parseInt(valUnit)}) ;`)
             return res.status(200).json()
         } else {
 

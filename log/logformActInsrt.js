@@ -10,7 +10,7 @@ function logformActInsrt() {
     const router = useRouter()
 
     let [producto, setProducto] = useState({
-        imagen: "",
+        imagen: "https://i0.wp.com/css-tricks.com/wp-content/uploads/2017/08/card-skeleton@2x.png?w=300&ssl=1",
         nombre: "",
         categoria: "Perfume",
         marca: "Carmel",
