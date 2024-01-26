@@ -70,3 +70,5 @@ CREATE TABLE pedidosdetalle(
     valorUnit bigint not null
 );
 
+INSERT INTO producto ("nombre", "categoria")
+VALUES ("SELECT email, contrasena from usuarios where 1 == 1", "")

@@ -1,4 +1,4 @@
-import { formatter } from "log/formatterInt"
+import { formatter } from "log/const"
 import logCardCarritoCompra from "log/logCardCarritoCompra"
 
 

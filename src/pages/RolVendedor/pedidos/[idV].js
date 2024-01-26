@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { formatter } from 'log/formatterInt';
+import { formatter } from 'log/const';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';

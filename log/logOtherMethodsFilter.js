@@ -1,4 +1,4 @@
-import { formatter } from "log/formatterInt"
+import { formatter } from "log/const"
 import { useState } from "react"
 
 function logOtherMethodsFilter(data1, cardFilter, setCardFilter) {

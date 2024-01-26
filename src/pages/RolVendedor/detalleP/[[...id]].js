@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { formatter } from 'log/formatterInt';
+import { formatter } from 'log/const';
 import React from 'react'
 
 function detalleP(props) {

@@ -9,7 +9,7 @@ import logFilterProdUsersInput from "log/logFilterProdUsersInput"
 
 
 
-function ViewRolVendedor({prod, infoUser}) {
+function ViewRolVendedor({prod}) {
 
 
   const { closeSesion } = LogCloseSesion()
@@ -127,13 +127,13 @@ function ViewRolVendedor({prod, infoUser}) {
 
               <div className="perfil">
                 <div className="informacion">
-                  <p>Hola, <b>{!infoUser[0] ? 'unknown': infoUser[0].nombre}</b></p>
+                  <p>Hola, <b>{!localStorage.getItem('theName') ? 'unknown': localStorage.getItem('theName')}</b></p>
                   <small>
                     Vendedor
                   </small>
                 </div>
-                <Link href={'/ActUser/'+infoUser.map(x => x.id)} style={{position:'relative'}} className="foto_perfil">
-                  <img src={!infoUser[0] ? 'unknown': infoUser[0].imagen} alt="foto perfil" />
+                <Link href={'/ActUser/'+localStorage.getItem('inf')} style={{position:'relative'}} className="foto_perfil">
+                  <img src={!localStorage.getItem('imgUser') ? 'unknown': localStorage.getItem('imgUser')} alt="foto perfil" />
                   <span style={{position:'absolute', borderRadius:'10px',zIndex:'10', bottom:'0', right:'0'}} className="material-icons-sharp"> edit </span>
                 </Link>
               </div>

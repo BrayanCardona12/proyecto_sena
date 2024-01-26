@@ -2,7 +2,7 @@ import axios from 'axios'
 import { StyleCardProducto } from 'log/Styles'
 import logCardProducto from 'log/logCardProducto'
 import Link from 'next/link'
-import { formatter } from "log/formatterInt"
+import { formatter } from "log/const"
 
 
 function CardProducto({ vendedor, infoProd, dataCar, cliente }) {

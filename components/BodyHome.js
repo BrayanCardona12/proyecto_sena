@@ -1,35 +1,26 @@
-import EfectoHome from 'log/EfectoHome';
-import {StylesHome} from 'log/Styles'
-import LogAuth from 'log/logAuth';
+import { StylesHome } from 'log/Styles'
 import Link from 'next/link';
-import  '@/styles/Home.module.css'
+import '@/styles/Home.module.css'
 import { ToastContainer } from 'react-toast';
+import { IconPoints } from './iconsLoading';
 
-export default function BodyHome() {
-
-
-  EfectoHome()
-
-  const {changeInput, submit, correo, contrasena, rol, error} = LogAuth()
+export default function BodyHome({ changeInput, submit, correo, contrasena, rol, error, loading, setloading }) {
 
   return (
     <>
-  
-      <style jsx> 
-      {`${StylesHome()}`}
-       </style>
+      <style jsx>
+        {`${StylesHome()}`}
+      </style>
 
       <header className="header">
-        <ToastContainer delay={8000} position='top-right'/>
+        <ToastContainer delay={8000} position='top-left' />
         <Link href={"/RolCliente"} className='logo'>
-        <i className="fa-solid fa-store"></i> SGVC</Link>
-
-  
+          <i className="fa-solid fa-store"></i> SGVC</Link>
 
         <div className="icons">
-         
+
           <div id="search-btn" className="fas fa-search"></div>
-   
+
           <div id="login-btn" className="fas fa-user"></div>
         </div>
       </header>
@@ -45,9 +36,9 @@ export default function BodyHome() {
             <option value="1">Cliente</option>
             <option value="2">Vendedor</option>
           </select>
-        
-          <input type="submit" value="login now" className="btn btn-margin" />
-          {error? <b style={{color:'red', fontSize:'1.3rem'}}>{error}</b>: ''}
+          {loading ? <IconPoints colorF={"#E0592A"} colorL={"#FFFFFF"} style1={ { width: '100%', display: 'flex', alignItems: 'center',   justifyContent: 'center',     backgroundColor: '#E0592A'   } } style2={   {     display: 'block',     maxHeight: '40px'   } } /> : <button className="btn btn-margin">Ingresar</button>}
+          
+          {error ? <b style={{ color: 'red', fontSize: '1.3rem' }}>{error}</b> : ''}
           <p className="forget">Olvidaste la contraseña <Link href="/forgotPass">Click Aqui</Link></p>
           <p className="forget">No tienes una cuenta <Link href="/Registro_Usuarios">Crear Una</Link></p>
         </form>
@@ -63,10 +54,10 @@ export default function BodyHome() {
               <p>Un perfume para mujer ambarado floral. Un elixir dorado con notas suntuosas de rosa blanca, canela dulce y un toque de chocolate.
               </p>
               <b id='btn-1' className="btn">Comprar Ahora</b>
-            
+
             </div>
             <div className="image">
-              <img style={{maxWidth:"500px", width:'100%', objectFit:'contain'}} src="https://emprendimiento.yanbal.com/assets/images/photos/global/ccori_ccoricristal_ccorirose.jpg" alt="null" />
+              <img style={{ maxWidth: "500px", width: '100%', objectFit: 'contain' }} src="https://emprendimiento.yanbal.com/assets/images/photos/global/ccori_ccoricristal_ccorirose.jpg" alt="null" />
             </div>
           </div>
 
@@ -96,16 +87,10 @@ export default function BodyHome() {
               <img src="https://datosmujer.cl/wp-content/uploads/pack-maquillaje.jpg" />
             </div>
           </div>
-
         </div>
-
-        <div id="slide-next"  className="fas fa-angle-right"></div>
-        <div id="slide-prev"  className="fas fa-angle-left"></div>
-
+        <div id="slide-next" className="fas fa-angle-right"></div>
+        <div id="slide-prev" className="fas fa-angle-left"></div>
       </section>
-
-
-     
     </>
 
   )

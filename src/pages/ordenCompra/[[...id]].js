@@ -1,5 +1,5 @@
 import axios from "axios";
-import { formatter } from "log/formatterInt"
+import { formatter } from "log/const"
 import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useState } from "react";

@@ -1,41 +1,35 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 
-function getProductos(props) {
+function getProductos() {
 
-  const [productos, setProductos] = useState([])
- 
-if (props) {
-  
-  useEffect(() => {
-    async function getProductos() {
-      const { data } = await axios.post('/api/Crud/selectProductos', { id: props.id })
-      setProductos(data)
-    }
-
-    getProductos()
-
-  }, [])
-  return {productos:productos}
-}else {
+  const [productos, setProductos] = useState()
 
   useEffect(() => {
-    async function getProductos() {
-      const { data } = await axios.post('/api/Crud/selectProductos', { id: localStorage.getItem('inf') })
-      setProductos(data)
-    }
 
-    getProductos()
+
+    (async () => {
+      try {
+        const { data } = await axios.post('/api/Crud/selectProductos', { id: localStorage.getItem('inf') })
+        setProductos(data)
+      } catch (err) {
+        console.log('e');
+      }
+
+    })()
+
+
+
 
   }, [])
-  return {productos:productos}
+  return { productos: productos }
 }
 
-   
 
 
-  
 
-}
+
+
+
 
 export default getProductos

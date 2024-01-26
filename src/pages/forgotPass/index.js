@@ -53,7 +53,8 @@ function forgotPass() {
         return
       } else {
         (async () => {
-          await axios.post(`http://localhost:4055/send/${camposInput.email}/${codRamdon.current}`)
+     
+          await axios.post(`https://service-email.vercel.app/send/${camposInput.email}/${codRamdon.current}`)
 
           setCamposInput({ ...camposInput, statusCod: true })
         })();
@@ -126,7 +127,7 @@ function forgotPass() {
 
   return (
     <div style={{ textAlign: 'center', maxWidth: '600px', margin: 'auto', padding: '20px', fontFamily: `monospace` }}>
-      <ToastContainer delay={4000} position="top-right"/>
+      <ToastContainer delay={4000} position="top-left"/>
       <h1 style={{ color: '#007bff' }}>Recuperar Tu Contraseña</h1>
       <p>Por favor, introduce el correo electrónico que usabas para iniciar sesión.</p>
       {camposInput.statusChangePass || camposInput.statusCod ? (
