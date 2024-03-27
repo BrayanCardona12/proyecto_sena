@@ -7,7 +7,7 @@ import { formatter } from "log/const"
 
 function CardProducto({ vendedor, infoProd, dataCar, cliente }) {
 
-  let { changeInput, cantidad, error, addCar, statusCar }= logCardProducto(infoProd, dataCar)
+  let { changeInput, cantidad, error, addCar, statusCar } = logCardProducto(infoProd, dataCar)
 
   // return (
   //   <>
@@ -73,12 +73,12 @@ function CardProducto({ vendedor, infoProd, dataCar, cliente }) {
   //     </div></>
   // )
 
-  return (      <>
+  return (<>
 
 
     <style jsx>
-        {
-            `
+      {
+        `
 
 .grid_contenido {
 display: flex;
@@ -175,84 +175,84 @@ display: block;
 
 
 `
-        }
+      }
     </style>
 
-    <main style={{maxWidth:'300px'}} className="card_product">
+    <main style={{ maxWidth: '300px' }} className="card_product">
 
-        <div className="grid_contenido">
-            <div className="card_contenido">
-                {vendedor ? (
-                    <div className="card_header">
-                        <Link style={{fontSize:'2rem', color:'green'}} href={"/RolVendedor/actProducto/" + infoProd.idProducto}>
-                            <i className="fa-solid fa-pen-to-square"></i>
-                        </Link>
+      <div className="grid_contenido">
+        <div className="card_contenido">
+          {vendedor ? (
+            <div className="card_header">
+              <Link style={{ fontSize: '2rem', color: 'green' }} href={"/RolVendedor/actProducto/" + infoProd.idProducto}>
+                <i className="fa-solid fa-pen-to-square"></i>
+              </Link>
 
-                        <span style={{fontSize:'2rem', color:'red'}} onClick={async () => {
-                            await axios.delete("/api/Crud/insertUpdate/" + infoProd.idProducto)
-                            location.href = "/RolVendedor"
-                        }}>
-                            <i className='bx bx-trash'></i>
-                        </span>
+              <span style={{ fontSize: '2rem', color: 'red' }} onClick={async () => {
+                await axios.delete("/api/Crud/insertUpdate/" + infoProd.idProducto)
+                location.href = "/RolVendedor"
+              }}>
+                <i className='bx bx-trash'></i>
+              </span>
 
 
 
-                    </div>
-                ) : ''}
-
-                <div className="card_image">
-                    <img style={{borderRadius:'10px'}} src={infoProd.imagen} alt="img-producto" />
-                </div>
-                <div className="producto_detalle">
-     
-                    <span className="producto_category">{infoProd.categoria}</span>
-                    <h4 className="producto_title">{infoProd.nombre}</h4>
-                    <p className="producto_marca">{infoProd.marca}</p>
-                    <p className="producto_desc">{infoProd.descripcion}</p>
-                    <p className="producto_cantidad">Cantidad: {infoProd.cantidad}</p>
-                    <p className="producto_precio">{formatter.format(infoProd.precio)}</p>
-                </div>
-
-                {
-  cliente ? (
-    <>
-      <div style={{ width: '100%', display: 'flex', justifyContent: 'center', fontSize: '1.4rem' }}>
-
-        {
-          statusCar ? <p style={{
-            padding: '12px',
-            fontSize: '.6rem',
-            backgroundColor: 'rgb(77, 186, 55)',
-            width: '50%',
-            margin: 'auto',
-            textAlign: 'center',
-            borderRadius: '5px'
-          }}>Producto Añadido al Carrito</p>
-            :
-            error != "" ? <>
-              <span style={{ backgroundColor: 'gray' }}>+ 🛒</span>
-              <input value={cantidad} onChange={changeInput} type='number' placeholder='1' min={1} max={parseInt(infoProd.cantidad)} />
-            </> : <>
-              <span onClick={addCar} style={{ backgroundColor: 'green' }}>+ 🛒</span>
-              <input value={cantidad} onChange={changeInput} type='number' placeholder='1' min={1} max={parseInt(infoProd.cantidad)} />
-
-            </>
-        }
-      </div>
-      <b>{error}</b>
-    </>
-  ) : ''
-}
             </div>
+          ) : ''}
 
+          <div className="card_image">
+            <img style={{ borderRadius: '10px' }} src={infoProd.imagen} alt="img-producto" />
+          </div>
+          <div className="producto_detalle">
 
+            <span className="producto_category">{infoProd.categoria}</span>
+            <h4 className="producto_title">{infoProd.nombre}</h4>
+            <p className="producto_marca">{infoProd.marca}</p>
+            <p className="producto_desc">{infoProd.descripcion}</p>
+            <p className="producto_cantidad">Cantidad: {infoProd.cantidad}</p>
+            <p className="producto_precio">{formatter.format(infoProd.precio)}</p>
+          </div>
 
+          {
+            cliente ? (
+              <>
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center', fontSize: '1.4rem' }}>
+
+                  {
+                    statusCar ? <p style={{
+                      padding: '12px',
+                      fontSize: '.6rem',
+                      backgroundColor: 'rgb(77, 186, 55)',
+                      width: '50%',
+                      margin: 'auto',
+                      textAlign: 'center',
+                      borderRadius: '5px'
+                    }}>Producto Añadido al Carrito</p>
+                      :
+                      error != "" ? <>
+                        <span style={{ backgroundColor: 'gray' }}>+ 🛒</span>
+                        <input value={cantidad} onChange={changeInput} type='number' placeholder='1' min={1} max={parseInt(infoProd.cantidad)} />
+                      </> : <>
+                        <span onClick={addCar} style={{ backgroundColor: 'green' }}>+ 🛒</span>
+                        <input value={cantidad} onChange={changeInput} type='number' placeholder='1' min={1} max={parseInt(infoProd.cantidad)} />
+
+                      </>
+                  }
+                </div>
+                <b>{error}</b>
+              </>
+            ) : ''
+          }
         </div>
 
-      
+
+
+      </div>
+
+
 
     </main>
-</>)
+  </>)
 }
 
 export default CardProducto

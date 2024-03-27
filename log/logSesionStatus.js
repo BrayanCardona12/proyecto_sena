@@ -9,7 +9,7 @@ function LogSesionStatus(authValor) {
 
     let user = localStorage.getItem('auth')
     if (user != authValor) {
-      router.push('/')
+      router.push('/FormLogin')
       return
     }else {
       setSesionActive(true)
