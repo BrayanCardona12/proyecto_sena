@@ -45,12 +45,13 @@ export default function FormLogin() {
                     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
                     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+                <link rel="stylesheet" href="/style/estiloslogin.css"
+                />
+
             </Head>
 
 
-            <style jsx>
-                {`${StyleFormLogin()}`}
-            </style>
+
 
             <div className='bg_signUp'>
                 <ToastContainer delay={8000} position='top-left' />
@@ -86,12 +87,12 @@ export default function FormLogin() {
                                 <Link className='link_pass' href='/forgotPass'>Olvidaste tu Contraseña</Link>
                             </div>
 
-                            {error ? error: ''}
+                            {error ? error : ''}
 
-                            {loading ? <IconPoints colorF={"#E0592A"} colorL={"#FFFFFF"} style1={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#E0592A' }} style2={{ display: 'block', maxHeight: '40px' }} /> :  <button type='submit' className='btn_signUp'>Iniciar Sesión</button>}
+                            {loading ? <IconPoints colorF={"#E0592A"} colorL={"#FFFFFF"} style1={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#E0592A' }} style2={{ display: 'block', maxHeight: '40px' }} /> : <button type='submit' className='btn_signUp'>Iniciar Sesión</button>}
 
-                          
-                       
+
+
 
                             <div className='registro_link'>
                                 <p>

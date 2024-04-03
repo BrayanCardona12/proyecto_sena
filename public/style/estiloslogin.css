@@ -1,0 +1,134 @@
+
+    .bg_signUp {
+        background-image: linear-gradient(#1f1f1f11, #151515c9), url(https://www.clara.es/medio/2019/11/18/tratamientos-belleza-regalar-navidad-olga-san-bartolome_7fa8843b_1280x772.jpg);
+        background-repeat: no-repeat;
+        background-position: contain;
+        background-size: cover;
+        min-height: 100vh;
+    }
+    
+    .center_contenido {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+    
+    .container_login {
+        width: 420px;
+        background-color: transparent;
+        border: 2px solid rgba(255, 255, 255, .2);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+        color: #fff;
+        border-radius: 10px;
+        padding: 30px 40px;
+    }
+    
+    .titulo {
+        font-size: 36px;
+        text-align: center;
+    }
+    
+    .input_box {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        margin: 30px 0;
+    }
+    .rol {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        border: 2px solid rgba(255, 255, 255, .2);
+        border-radius: 40px;
+        font-size: 16px;
+        color: #fff;
+        padding: 0 14px 0 14px;
+   
+    }
+    .color_option {
+        background-color: #e1e1e1;
+        color: #000;
+       
+    }
+    .input_wh {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        border: 2px solid rgba(255, 255, 255, .2);
+        border-radius: 40px;
+        font-size: 16px;
+        color: #fff;
+        padding: 20px 45px 20px 20px;
+    }
+    
+    .input_wh::placeholder {
+        color: #fff;
+    }
+    
+    .icono_login {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+    }
+    
+    .recordar_contra {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        margin: -15px 0 15px;
+    }
+    
+    .box_pass {
+        accent-color: #fff;
+        margin-right: 3px;
+    }
+    
+    .link_pass {
+        color: #fff;
+    }
+    
+    .link_pass:hover {
+        text-decoration: underline;
+    }
+    
+    .btn_signUp {
+        width: 100%;
+        height: 45px;
+        background-color: #fff;
+        border: none;
+        outline: none;
+        border-radius: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        cursor: pointer;
+        font-size: 16px;
+        color: #333;
+        font-weight: 600;
+    }
+    .btn_signUp:hover {
+        background-color: #e8e8e8;
+        color: #000;
+    }
+    .registro_link {
+        font-size: 14px;
+        text-align: center;
+        margin: 20px 0 15px;
+    }
+    
+    .texto_info_link {
+        color: #fff;
+        font-weight: 600;
+    }
+    
+    .texto_info_link:hover {
+        text-decoration: underline;
+    }
+    
+    

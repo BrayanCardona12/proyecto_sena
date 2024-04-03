@@ -20,7 +20,9 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
     "react-toast": "^1.0.3",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "swiper": "^11.1.0",
+    "framer-motion": "^10.16.16"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",

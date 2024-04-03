@@ -18,11 +18,7 @@ export default function BodyHome() {
 
   return (
     <>
-      <style jsx>
-        {
-       `${StyleIndex()}`
-        }
-      </style>
+   
 
       <header className='header'>
         <Link  href="/"><span className='logo_sivg'>SGVC</span></Link>
