@@ -150,8 +150,11 @@ function CardUser({ datos, clickIcon }) {
   `
             }
         </style>
-
-        <div style={{ position: 'relative' }}>
+        <div>
+            <div style={{ position: 'absolute', bottom: '0', width: '100%', display: 'flex', justifyContent: 'space-between' }} className="social_icons">
+                <a href={`mailto:${item.correo}`} className="yt"><i className='bx bxl-gmail'></i></a>
+                <a target='_blank' href={`https://api.whatsapp.com/send?phone=${item.codInt}${item.telefono}`} className="what"><i className='bx bxl-whatsapp'></i></a>
+            </div>
 
             <Link onClick={clickLink} href={`/`}>
                 <div className="wrapper">

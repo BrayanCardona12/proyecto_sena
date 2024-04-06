@@ -1,12 +1,12 @@
 import axios from 'axios'
 import ScreenError from 'components/screenError'
-import ViewRolCliente from 'components/viewRolCliente'
 import EffectDarkModeStatus from 'log/EffectDarkModeStatus'
 import { host } from 'log/const'
 import LogCloseSesion from 'log/logCloseSesion'
 import logFilterProdUsersInput from 'log/logFilterProdUsersInput'
 import LogSesionStatus from 'log/logSesionStatus'
 import { useState } from 'react'
+import ClienteHome from './indexDef'
 
 
 function HomeCliente({ data }) {
@@ -25,7 +25,7 @@ function HomeCliente({ data }) {
   return (
     <>{
       sesionActive && !data.error ?
-        <ViewRolCliente
+        <ClienteHome
           infoListV={data}
           closeSesion={closeSesion}
           Change={Change}
