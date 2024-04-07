@@ -61,7 +61,7 @@ export default function ClienteHome({
 
                 </section>
                 {
-                    openListV ? cardFilter.length != 0 ? 
+                    openListV ? [...cardFilter].length != 0 ? 
                       
                     (<div style={{ display: 'flex', flexWrap: 'wrap', gap: '13px', justifyContent: 'center' }}>
                         {
@@ -81,7 +81,7 @@ export default function ClienteHome({
                     
                     
                     
-                    : cardFilter.length != 0 ? <CarruselVendedores clickIcon={setLoading} items={[...cardFilter]} /> : <CarruselVendedores clickIcon={setLoading} items={[...infoListV]} />
+                    : [...cardFilter].length != 0 ? <CarruselVendedores clickIcon={setLoading} items={[...cardFilter]} /> : <CarruselVendedores clickIcon={setLoading} items={[...infoListV]} />
                 }
                     <button onClick={() => {
                         setOpenListV(!openListV)
