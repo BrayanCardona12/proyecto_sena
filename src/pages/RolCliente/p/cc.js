@@ -11,7 +11,7 @@ import axios from 'axios'
 import ScreenError from 'components/screenError'
 
 
-function ClienteHome({ data}) {
+export default function ClienteHome({ data}) {
 
     const [load, setLoading] = useState(false)
 
@@ -168,7 +168,6 @@ function ClienteHome({ data}) {
     )
 }
 
-export default ClienteHome
 
 ClienteHome.getInitialProps = async (ctx) => {
 

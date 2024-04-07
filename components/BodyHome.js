@@ -62,7 +62,7 @@ export default function BodyHome() {
                 <h1 className='penetrte_title'>Snak</h1>
               </div>
               <div className="content">
-                <h3 className='content_title'>01. The Entry Fragger</h3>
+                <h3 className='content_title'>01111. The Entry Fragger</h3>
                 <p className='content_pagraf'>Abhishek Shakya, also known by his in-game name SnakeEye, is the entry fragger of SEC C
                   Esports.</p>
                 <Link href="#" ><span className='btn_info'>More Details</span></Link>
