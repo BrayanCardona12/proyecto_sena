@@ -3,11 +3,12 @@ import { pool } from "database/conexion";
 export default async function CarritoCompra(req, res) {
 
     async function getProductValidate(req, res) {
-        //  let {idVendedor, idProducto, idCliente} = req.body
-        let query = `SELECT * from carrito`
+        let { idV, idC } = req.body
+        let query = `SELECT * from carrito where idCliente = ? AND idVendedor = ?`
         //let query = `SELECT * from carrito where idVendedor = ${idVendedor} AND idProducto = ${idProducto} AND idCliente = ${idCliente}`
 
-        const [datos] = await pool.query(query)
+        const [datos] = await pool.query(query, [idC, idV])
+
         return res.status(200).json(datos)
     }
 
@@ -24,7 +25,7 @@ export default async function CarritoCompra(req, res) {
         let { idC, idV } = req.body
 
         const [datos] = await pool.query(`SELECT imagen, cantidad, nombre, precio, carrito.cantidadProducto, carrito.idCliente, carrito.idVendedor, carrito.idProducto FROM producto inner join carrito on producto.idProducto = carrito.idProducto where carrito.idCliente = ? and carrito.idVendedor = ? AND carrito.estado = 'disponible' AND producto.estado = 'disponible';`, [idC, idV])
-    
+
         return res.status(200).json(datos)
     }
 
@@ -33,7 +34,7 @@ export default async function CarritoCompra(req, res) {
     //     let { idC, idV } = req.body
 
     //     await pool.query(`UPDATE carrito SET estado = '${estado}', cantidadProducto = ${cantidadProducto} WHERE idCliente = ${idC} AND idProducto = ${idP} AND idVendedor = ${idV} ;`)
-     
+
     //     return res.status(200).json(datos)
     // }
 
