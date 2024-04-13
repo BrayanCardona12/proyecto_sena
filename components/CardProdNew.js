@@ -2,6 +2,7 @@ import { formatter } from 'log/const'
 import logCardProducto from 'log/logCardProducto'
 import React from 'react'
 import Link from 'next/link'
+import axios  from 'axios'
 
 function CardProdNew({ vendedor, dataCar, cliente, x }) {
 
@@ -11,7 +12,7 @@ function CardProdNew({ vendedor, dataCar, cliente, x }) {
         <div key={x.idProducto} className='galeria_content'>
 
             {vendedor ? (
-                <div className="card_header">
+                <div style={{width:'100%' , display:'flex', justifyContent:'space-around', alignContent:'center'}} className="card_header">
                     <Link style={{ fontSize: '2rem', color: 'green' }} href={"/RolVendedor/actProducto/" + x.idProducto}>
                         <i className="fa-solid fa-pen-to-square"></i>
                     </Link>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from 'next/router'
+import CardcarruselV from "./CardcarruselV";
 
 
 const CarruselVendedores = ({ items, clickIcon }) => {
@@ -220,29 +221,29 @@ const CarruselVendedores = ({ items, clickIcon }) => {
                     {items.slice(currentIndex, currentIndex + numVisibleItems).map((item, index) => (
 
 
-                        <div style={{ position: 'relative' }}  key={index} className="carrusel_bg">
-                            <div onClick={(e) => { clickLink(e, item) }}>
-                            <div className="carrusel__image">
-                                <img src={item.imagen} alt={item.nombre} className="carrusel__img" />
-                            </div>
-                            <div className="carrusel__footer">
-                                <h2 className="carrusel__name">{item.nombre}</h2>
-                                <h3 className="carrusel__marca">{`${item.ciudad} | ${item.pais}` }</h3>
-                                <p className="carrusel__detalle">{item.correo}</p>
-                                <div className="flex__carrusel">
-                                    <p className="carrusel__precio">1</p>
-                                </div>
-                            </div>
-                            </div>
+                        // <div style={{ position: 'relative' }}  key={index} className="carrusel_bg">
+                        //     <div onClick={(e) => { clickLink(e, item) }}>
+                        //     <div className="carrusel__image">
+                        //         <img src={item.imagen} alt={item.nombre} className="carrusel__img" />
+                        //     </div>
+                        //     <div className="carrusel__footer">
+                        //         <h2 className="carrusel__name">{item.nombre}</h2>
+                        //         <h3 className="carrusel__marca">{`${item.ciudad} | ${item.pais}` }</h3>
+                        //         <p className="carrusel__detalle">{item.correo}</p>
+                        //         <div className="flex__carrusel">
+                        //             <p className="carrusel__precio">1</p>
+                        //         </div>
+                        //     </div>
+                        //     </div>
 
-                            <div style={{ position: 'absolute', bottom: '0', width: '100%', display: 'flex', justifyContent: 'space-between' }} className="social_icons">
-                                <a href={`mailto:${item.correo}`} className="yt"><i className='bx bxl-gmail'></i></a>
-                                <a target='_blank' href={`https://api.whatsapp.com/send?phone=${item.codInt}${item.telefono}`} className="what"><i className='bx bxl-whatsapp'></i></a>
-                            </div>
-                        </div>
+                        //     <div style={{ position: 'absolute', bottom: '0', width: '100%', display: 'flex', justifyContent: 'space-between' }} className="social_icons">
+                        //         <a href={`mailto:${item.correo}`} className="yt"><i className='bx bxl-gmail'></i></a>
+                        //         <a target='_blank' href={`https://api.whatsapp.com/send?phone=${item.codInt}${item.telefono}`} className="what"><i className='bx bxl-whatsapp'></i></a>
+                        //     </div>
+                        // </div>
 
 
-
+ <CardcarruselV clickLink={clickLink} item={item} key={index}/>
 
 
                     ))}

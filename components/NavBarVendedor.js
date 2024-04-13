@@ -7,9 +7,11 @@ import { useRouter } from "next/router";
 import { ToastContainer } from 'react-toast';
 import { toast } from 'react-toast'
 
-// esta es la navBar del cliente
 
-function NavBarHome({ textInputFilter, closeSesion, carrito, Change, infoCarShop, total, parametros, home }) {
+// esta es la navBar del vendedor
+
+
+export default function NavBarVendedor({textInputFilter, closeSesion, Change}) {
     //menu responsive
     const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -21,7 +23,9 @@ function NavBarHome({ textInputFilter, closeSesion, carrito, Change, infoCarShop
 
         if (document.getElementById('acr')) {  document.getElementById('acr').href = `${!localStorage.getItem('inf') ? '/' : '/ActUser/' + localStorage.getItem('inf')}` }
         
-        if (document.getElementById('ped')) {  document.getElementById('ped').href = `${!localStorage.getItem('inf') ? '/' : '/RolCliente/pedidos?idC=' + localStorage.getItem('inf')}` }
+        if (document.getElementById('ped')) {  document.getElementById('ped').href = `${!localStorage.getItem('inf') ? '/' : '/RolVendedor/pedidos/' + localStorage.getItem('inf')}` }
+
+        if (document.getElementById('analiticas')) {  document.getElementById('analiticas').href = `${!localStorage.getItem('inf') ? '/' : '/graficas/' + localStorage.getItem('inf')}` }
         
 
     
@@ -56,21 +60,14 @@ function NavBarHome({ textInputFilter, closeSesion, carrito, Change, infoCarShop
                     <div className='header_info'>
                         <div className='header_datos'>
                             <p className='header_datos_per'>Hola, <span id="nombrePerfil"></span></p>
-                            <p className='header_cliente'>Cliente</p>
+                            <p className='header_cliente'>Vendedor</p>
                         </div>
                         <a id="actUser" style={{ position: 'relative' }} className="foto_perfil">
                             <img id="fotoPerfil" alt='foto cliente' className='header_img' />
                             <span style={{ position: 'absolute', borderRadius: '10px', zIndex: '1', bottom: '0', right: '0' }} className="material-icons-sharp"> edit </span>
                         </a>
 
-                        {
-                            carrito ? (
-                                <div className='icon_cart' onClick={toggleCart}>
-                                    <i className='bx bxs-cart-alt cart_icon'></i>
-                                    <span className='cart_num'>{[...infoCarShop].length}</span>
-                                </div>
-                            ) : ''
-                        }
+                       
 
 
                     </div>
@@ -86,67 +83,11 @@ function NavBarHome({ textInputFilter, closeSesion, carrito, Change, infoCarShop
                 </div>
             </header>
 
-            {/* carrito */}
-
-            {
-                carrito ? (
-                    <div className={`cartTab ${isCartOpen ? 'showCart' : ''}`}>
-                        <h1 className='cart_title'>Shopping Cart</h1>
-                        <div className='list_Cart'>
-
-                            {[...infoCarShop].length == 0 ? <h2 style={{textAlign:'center'}}>No hay productos disponibles</h2> : [...infoCarShop].map((x) => (
-                                <CardNewCarShop x={x} toast={toast} />
-
-                                // <div className='cart_item'>
-                                //     <div className='cart_image'>
-                                //         <img className='cart_image_client' src={x.imagen} alt='producto' />
-                                //     </div>
-                                //     <div className='cart_name'>
-                                //         <p className='cart_name_text'>{x.nombre}</p>
-                                //     </div>
-                                //     <div className='cart_precio'>
-                                //         <p className='cart_precio_col'>{formatter.format(x.precio)}</p>
-                                //     </div>
-                                //     <div className='cart_cantidad'>
-                                //         <span className='minus'>-</span>
-                                //         <span className='cantidad_lote'>{x.cantidadProducto}</span>
-                                //         <span className='plus'>+</span>
-                                //     </div>
-                                //     <div className='cart_delete'>
-                                //         <button onClick={deleteCrP}><i className='bx bxs-trash delete_icon'></i></button>
-                                //     </div>
-                                // </div>
-
-                                // <CardCarritoCompra key={x.idProducto} datos={x} />
-                            )
-                            )}
-
-
-
-
-                        </div>
-                        <div className='cart_total'>
-                            <h3 className='cart_title_total'>
-                                <span className='spanColorTotal'>Total:</span>
-                                {total([...infoCarShop])}</h3>
-                        </div>
-                        <div className='cart_btn'>
-                            <button onClick={(e) => {
-                                e.preventDefault()
-                                router.push(`/ordenCompra/${parametros.current.idV}/${parametros.current.idC}`)
-                            }} className='cart_check'>
-                                Ir a la Cesta
-                            </button>
-                        </div>
-                    </div>
-
-                ) : ''
-            }
+           
 
             {/* NAVEGACION */}
             <div className={`nav ${isMenuOpen ? 'show-menu' : ''} `} id='navbar'>
-                {
-                    !carrito && !home ? <> </> : <>
+         
                         <nav className='nav_container'>
 
 
@@ -166,12 +107,22 @@ function NavBarHome({ textInputFilter, closeSesion, carrito, Change, infoCarShop
 
                                         <Link href='/RolCliente' className='nav_link'>
                                             <i className="bx bxs-group nav_icon"></i>
-                                            <span className='nav_name'>Vendedores</span>
+                                            <span className='nav_name'>Mis Clientes</span>
                                         </Link>
 
                                         <a id="ped" className='nav_link'>
                                             <i className="bx bx-store nav_icon"></i>
-                                            <span className='nav_name'>Pedidos</span>
+                                            <span className='nav_name'>Mis Pedidos</span>
+                                        </a>
+
+                                        <Link href="/RolVendedor/insertarproductos"  className='nav_link'>
+                                            <i className="bx bx-plus nav_icon"></i>
+                                            <span className='nav_name'>Insertar Producto</span>
+                                        </Link>
+
+                                        <a id="analiticas" className='nav_link'>
+                                            <i className="bx bx-table nav_icon"></i>
+                                            <span className='nav_name'>Analíticas</span>
                                         </a>
 
                                     
@@ -197,10 +148,7 @@ function NavBarHome({ textInputFilter, closeSesion, carrito, Change, infoCarShop
 
 
 
-                                        <Link href='' className='nav_link'>
-                                            <i className='bx bx-bookmark nav_icon'></i>
-                                            <span className='nav_name'>Favoritos</span>
-                                        </Link>
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -217,9 +165,9 @@ function NavBarHome({ textInputFilter, closeSesion, carrito, Change, infoCarShop
                                 <span className='nav_name'>Cerrar Sesión</span>
                             </div>
                         </nav>
-                    </>
+                   
 
-                }
+                
 
             </div>
 
@@ -227,5 +175,3 @@ function NavBarHome({ textInputFilter, closeSesion, carrito, Change, infoCarShop
         </>
     )
 }
-
-export default NavBarHome;

@@ -4,8 +4,6 @@ import CardProdNew from 'components/CardProdNew';
 import CardProducto from 'components/CardProducto'
 import CategoriaNavBar from 'components/CategoriaNavBar';
 import NavBarHome from 'components/NavBarHome';
-import EffectDarkModeStatus from 'log/EffectDarkModeStatus';
-import { StyleHomeCliente } from 'log/Styles';
 import { formatter } from 'log/const';
 import LogCloseSesion from 'log/logCloseSesion';
 import logFilterProdUsersInput from 'log/logFilterProdUsersInput';
@@ -20,10 +18,7 @@ import { ToastContainer } from 'react-toast';
 
 function InfoCatalogo(props) {
 
-  // const [darkMode, setDarkMode] = useState(false)
-
-  // EffectDarkModeStatus(setDarkMode)
-
+  
   let { data: { data1, data2, data3, identCli, nom } } = props;
 
   let { closeSesion } = LogCloseSesion()

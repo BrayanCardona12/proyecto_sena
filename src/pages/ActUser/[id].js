@@ -67,7 +67,7 @@ function actUser(props) {
         if (correo.current == datosInput.correo) {
             ; (async () => {
                 try {
-                    await axios.post(`http://localhost:4055/send/${datosInput.correo}/${codRamdon.current}`)
+                    await axios.post(`https://service-email.vercel.app/send/${datosInput.correo}/${codRamdon.current}`)
                 } catch (ee) {
                     toast.error('Error, por favor inténtalo mas tarde')
                     console.log(ee);

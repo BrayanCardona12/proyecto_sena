@@ -1,5 +1,4 @@
 import { IconPoints } from 'components/iconsLoading';
-import { StyleFormLogin } from 'log/Styles';
 import LogAuth from 'log/logAuth';
 import LogSesionStatus from 'log/logSesionStatus';
 import Head from 'next/head';
@@ -57,17 +56,26 @@ export default function FormLogin() {
                 <ToastContainer delay={8000} position='top-left' />
                 <div className='center_contenido'>
                     <div className='container_login'>
+
+                    <div className='btn__arrow'>
+                        <button className='btn__design--arrow'>
+                            <Link className='' href='/'>
+                            <i className="fa-solid fa-arrow-left"></i>
+                            </Link>
+                        </button>
+                    </div>
+
                         <form onSubmit={submit}>
                             <h1 className='titulo'>Inicio de Sesión</h1>
                             <div className='input_box'>
-                                <select name='rol' onChange={changeInput} value={rol} className='rol'>
+                                <select style={{padding:'0 0 0 1.2rem'}} name='rol' onChange={changeInput} value={rol} className='rol'>
                                     <option className='color_option' disabled>--Seleccione Su Rol--</option>
                                     <option value={'1'} className='color_option'>Cliente</option>
                                     <option value={'2'} className='color_option'>Vendedor</option>
                                 </select>
                             </div>
                             <div className='input_box'>
-                                <input onChange={changeInput} className='input_wh' type='text' name='correo' value={correo} placeholder='Nombre Usuario' />
+                                <input onChange={changeInput} className='input_wh' type='text' name='correo' value={correo} placeholder='Email' />
                                 <i className="fa-solid fa-user icono_login"></i>
                             </div>
                             <div className='input_box'>
@@ -87,9 +95,9 @@ export default function FormLogin() {
                                 <Link className='link_pass' href='/forgotPass'>Olvidaste tu Contraseña</Link>
                             </div>
 
-                            {error ? error : ''}
+                            {error ? <span style={{margin:'0 0 15px 0', display:'block', backgroundColor: '#ff000042', border:'1px solid #6a0000', padding:'12px', borderRadius:'5px'}}>{error}</span>  : ''}
 
-                            {loading ? <IconPoints colorF={"#E0592A"} colorL={"#FFFFFF"} style1={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#E0592A' }} style2={{ display: 'block', maxHeight: '40px' }} /> : <button type='submit' className='btn_signUp'>Iniciar Sesión</button>}
+                            {loading ? <IconPoints colorF={"#E0592A"} colorL={"#FFFFFF"} style1={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#E0592A', borderRadius:'40px' }} style2={{ display: 'block', maxHeight: '40px' }} /> : <button type='submit' style={{backgroundColor:'#ff9f43'}} className='btn_signUp'>Iniciar Sesión</button>}
 
 
 

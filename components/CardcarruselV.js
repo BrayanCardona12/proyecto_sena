@@ -1,19 +1,9 @@
-import { useRouter } from 'next/router'
+import React from 'react'
 
-function CardUserNew({ item, index, clickIcon }) {
-
-    const router = useRouter()
-    let clickLink = (e, datos) => {
-        e.preventDefault()
-        clickIcon(true)
-        setTimeout(() => {
-            clickIcon(false)
-            router.push(`/RolCliente/${datos.id}/?idC=` + localStorage.getItem('inf') + '&nom=' + datos.nombre)
-        }, 2500)
-    }
-
+function CardcarruselV({ clickLink, item, }) {
     return (
         <>
+
             <style jsx>
                 {`
             .wrapper {
@@ -165,30 +155,7 @@ function CardUserNew({ item, index, clickIcon }) {
             `}
             </style>
 
-
-            {/* <div style={{ position: 'relative' }} key={index} className="carrusel_bg">
-                <div onClick={(e) => { clickLink(e, item) }}>
-                    <div className="carrusel__image">
-                        <img src={item.imagen} alt={item.nombre} className="carrusel__img" />
-                    </div>
-                    <div className="carrusel__footer">
-                        <h2 className="carrusel__name">{item.nombre}</h2>
-                        <h3 className="carrusel__marca">{item.ciudad}</h3>
-                        <p className="carrusel__detalle">{item.correo}</p>
-                        <div className="flex__carrusel">
-                            <p className="carrusel__precio">1</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div style={{ position: 'absolute', bottom: '0', width: '100%', display: 'flex', justifyContent: 'space-between' }} className="social_icons">
-                    <a href={`mailto:${item.correo}`} className="yt"><i className='bx bxl-gmail'></i></a>
-                    <a target='_blank' href={`https://api.whatsapp.com/send?phone=${item.codInt}${item.telefono}`} className="what"><i className='bx bxl-whatsapp'></i></a>
-                </div>
-            </div> */}
-
-
-            <div className='wrapper'>
+            <div  className='wrapper'>
 
                 <div onClick={(e) => { clickLink(e, item) }} className='img_area'>
                     <div className='inner_area'>
@@ -197,21 +164,22 @@ function CardUserNew({ item, index, clickIcon }) {
 
                     </div>
                 </div>
-                <div onClick={(e) => { clickLink(e, item) }} style={{ textAlign: 'center' }}>
-                    <div className='name'>{item.nombre}</div>
-                    <div className='about'>{`${item.ciudad} | ${item.pais}`}</div>
-                    <div className='rol'>Vendedor</div>
+                <div onClick={(e) => { clickLink(e, item) }} style={{textAlign:'center'}}>
+                          <div className='name'>{item.nombre}</div>
+                <div className='about'>{`${item.ciudad} | ${item.pais}`}</div>
+                <div className='rol'>Vendedor</div>
                 </div>
+          
 
-
-                <div className='social_icons'>
-                    <a href={`mailto:${item.correo}`} className='link_icon yt'><i className='bx bxl-gmail icon_networ'></i></a>
-                    <a target="_blank" href={`https://api.whatsapp.com/send?phone=${item.codInt}${item.telefono}`} className='link_icon what'><i className='bx bxl-whatsapp icon_networ'></i></a>
-                </div>
+                <div  className='social_icons'>
+                <a href={`mailto:${item.correo}`} className='link_icon yt'><i className='bx bxl-gmail icon_networ'></i></a>
+                <a target="_blank" href={`https://api.whatsapp.com/send?phone=${item.codInt}${item.telefono}`} className='link_icon what'><i className='bx bxl-whatsapp icon_networ'></i></a>
             </div>
+            </div>
+     
         </>
 
     )
 }
 
-export default CardUserNew
+export default CardcarruselV

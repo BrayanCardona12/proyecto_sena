@@ -3,7 +3,9 @@ import { useState, useEffect } from "react"
 
 function getProductos() {
 
-  const [productos, setProductos] = useState()
+  const [productos, setProductos] = useState([{
+    error: true
+  }])
 
   useEffect(() => {
 
@@ -11,9 +13,11 @@ function getProductos() {
     (async () => {
       try {
         const { data } = await axios.post('/api/Crud/selectProductos', { id: localStorage.getItem('inf') })
-        setProductos(data)
+        setProductos([...data])
       } catch (err) {
-        console.log('e');
+        setProductos( [{
+          error: true
+        }])
       }
 
     })()
