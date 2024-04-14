@@ -13,7 +13,7 @@ export default function logRegister() {
 
     const [loading, setLoading] = useState(false)
 
-    let [im, setIm] = useState('https://i0.wp.com/css-tricks.com/wp-content/uploads/2017/08/card-skeleton@2x.png?w=300&ssl=1')
+    let [im, setIm] = useState('../img/producto_form.svg')
 
 
     // Cositas del register
@@ -192,7 +192,7 @@ export default function logRegister() {
             setLoading(false)
             return
         } else {
-            await axios.post(`http://localhost:4055/send/${datosInput.correo}/${codRamdon.current}`)
+            await axios.post(`https://service-email.vercel.app/send/${datosInput.correo}/${codRamdon.current}`)
             setStatusBtnSend(false)
             setLoading(false)
             setError('')
@@ -212,6 +212,7 @@ export default function logRegister() {
             if (parseInt(datosInput.rol) == 1) {
                 let url1 = await uploadFile(file1)
                 await axios.post('/api/RegisterUsers', { ...datosInput, imagen: url1 })
+                localStorage.setItem('imgUser', url1)
 
             } else {
                 if (datosInput.imgDavi == 'vacio' || datosInput.imgNequi == 'vacio') {
@@ -222,7 +223,7 @@ export default function logRegister() {
                     let url2 = await uploadFile(file2)
                     let url3 = await uploadFile(file3)
                     await axios.post('/api/RegisterUsers', { ...datosInput, imagen: url1, imgDavi: url2, imgNequi: url3 })
-
+                    localStorage.setItem('imgUser', url1)
                 }
 
 
@@ -238,6 +239,9 @@ export default function logRegister() {
                 const info = data[0]
 
                 localStorage.setItem('inf', info.id)
+                localStorage.setItem('theName', info.nombre)
+        
+        
                 router.push('/RolCliente')
 
                 setLoading(false)
@@ -252,6 +256,10 @@ export default function logRegister() {
                 const info = data[0]
 
                 localStorage.setItem('inf', info.id)
+
+                localStorage.setItem('theName', info.nombre)
+              
+        
                 router.push('/RolVendedor')
                 setLoading(false)
                 return

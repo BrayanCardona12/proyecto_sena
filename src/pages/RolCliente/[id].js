@@ -403,6 +403,8 @@ function InfoCatalogo(props) {
         infoCarShop={[...data3]}
         parametros={parametros}
         total={total}
+        home={false}
+        pedidos={false}
 
 
       />

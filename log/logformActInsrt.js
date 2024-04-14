@@ -10,7 +10,7 @@ function logformActInsrt() {
     const router = useRouter()
 
     let [producto, setProducto] = useState({
-        imagen: "https://i0.wp.com/css-tricks.com/wp-content/uploads/2017/08/card-skeleton@2x.png?w=300&ssl=1",
+        imagen: "../img/producto_form.svg",
         nombre: "",
         categoria: "Perfume",
         marca: "Carmel",
@@ -22,7 +22,7 @@ function logformActInsrt() {
 
     })
 
-    let [im, setIm] = useState('https://i0.wp.com/css-tricks.com/wp-content/uploads/2017/08/card-skeleton@2x.png?w=300&ssl=1')
+    let [im, setIm] = useState('../img/producto_form.svg')
 
     useEffect(() => {
         setProducto({ ...producto, idVendedor: parseInt(localStorage.getItem('inf')) })
@@ -55,7 +55,10 @@ function logformActInsrt() {
     let [inputMarca, setInputMarca] = useState(false)
 
     const changeMarca = (e) => {
-        Change({ target: { name: "marca", value: e.target.textContent } })
+        Change({ target: { name: "marca", value: e.target.value } })
+        if (e.target.value == 'Otro') {
+            setInputMarca(true)
+        }
     }
 
 

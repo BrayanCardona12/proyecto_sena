@@ -10,34 +10,54 @@ function CardProdNew({ vendedor, dataCar, cliente, x }) {
 
     return (
         <div key={x.idProducto} className='galeria_content'>
-
+{/* 
             {vendedor ? (
                 <div style={{width:'100%' , display:'flex', justifyContent:'space-around', alignContent:'center'}} className="card_header">
-                    <Link style={{ fontSize: '2rem', color: 'green' }} href={"/RolVendedor/actProducto/" + x.idProducto}>
-                        <i className="fa-solid fa-pen-to-square"></i>
+                    <Link class="mx-2 bg-green-500 hover:bg-green-700  text-white font-bold py-2 px-4 rounded" href={"/RolVendedor/actProducto/" + x.idProducto}>
+                        Actualizar
                     </Link>
+                   
 
-                    <span style={{ fontSize: '2rem', color: 'red' }} onClick={async () => {
+                    <span className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={async () => {
                         await axios.delete("/api/Crud/insertUpdate/" + x.idProducto)
                         location.href = "/RolVendedor"
                     }}>
-                        <i className='bx bx-trash'></i>
+                        Eliminar
+                    </span>
+
+
+
+                </div>
+            ) : ''} */}
+
+            <Link href='/cliente/detalleProducto'>
+                <img src={x.imagen} class='galeria_img' alt='imagen producto' />
+              <p className='galeria_marca'>{x.marca}</p>
+                <p className='galeria_categoria'>{x.categoria}</p>
+                <h3 className='galeria_tittle'>{x.nombre}</h3>
+                <p className='galeria_descripcion'>{x.descripcion}</p>
+                <p className='galeria_cantidad'>Cantidad: {x.cantidad}</p>
+                <h6 className='galeria_precio'>{formatter.format(x.precio)}</h6>
+            </Link>
+            
+            {vendedor ? (
+                <div style={{width:'100%' , display:'flex', justifyContent:'center', alignContent:'center', margin:'12px 0'}} className="card_header">
+                    <Link class="mx-2 bg-green-500 hover:bg-green-700  text-white font-bold py-2 px-4 rounded" href={"/RolVendedor/actProducto/" + x.idProducto}>
+                        Actualizar
+                    </Link>
+                   
+
+                    <span className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={async () => {
+                        await axios.delete("/api/Crud/insertUpdate/" + x.idProducto)
+                        location.href = "/RolVendedor"
+                    }}>
+                        Eliminar
                     </span>
 
 
 
                 </div>
             ) : ''}
-
-            <Link href='/cliente/detalleProducto'>
-                <img src={x.imagen} class='galeria_img' alt='imagen producto' />
-
-                <h4 className='galeria_tipo'>{x.categoria}</h4>
-                <h3 className='galeria_marca'>{x.nombre}</h3>
-                <p className='galeria_descripcion'>{x.descripcion}</p>
-                <h3 className='galeria_cantidad'>Cantidad: {x.cantidad}</h3>
-                <h6 className='galeria_precio'>{formatter.format(x.precio)}</h6>
-            </Link>
           
 
             {

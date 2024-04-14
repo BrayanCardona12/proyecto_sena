@@ -61,7 +61,7 @@ function ClienteHome({ data }) {
           <title>Vista | Cliente</title>
         </Head>
 
-        <NavBarHome Change={Change} textInputFilter={textInputFilter} closeSesion={closeSesion} carrito={false} home={true} />
+        <NavBarHome Change={Change} textInputFilter={textInputFilter} closeSesion={closeSesion} carrito={false} home={true} pedidos={false} />
 
 
         <section style={{ position: 'relative' }} className='section_Pagin'>

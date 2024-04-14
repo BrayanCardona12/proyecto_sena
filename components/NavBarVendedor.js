@@ -11,7 +11,7 @@ import { toast } from 'react-toast'
 // esta es la navBar del vendedor
 
 
-export default function NavBarVendedor({textInputFilter, closeSesion, Change}) {
+export default function NavBarVendedor({textInputFilter, closeSesion, Change, pedidos}) {
     //menu responsive
     const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -54,7 +54,7 @@ export default function NavBarVendedor({textInputFilter, closeSesion, Change}) {
         <>
 
             <header className='header'>
-                <ToastContainer delay={2000} position="top-center" />
+            
 
                 <div className='header_contenedor'>
                     <div className='header_info'>
@@ -74,7 +74,7 @@ export default function NavBarVendedor({textInputFilter, closeSesion, Change}) {
 
                     <Link href='/' className='header_logo'>SGVC</Link>
                     <div className='header_search'>
-                        <input value={textInputFilter} onChange={Change} placeholder="Arom Perfum..." style={{ border: '1px solid black' }} type="search" className='input_search' />
+                        <input  value={textInputFilter} onChange={Change} placeholder="Arom Perfum..." style={{ border: '1px solid black', display:`${pedidos ? 'none': 'block'}`}} type="search" className='input_search' />
                     </div>
 
                     <div className='header_toggle' onClick={toggleMenu}>

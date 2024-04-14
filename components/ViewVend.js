@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
-import debounce from 'just-debounce-it'
 import LogCloseSesion from 'log/logCloseSesion'
-import { Head } from 'next/head'
-import NavBarHome from 'components/NavBarHome'
 import NavBarVendedor from 'components/NavBarVendedor'
-import Link from "next/link"
 import logFilterProdUsersInput from 'log/logFilterProdUsersInput'
 import CardProdNew from 'components/CardProdNew'
 

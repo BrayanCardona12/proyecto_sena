@@ -9,7 +9,7 @@ import { toast } from 'react-toast'
 
 // esta es la navBar del cliente
 
-function NavBarHome({ textInputFilter, closeSesion, carrito, Change, infoCarShop, total, parametros, home }) {
+function NavBarHome({ textInputFilter, pedidos ,closeSesion, carrito, Change, infoCarShop, total, parametros, home }) {
     //menu responsive
     const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -77,7 +77,7 @@ function NavBarHome({ textInputFilter, closeSesion, carrito, Change, infoCarShop
 
                     <Link href='/' className='header_logo'>SGVC</Link>
                     <div className='header_search'>
-                        <input value={textInputFilter} onChange={Change} placeholder="Arom Perfum..." style={{ border: '1px solid black' }} type="search" className='input_search' />
+                        <input value={textInputFilter} onChange={Change} placeholder="Arom Perfum..." style={{ border: '1px solid black', display:`${pedidos ? 'none': 'block'}` }} type="search" className='input_search' />
                     </div>
 
                     <div className='header_toggle' onClick={toggleMenu}>

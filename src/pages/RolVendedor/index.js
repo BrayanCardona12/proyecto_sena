@@ -36,8 +36,9 @@ function HomeVendedor() {
             </>
           </>
           :
-
           <ScreenError />
+
+         
       }
     </>
   )

@@ -1,0 +1,55 @@
+.bg_signUp {
+    background-image: linear-gradient(#1f1f1f11, #151515c9), url(https://www.clara.es/medio/2019/11/18/tratamientos-belleza-regalar-navidad-olga-san-bartolome_7fa8843b_1280x772.jpg);
+    background-repeat: no-repeat;
+    background-position: contain;
+    background-size: cover;
+    min-height: 100vh;
+}
+.center_registro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.container_registro {
+    width: 1000px;
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.titulo_registro {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+}
+.rol_registro {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+}
+.link_cuenta::before {
+    content: "";
+    display: block;
+    width: 20%;
+    height: 3px;
+    background-color: #f76307;
+    margin: 0 auto;
+    position: absolute;
+    border-radius: 10px;
+}
+
+.link_cuenta {
+    margin-left: 10px;
+}
+
+.link_cuenta:hover {
+    text-decoration: underline;
+}
