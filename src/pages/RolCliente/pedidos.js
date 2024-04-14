@@ -125,7 +125,7 @@ function pedidos(props) {
         `}
             </style>
 
-            {data[0].error ?
+            {data[0] == {error: true} ?
                 toast.error('Ups, ha ocurrido un error en el servidor.')
                 : ''}
 

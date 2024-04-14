@@ -175,7 +175,7 @@ let {closeSesion} = LogCloseSesion()
 
 
             <div className="html">
-            {data[0].error ?
+            {data[0] == {error: true} ?
                 toast.error('Ups, ha ocurrido un error en el servidor.')
                 : ''}
                 <ToastContainer delay={8000} position='top-center' />

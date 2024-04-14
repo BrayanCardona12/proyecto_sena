@@ -17,7 +17,7 @@ function HomeVendedor() {
 
     <>
       {
-        sesionActive && productos[0].error != true ?
+        sesionActive && productos[0] != {error: true } ?
 
           <>
             <>

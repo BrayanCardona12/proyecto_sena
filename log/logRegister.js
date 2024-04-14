@@ -215,15 +215,38 @@ export default function logRegister() {
                 localStorage.setItem('imgUser', url1)
 
             } else {
-                if (datosInput.imgDavi == 'vacio' || datosInput.imgNequi == 'vacio') {
-                    await axios.post('/api/RegisterUsers', { ...datosInput})
+                if (datosInput.imgDavi == 'vacio' && datosInput.imgNequi == 'vacio') {
+                    await axios.post('/api/RegisterUsers', { ...datosInput })
 
                 } else {
                     let url1 = await uploadFile(file1)
-                    let url2 = await uploadFile(file2)
-                    let url3 = await uploadFile(file3)
-                    await axios.post('/api/RegisterUsers', { ...datosInput, imagen: url1, imgDavi: url2, imgNequi: url3 })
                     localStorage.setItem('imgUser', url1)
+
+                    if (datosInput.imgDavi != 'vacio' && datosInput.imgNequi == 'vacio') {
+
+
+                        let url2 = await uploadFile(file2)
+
+                        await axios.post('/api/RegisterUsers', { ...datosInput, imagen: url1, imgDavi: url2 })
+
+                    }
+
+                    if (datosInput.imgDavi == 'vacio' && datosInput.imgNequi != 'vacio') {
+
+
+                        let url3 = await uploadFile(file3)
+                        await axios.post('/api/RegisterUsers',  { ...datosInput, imagen: url1, imgNequi: url3 })
+
+                    }
+
+                    if (datosInput.imgDavi != 'vacio' && datosInput.imgNequi != 'vacio') {
+                        let url2 = await uploadFile(file2)
+                        let url3 = await uploadFile(file3)
+                        await axios.post('/api/RegisterUsers', { ...datosInput, imagen: url1, imgDavi: url2, imgNequi: url3 })
+
+                    }
+
+
                 }
 
 
@@ -240,8 +263,8 @@ export default function logRegister() {
 
                 localStorage.setItem('inf', info.id)
                 localStorage.setItem('theName', info.nombre)
-        
-        
+
+
                 router.push('/RolCliente')
 
                 setLoading(false)
@@ -258,8 +281,8 @@ export default function logRegister() {
                 localStorage.setItem('inf', info.id)
 
                 localStorage.setItem('theName', info.nombre)
-              
-        
+
+
                 router.push('/RolVendedor')
                 setLoading(false)
                 return

@@ -354,13 +354,13 @@ export default function RegistroUsuarios() {
                   </div>
 
 
-                  <div class="border-b border-gray-900/10 pb-12">
-                    <h2 class="text-base font-semibold leading-7 ">Ingrese los Datos</h2>
+                  <div className="border-b border-gray-900/10 pb-12">
+                    <h2 className="text-base font-semibold leading-7 ">Ingrese los Datos</h2>
 
 
-                    <div class="mt-3 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-                      <div class="sm:col-span-2">
+                      <div className="sm:col-span-2">
                         <label for="documento" className="block text-sm font-medium leading-6">Seleccione el Rol</label>
                         <div className="mt-2">
                           <select id="documento" onChange={changeInput} value={datosInput.rol} name='rol' autoComplete="country-name" className="block w-full rounded-md border-0 py-1.5  ring-1 ring-inset text-gray-300 ring-gray-300 sm:text-sm sm:leading-6 bg-transparent">

@@ -1,15 +1,14 @@
+import { info } from 'autoprefixer'
 import axios from 'axios'
 import { uploadFile } from 'firebaseConfig/config'
+import { host } from 'log/const'
 import Head from 'next/head'
 import Link from 'next/link'
-
-
-
 import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
 import { ToastContainer, toast } from 'react-toast'
 
-function actUser(props) {
+function actUser({ data }) {
     const router = useRouter()
 
 
@@ -19,13 +18,10 @@ function actUser(props) {
         imagen: '',
         apellido: '',
         codInt: 0,
-
         tipoDoc: 'Cédula de Ciudadania',
         numDoc: '',
         imgDavi: 'vacio',
         imgNequi: 'vacio',
-
-
         telefono: 31264534,
         edad: 32,
         pais: 'CO',
@@ -40,6 +36,8 @@ function actUser(props) {
     let correo = useRef()
 
     const [file, setFile] = useState(null)
+    const [file2, setFile2] = useState(null)
+    const [file3, setFile3] = useState(null)
 
     const [inputCod, setInputCod] = useState('')
 
@@ -49,8 +47,18 @@ function actUser(props) {
     const [statusBtnSend, setStatusBtnSend] = useState(true)
 
     useEffect(() => {
-        setDatosInput({ ...props.data[0] })
-        correo.current = props.data[0].correo
+        try {
+
+            setDatosInput({ ...data[0] })
+            correo.current = data[0].correo
+
+        } catch (error) {
+
+            toast.error('Ups, ha ocurrido un error en el servidor')
+
+        }
+
+
     }, [])
 
     const changeInput = ({ target: { name, value } }) => {
@@ -87,7 +95,7 @@ function actUser(props) {
                     return
                 } else {
                     ; (async () => {
-                        await axios.post(`http://localhost:4055/send/${datosInput.correo}/${codRamdon.current}`)
+                        await axios.post(`https://service-email.vercel.app/send/${datosInput.correo}/${codRamdon.current}`)
                     })();
                     setStatusBtnSend(false)
                     setError('')
@@ -114,18 +122,41 @@ function actUser(props) {
 
                 if (alerta) {
 
-                    if (file == null) {
+                    if (file == null && file2 == null && file3 == null) {
                         toast.warn('⌛ Cargando...')
                         await axios.put(`/api/RegisterUsers/`, { ...datosInput, id: parseInt(router.query.id) })
+                        localStorage.setItem('imgUser', datosInput.imagen)
+                        localStorage.setItem('theName', datosInput.nombre)
                         router.push('/')
 
                     } else {
+
+                        let infoImgs = {}
+                        let infoInputsFile = { imagen: file, imgDavi: file2, imgNequi: file3 }
+
+                        for (const it in infoInputsFile) {
+                            if (infoInputsFile[it] != null) {
+
+                                let urll = await uploadFile(infoInputsFile[it])
+
+                                infoImgs = { ...infoImgs, [it]: urll }
+                                if (it == 'imagen') {
+                                    localStorage.setItem('imgUser', urll)
+                                    localStorage.setItem('theName', datosInput.nombre)
+                                }
+                            }
+
+
+                        }
+
+
+
                         toast.warn('⌛ Cargando...')
 
-                        let url = await uploadFile(file)
+                        // let url = await uploadFile(file)
 
 
-                        await axios.put(`/api/RegisterUsers/`, { ...datosInput, id: parseInt(router.query.id), imagen: url })
+                        await axios.put(`/api/RegisterUsers/`, { ...datosInput, id: parseInt(router.query.id), ...infoImgs })
                         router.push('/')
                     }
 
@@ -152,352 +183,291 @@ function actUser(props) {
 
 
     return (
+       
         <>
-            <style jsx>
-                {`
-   
-
-
-                    input {
-                        width: 100%;
-                    }
-
-                  .cont-form {
-                    width: 50%;
-                margin:auto;
-                    min-height: 100vh;
-                    display: flex;
-                    align-items: center;
-                    flex-direction: column;
-                    justify-content: center;
-                  }
-
-
-
-                  
-                `}
-            </style>
             <Head>
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+            <link rel="icon" href="https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png" />
+
+                <link rel="stylesheet" href="/style/registro.css" />
+                <title>Formulario | Actualizar Información Personal</title>
             </Head>
-            <Link href={datosInput.rol == '2' ? '/RolVendedor' : '/RolCliente'}>
-            regresar
-            
-            </Link>
-            <form style={{ width: '100%', maxWidth: '920px', margin: 'auto' }}>
-                <ToastContainer delay={6000} position='top-right' />
+            <div className='bg_signUp'>
+                <section>
+                   
+                    <div className='center_registro'>
+                        <div className='bg_formAdd container_registro'>
+                            <h1 className='titulo_registro'>Actualizar Información Personal</h1>
+                            <form className='contenedor px-11 py-2'>
+                            <ToastContainer delay={6000} position='bottom-center' />
+                                <div className="space-y-3">
+                                    <div className="col-span-full border-b border-gray-900/10 pb-5">
+                                        <label for="photo" className="block text-xl font-medium leading-6">Foto</label>
+                                        <div className="mt-2 flex items-center gap-x-3">
+                                            <img src={datosInput.imagen} className=' rounded-full w-20 h-20' />
+                                            <input type="file" onChange={(e) => { setFile(e.target.files[0]) }} name="imagen" className=' w-10/12 file:bg-gradient-to-b file:from-green-500 file:to-green-600 file:px-6 file:py-3 file:m-5 file:border-none file:rounded-full file:text-white file:cursor-pointer file:shadow-lg file:shadow-green-600/50' />
+                                        </div>
+                                    </div>
 
-                <h1 className='text-center'>Actualizar Información Personal</h1>
 
-                <img style={{ width: '20%', borderRadius: '10px', display: 'block', margin: 'auto' }} src={datosInput.imagen} />
-                <label>Imagen</label>
-                <input className='form-control' onChange={(e) => { setFile(e.target.files[0]) }} name="imagen" placeholder="Imagen..." type="file" />
-                <label>Nombre:</label>
-                <input className='form-control' onChange={changeInput} value={datosInput.nombre} name="nombre" placeholder="Nombres" type="text" />
-                <label>Apellido:</label>
-                <input className='form-control' onChange={changeInput} value={datosInput.apellido} name="apellido" placeholder="Apellidos" type="text" />
-                <label>Tipo de Documento:</label>
-                <select className='form-control' onChange={changeInput} value={datosInput.tipo} name='tipoDoc' id="tipoDoc">
-                    <option value="Cédula de Ciudadania">Cedula de Ciudadania</option>
-                    <option value="Cédula Extranjera">Cédula Extranjera</option>
-                    <option value="Pasaporte">Pasaporte</option>
-                    <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
-                </select>
-                <label>No de Documento:</label>
-                <input className='form-control' name="numDoc" type="text" onChange={changeInput} placeholder="Numero de Documento" value={datosInput.numDoc} />
+                                    <div className="border-b border-gray-900/10 pb-12">
+                                        <h2 className="text-base font-semibold leading-7 ">Ingrese los Datos</h2>
+
+
+                                        <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
 
 
+                                            <div className="sm:col-span-2">
+                                                <label for="first-name" className="block text-sm font-medium leading-6">Nombre</label>
+                                                <div className="mt-2">
+                                                    <input type="text" onChange={changeInput} value={datosInput.nombre} name="nombre" id="first-name" autoComplete="given-name" className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-white bg-transparent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder='Nombre' />
+                                                </div>
+                                            </div>
+
+                                            <div className="sm:col-span-2">
+                                                <label for="apellido" className="block text-sm font-medium leading-6">Apellido</label>
+                                                <div className="mt-2">
+                                                    <input type="text" onChange={changeInput} value={datosInput.apellido} name="apellido" id="apellido" autoComplete="given-name" className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset bg-transparent ring-gray-300 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder='Apellido' />
+                                                </div>
 
 
 
-                <div style={{ width: '100%' }}>
-                    <label>Código Internacional:</label>
-                    <input className='form-control' min={1} max={400} style={{ width: '20%' }} onChange={changeInput} name="codInt" placeholder="Codigo Internacional" value={datosInput.codInt} autoComplete="postal-code" type="number" />
-                    <label>Telefono:</label>
-                    <input className='form-control' style={{ width: '65%' }} onChange={changeInput} value={datosInput.telefono} name="telefono" placeholder="Teléfono" autoComplete="postal-code" type="number" />
+                                            </div>
 
-                </div>
-                <label>Edad:</label>
-                <input className='form-control' onChange={changeInput} value={datosInput.edad} name="edad" placeholder="Edad" type="number" />
-                <label>País:</label>
-                <select className='form-control' onChange={changeInput} value={datosInput.pais} name="pais" >
-                    <option value="">Country</option>
-                    <option value="AF">Afghanistan</option>
-                    <option value="AL">Albania</option>
-                    <option value="DZ">Algeria</option>
-                    <option value="AS">American Samoa</option>
-                    <option value="AD">Andorra</option>
-                    <option value="AO">Angola</option>
-                    <option value="AI">Anguilla</option>
-                    <option value="AR">Argentina</option>
-                    <option value="AM">Armenia</option>
-                    <option value="AW">Aruba</option>
-                    <option value="AU">Australia</option>
-                    <option value="AT">Austria</option>
-                    <option value="AZ">Azerbaijan</option>
-                    <option value="BS">Bahamas</option>
-                    <option value="BH">Bahrain</option>
-                    <option value="BD">Bangladesh</option>
-                    <option value="BB">Barbados</option>
-                    <option value="BY">Belarus</option>
-                    <option value="BE">Belgium</option>
-                    <option value="BZ">Belize</option>
-                    <option value="BJ">Benin</option>
-                    <option value="BM">Bermuda</option>
-                    <option value="BT">Bhutan</option>
-                    <option value="BO">Bolivia</option>
-                    <option value="BA">Bosnia and Herzegowina</option>
-                    <option value="BW">Botswana</option>
-                    <option value="BV">Bouvet Island</option>
-                    <option value="BR">Brazil</option>
-                    <option value="IO">British Indian Ocean Territory</option>
-                    <option value="BN">Brunei Darussalam</option>
-                    <option value="BG">Bulgaria</option>
-                    <option value="BF">Burkina Faso</option>
-                    <option value="BI">Burundi</option>
-                    <option value="KH">Cambodia</option>
-                    <option value="CM">Cameroon</option>
-                    <option value="CA">Canada</option>
-                    <option value="CV">Cape Verde</option>
-                    <option value="KY">Cayman Islands</option>
-                    <option value="CF">Central African Republic</option>
-                    <option value="TD">Chad</option>
-                    <option value="CL">Chile</option>
-                    <option value="CN">China</option>
-                    <option value="CX">Christmas Island</option>
-                    <option value="CC">Cocos (Keeling) Islands</option>
-                    <option value="CO">Colombia</option>
-                    <option value="KM">Comoros</option>
-                    <option value="CG">Congo</option>
-                    <option value="CD">Congo, the Democratic Republic of the</option>
-                    <option value="CK">Cook Islands</option>
-                    <option value="CR">Costa Rica</option>
-                    <option value="CI">Cote d'Ivoire</option>
-                    <option value="HR">Croatia (Hrvatska)</option>
-                    <option value="CU">Cuba</option>
-                    <option value="CY">Cyprus</option>
-                    <option value="CZ">Czech Republic</option>
-                    <option value="DK">Denmark</option>
-                    <option value="DJ">Djibouti</option>
-                    <option value="DM">Dominica</option>
-                    <option value="DO">Dominican Republic</option>
-                    <option value="EC">Ecuador</option>
-                    <option value="EG">Egypt</option>
-                    <option value="SV">El Salvador</option>
-                    <option value="GQ">Equatorial Guinea</option>
-                    <option value="ER">Eritrea</option>
-                    <option value="EE">Estonia</option>
-                    <option value="ET">Ethiopia</option>
-                    <option value="FK">Falkland Islands (Malvinas)</option>
-                    <option value="FO">Faroe Islands</option>
-                    <option value="FJ">Fiji</option>
-                    <option value="FI">Finland</option>
-                    <option value="FR">France</option>
-                    <option value="GF">French Guiana</option>
-                    <option value="PF">French Polynesia</option>
-                    <option value="TF">French Southern Territories</option>
-                    <option value="GA">Gabon</option>
-                    <option value="GM">Gambia</option>
-                    <option value="GE">Georgia</option>
-                    <option value="DE">Germany</option>
-                    <option value="GH">Ghana</option>
-                    <option value="GI">Gibraltar</option>
-                    <option value="GR">Greece</option>
-                    <option value="GL">Greenland</option>
-                    <option value="GD">Grenada</option>
-                    <option value="GP">Guadeloupe</option>
-                    <option value="GU">Guam</option>
-                    <option value="GT">Guatemala</option>
-                    <option value="GN">Guinea</option>
-                    <option value="GW">Guinea-Bissau</option>
-                    <option value="GY">Guyana</option>
-                    <option value="HT">Haiti</option>
-                    <option value="HM">Heard and Mc Donald Islands</option>
-                    <option value="VA">Holy See (Vatican City State)</option>
-                    <option value="HN">Honduras</option>
-                    <option value="HK">Hong Kong</option>
-                    <option value="HU">Hungary</option>
-                    <option value="IS">Iceland</option>
-                    <option value="IN">India</option>
-                    <option value="ID">Indonesia</option>
-                    <option value="IR">Iran (Islamic Republic of)</option>
-                    <option value="IQ">Iraq</option>
-                    <option value="IE">Ireland</option>
-                    <option value="IL">Israel</option>
-                    <option value="IT">Italy</option>
-                    <option value="JM">Jamaica</option>
-                    <option value="JP">Japan</option>
-                    <option value="JO">Jordan</option>
-                    <option value="KZ">Kazakhstan</option>
-                    <option value="KE">Kenya</option>
-                    <option value="KI">Kiribati</option>
-                    <option value="KP">Korea, Democratic People's Republic of</option>
-                    <option value="KR">Korea, Republic of</option>
-                    <option value="KW">Kuwait</option>
-                    <option value="KG">Kyrgyzstan</option>
-                    <option value="LA">Lao People's Democratic Republic</option>
-                    <option value="LV">Latvia</option>
-                    <option value="LB">Lebanon</option>
-                    <option value="LS">Lesotho</option>
-                    <option value="LR">Liberia</option>
-                    <option value="LY">Libyan Arab Jamahiriya</option>
-                    <option value="LI">Liechtenstein</option>
-                    <option value="LT">Lithuania</option>
-                    <option value="LU">Luxembourg</option>
-                    <option value="MO">Macau</option>
-                    <option value="MK">Macedonia, The Former Yugoslav Republic of</option>
-                    <option value="MG">Madagascar</option>
-                    <option value="MW">Malawi</option>
-                    <option value="MY">Malaysia</option>
-                    <option value="MV">Maldives</option>
-                    <option value="ML">Mali</option>
-                    <option value="MT">Malta</option>
-                    <option value="MH">Marshall Islands</option>
-                    <option value="MQ">Martinique</option>
-                    <option value="MR">Mauritania</option>
-                    <option value="MU">Mauritius</option>
-                    <option value="YT">Mayotte</option>
-                    <option value="MX">Mexico</option>
-                    <option value="FM">Micronesia, Federated States of</option>
-                    <option value="MD">Moldova, Republic of</option>
-                    <option value="MC">Monaco</option>
-                    <option value="MN">Mongolia</option>
-                    <option value="MS">Montserrat</option>
-                    <option value="MA">Morocco</option>
-                    <option value="MZ">Mozambique</option>
-                    <option value="MM">Myanmar</option>
-                    <option value="NA">Namibia</option>
-                    <option value="NR">Nauru</option>
-                    <option value="NP">Nepal</option>
-                    <option value="NL">Netherlands</option>
-                    <option value="AN">Netherlands Antilles</option>
-                    <option value="NC">New Caledonia</option>
-                    <option value="NZ">New Zealand</option>
-                    <option value="NI">Nicaragua</option>
-                    <option value="NE">Niger</option>
-                    <option value="NG">Nigeria</option>
-                    <option value="NU">Niue</option>
-                    <option value="NF">Norfolk Island</option>
-                    <option value="MP">Northern Mariana Islands</option>
-                    <option value="NO">Norway</option>
-                    <option value="OM">Oman</option>
-                    <option value="PK">Pakistan</option>
-                    <option value="PW">Palau</option>
-                    <option value="PA">Panama</option>
-                    <option value="PG">Papua New Guinea</option>
-                    <option value="PY">Paraguay</option>
-                    <option value="PE">Peru</option>
-                    <option value="PH">Philippines</option>
-                    <option value="PN">Pitcairn</option>
-                    <option value="PL">Poland</option>
-                    <option value="PT">Portugal</option>
-                    <option value="PR">Puerto Rico</option>
-                    <option value="QA">Qatar</option>
-                    <option value="RE">Reunion</option>
-                    <option value="RO">Romania</option>
-                    <option value="RU">Russian Federation</option>
-                    <option value="RW">Rwanda</option>
-                    <option value="KN">Saint Kitts and Nevis</option>
-                    <option value="LC">Saint LUCIA</option>
-                    <option value="VC">Saint Vincent and the Grenadines</option>
-                    <option value="WS">Samoa</option>
-                    <option value="SM">San Marino</option>
-                    <option value="ST">Sao Tome and Principe</option>
-                    <option value="SA">Saudi Arabia</option>
-                    <option value="SN">Senegal</option>
-                    <option value="SC">Seychelles</option>
-                    <option value="SL">Sierra Leone</option>
-                    <option value="SG">Singapore</option>
-                    <option value="SK">Slovakia (Slovak Republic)</option>
-                    <option value="SI">Slovenia</option>
-                    <option value="SB">Solomon Islands</option>
-                    <option value="SO">Somalia</option>
-                    <option value="ZA">South Africa</option>
-                    <option value="GS">South Georgia and the South Sandwich Islands</option>
-                    <option value="ES">Spain</option>
-                    <option value="LK">Sri Lanka</option>
-                    <option value="SH">St. Helena</option>
-                    <option value="PM">St. Pierre and Miquelon</option>
-                    <option value="SD">Sudan</option>
-                    <option value="SR">Suriname</option>
-                    <option value="SJ">Svalbard and Jan Mayen Islands</option>
-                    <option value="SZ">Swaziland</option>
-                    <option value="SE">Sweden</option>
-                    <option value="CH">Switzerland</option>
-                    <option value="SY">Syrian Arab Republic</option>
-                    <option value="TW">Taiwan, Province of China</option>
-                    <option value="TJ">Tajikistan</option>
-                    <option value="TZ">Tanzania, United Republic of</option>
-                    <option value="TH">Thailand</option>
-                    <option value="TG">Togo</option>
-                    <option value="TK">Tokelau</option>
-                    <option value="TO">Tonga</option>
-                    <option value="TT">Trinidad and Tobago</option>
-                    <option value="TN">Tunisia</option>
-                    <option value="TR">Turkey</option>
-                    <option value="TM">Turkmenistan</option>
-                    <option value="TC">Turks and Caicos Islands</option>
-                    <option value="TV">Tuvalu</option>
-                    <option value="UG">Uganda</option>
-                    <option value="UA">Ukraine</option>
-                    <option value="AE">United Arab Emirates</option>
-                    <option value="GB">United Kingdom</option>
-                    <option value="US">United States</option>
-                    <option value="UM">United States Minor Outlying Islands</option>
-                    <option value="UY">Uruguay</option>
-                    <option value="UZ">Uzbekistan</option>
-                    <option value="VU">Vanuatu</option>
-                    <option value="VE">Venezuela</option>
-                    <option value="VN">Viet Nam</option>
-                    <option value="VG">Virgin Islands</option>
-                    <option value="VI">Virgin Islands</option>
-                    <option value="WF">Wallis and Futuna Islands</option>
-                    <option value="EH">Western Sahara</option>
-                    <option value="YE">Yemen</option>
-                    <option value="ZM">Zambia</option>
-                    <option value="ZW">Zimbabwe</option>
-                </select>
-                <label>Ciudad:</label>
-                <input className='form-control' onChange={changeInput} value={datosInput.ciudad} name="ciudad" placeholder="Ciudad" type="text" />
-                <label>Dirección:</label>
-                <input className='form-control' onChange={changeInput} value={datosInput.direccion} name="direccion" placeholder="Dirección" type="text" />
-
-                {datosInput.rol == '2' ? <>
-                    <i>Como eres vendendor, puedes modificar tus</i>
-                    <i>medios de pago (Daviplata o Nequi):</i>
-                    <img style={{ maxWidth: '100px' }} src={datosInput.imgDavi} />
-                    <img style={{ maxWidth: '100px' }} src={datosInput.imgNequi} />
-                    <input className='form-control' name="imgDavi" disabled onChange={changeInput} type="text" placeholder="Imagen Davi" value={datosInput.imgDavi} />
-                    <input className='form-control' name="imgNequi" disabled onChange={changeInput} type="text" placeholder="Imagen Nequi" value={datosInput.imgNequi} />
-                </> : ''}
+                                            <div className="sm:col-span-2">
+                                                <label for="apellido" className="block text-sm font-medium leading-6">Tipo de Documento</label>
+                                                <div className="mt-2">
+                                                    <select className="block w-full rounded-md border-0 py-1.5  ring-1 ring-inset text-gray-300 ring-gray-300 sm:text-sm sm:leading-6 bg-transparent" onChange={changeInput} value={datosInput.tipo} name='tipoDoc' id="tipoDoc">
+                                                        <option value="Cédula de Ciudadania">Cedula de Ciudadania</option>
+                                                        <option value="Cédula Extranjera">Cédula Extranjera</option>
+                                                        <option value="Pasaporte">Pasaporte</option>
+                                                        <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
 
-                {statusBtnSend ? <> <label>Correo:</label> <input className='form-control' onChange={changeInput} value={datosInput.correo} name="correo" placeholder="Correo" type="email" /></> : <input onChange={changeInput} value={datosInput.correo} disabled name="correo" placeholder="Correo" type="email" />}
-                <><label>Contraseña:</label></> <input className='form-control' onChange={changeInput} value={datosInput.contrasena} name="contrasena" placeholder="Contraseña" type="password" />
-                {error ? <b>{error}</b> : ''}
 
-                {statusBtnSend ? <button style={{ backgroundColor: 'green' }} onClick={sendEmail} className="btn-send-register">Enviar</button>
-                    : <>
-                        <i>Ingresa el codigo de verificacion enviado al correo electronico indicado en este formulario para continuar con la actualización de datos</i>
-                        <input className='form-control' type='text' placeholder='codigo' value={inputCod} onChange={(e) => {
-                            setInputCod(e.target.value)
-                        }} />
-                        <input type='submit' onClick={clickCodVerf} value={'dd'} />
-                    </>}
+                                            <div className="sm:col-span-2">
+                                                <label for="telefono" className="block text-sm font-medium leading-6">Número de Documento</label>
+                                                <div className="mt-2">
+                                                    <input className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset bg-transparent ring-gray-300 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" name="numDoc" type="text" onChange={changeInput} placeholder="Numero de Documento" value={datosInput.numDoc} />
+                                                </div>
+                                            </div>
 
 
-            </form>
+
+                                            <div className="sm:col-span-2">
+                                                <label for="telefono" className="block text-sm font-medium leading-6">Código Internacional</label>
+                                                <div className="mt-2">
+
+                                                    <input className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 bg-transparent placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" min={1} max={400} onChange={changeInput} name="codInt" placeholder="Codigo Internacional" value={datosInput.codInt} autoComplete="postal-code" type="number" />
+
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div className="sm:col-span-2">
+                                                <label for="telefono" className="block text-sm font-medium leading-6">Teléfono</label>
+                                                <div className="mt-2">
+                                                    <input className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 bg-transparent placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={changeInput} value={datosInput.telefono} name="telefono" placeholder="Teléfono" autoComplete="postal-code" type="number" />
+                                                </div>
+                                            </div>
+
+                                            <div className="sm:col-span-2">
+                                                <label for="edad" className="block text-sm font-medium leading-6">Edad</label>
+                                                <div className="mt-2">
+                                                    <input onChange={changeInput} value={datosInput.edad} name="edad" placeholder="Edad" className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-white bg-transparent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="number" />
+                                                </div>
+                                            </div>
+
+                                            <div className="sm:col-span-2">
+                                                <label for="pais" className="block text-sm font-medium leading-6">País</label>
+                                                <div className="mt-2">
+                                                    <select className="block w-full rounded-md border-0 py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 bg-transparent focus:ring-2 focus:ring-inset  sm:text-sm sm:leading-6" onChange={changeInput} value={datosInput.pais} name="pais" >
+                                                        <option disabled>-- Seleccione País</option>
+                                                        <option>Ecuador</option>
+                                                        <option>Colombia</option>
+                                                        <option>Venezuela</option>
+                                                        <option>España</option>
+                                                    </select>
+
+
+
+                                                </div>
+                                            </div>
+
+                                            <div className="sm:col-span-2">
+                                                <label for="ciudad" className="block text-sm font-medium leading-6">Ciudad</label>
+                                                <div className="mt-2">
+
+                                                    <input className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-white bg-transparent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={changeInput} value={datosInput.ciudad} name="ciudad" placeholder="Ciudad" type="text" />
+
+                                                </div>
+                                            </div>
+
+                                            <div className="sm:col-span-2">
+                                                <label for="direccion" className="block text-sm font-medium leading-6">Dirección</label>
+                                                <div className="mt-2">
+
+                                                    <input className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-white bg-transparent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={changeInput} value={datosInput.direccion} name="direccion" placeholder="Dirección" type="text" />
+
+                                                </div>
+                                            </div>
+
+
+                                            {datosInput.rol == '2' ? <>
+                                                <div className="sm:col-span-2" style={{ display: 'block', backgroundColor: 'rgb(0 46 255 / 26%)', border: '1px solid rgb(0 24 106)', padding: '12px', borderRadius: '5px' }}>
+
+                                                    {"Como eres vendendor, puedes modificar tus medios de pago (Daviplata o Nequi):"}
+
+                                                </div>
+
+                                                <div className="sm:col-span-2">
+                                                    <label for="ciudad" className="block text-sm font-medium leading-6">Daviplata</label>
+                                                    <div className="mt-2" style={{ display: 'flex' }}>
+                                                        <img style={{ maxWidth: '50px' }} src={datosInput.imgDavi} />
+                                                        <input className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-white bg-transparent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" name="imgDavi" onChange={(e) => { setFile2(e.target.files[0]) }} type="file" accept='image/*' placeholder="Imagen Davi" />
+
+                                                    </div>
+                                                </div>
+
+                                                <div className="sm:col-span-2">
+                                                    <label for="ciudad" className="block text-sm font-medium leading-6">Nequi</label>
+                                                    <div className="mt-2" style={{ display: 'flex' }}>
+                                                        <img style={{ maxWidth: '50px' }} src={datosInput.imgNequi} />
+                                                        <input className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-white bg-transparent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" name="imgNequi" onChange={(e) => { setFile3(e.target.files[0]) }} type="file" accept='image/*' placeholder="Imagen Nequi" />
+
+                                                    </div>
+                                                </div>
+
+
+                                            </> : ''}
+
+                                            {statusBtnSend ?
+                                                <>
+                                                    <div className="sm:col-span-2">
+                                                        <label for="ciudad" className="block text-sm font-medium leading-6">Correo</label>
+                                                        <div className="mt-2" >
+                                                            <input className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-white bg-transparent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={changeInput} value={datosInput.correo} name="correo" placeholder="Correo" type="email" />
+
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </>
+
+                                                :
+                                                <div className="sm:col-span-2">
+                                                    <label for="ciudad" className="block text-sm font-medium leading-6">Correo</label>
+                                                    <div className="mt-2" >
+                                                        <input disabled className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-white bg-transparent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={changeInput} value={datosInput.correo} name="correo" placeholder="Correo" type="email" />
+
+                                                    </div>
+                                                </div>
+                                            }
+
+
+                                            <div className="sm:col-span-2">
+                                                <label for="ciudad" className="block text-sm font-medium leading-6">Contraseña</label>
+                                                <div className="mt-2" >
+                                                    <input className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-white bg-transparent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={changeInput} value={datosInput.contrasena} name="contrasena" placeholder="Contraseña" type="password" />
+
+                                                </div>
+                                            </div>
+
+                                            {statusBtnSend ?
+
+
+                                                <div className="sm:col-span-2">
+                                                    <div className="mt-2" >
+                                                        <button onClick={sendEmail} className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Enviar</button>
+                                                    </div>
+                                                </div>
+                                                :
+
+                                                <>
+                                                    <div className="sm:col-span-2">
+                                                        <div className="mt-2" style={{ display: 'block', backgroundColor: '#397437', border: '1px solid #00450b', padding: '12px', borderRadius: '5px' }}>
+                                                            Ingresa el codigo de verificacion enviado al correo electronico indicado en este formulario para continuar con la actualización de datos
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div className="sm:col-span-2">
+                                                        <div className="mt-2" >
+                                                            <input className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-white bg-transparent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type='text' placeholder='codigo' value={inputCod} onChange={(e) => {
+                                                                setInputCod(e.target.value)
+                                                            }} />
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div className="sm:col-span-2">
+                                                        <div className="mt-2" >
+                                                            <input type='submit' className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={clickCodVerf} value={'Enviar'} />
+
+                                                        </div>
+                                                    </div>
+
+                                                </>
+
+                                            }
+
+
+                                            {error ? <b>{error}</b> : ''}
+
+
+
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div className="mt-6 flex items-center justify-between gap-x-6">
+                                    <p className=''>
+                                        Ya tienes una Cuenta?
+                                        <Link className='link_cuenta' href='/FormLogin'>Iniciar Sesión</Link>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </section>
+
+            </div>
+
         </>
     )
 }
 
 actUser.getInitialProps = async (ctx) => {
-    const dd = await axios.get(`http://localhost:3000/api/Login/?id=` + ctx.query.id)
 
-    return {
-        data: dd.data
+
+    try {
+        const { data } = await axios.get(host + `/api/Login/?id=` + ctx.query.id)
+
+        return {
+            data: JSON.parse(JSON.stringify(data))
+
+        };
+    } catch (error) {
+
+        return {
+            data: [{
+                error: true
+            }]
+        }
+
     }
+
 }
 
 export default actUser
