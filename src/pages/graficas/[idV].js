@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Bar, Line, Pie, Doughnut} from 'react-chartjs-2'
 import { Chart as ChartJS } from 'chart.js/auto'
 import axios from "axios";
+import { host } from "log/const";
 
 
 function graficas(props) {
@@ -173,10 +174,10 @@ export default graficas
 
 graficas.getInitialProps = async (ctx) => {
 
-    const response1 = await axios.get(`http://localhost:3000/api/grafico/${ctx.query.idV}`);
-    const response2 = await axios.post(`http://localhost:3000/api/grafico/${ctx.query.idV}`);
-    const response3= await axios.put(`http://localhost:3000/api/grafico/${ctx.query.idV}`);
-    const response4 = await axios.patch(`http://localhost:3000/api/grafico/${ctx.query.idV}`);
+    const response1 = await axios.get(host + `/api/grafico/${ctx.query.idV}`);
+    const response2 = await axios.post(host + `/api/grafico/${ctx.query.idV}`);
+    const response3= await axios.put(host + `/api/grafico/${ctx.query.idV}`);
+    const response4 = await axios.patch(host + `/api/grafico/${ctx.query.idV}`);
 
     // const data1 = response1.data;
     // const data2 = response2.data;

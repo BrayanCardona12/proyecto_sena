@@ -1,5 +1,5 @@
 import axios from "axios";
-import { formatter } from "log/const"
+import { formatter, host } from "log/const"
 import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -858,9 +858,9 @@ export default facturaEjem
 
 facturaEjem.getInitialProps = async (ctx) => {
 
-    const response3 = await axios.patch('http://localhost:3000/api/CarShop/', { idC: parseInt(ctx.query.id[1]), idV: parseInt(ctx.query.id[0]) });
-    const response2 = await axios.get(`http://localhost:3000/api/Login?id=${ctx.query.id[1]}`);
-    const response1 = await axios.get(`http://localhost:3000/api/Login?id=${ctx.query.id[0]}`);
+    const response3 = await axios.patch(host + '/api/CarShop/', { idC: parseInt(ctx.query.id[1]), idV: parseInt(ctx.query.id[0]) });
+    const response2 = await axios.get(host + `/api/Login?id=${ctx.query.id[1]}`);
+    const response1 = await axios.get(host + `/api/Login?id=${ctx.query.id[0]}`);
     const data1 = response1.data;
     const data2 = response2.data;
     const data3 = response3.data;

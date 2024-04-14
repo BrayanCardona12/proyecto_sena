@@ -1,5 +1,5 @@
 import axios from "axios";
-import { formatter } from "log/const";
+import { formatter, host } from "log/const";
 import { useEffect, useState } from "react"
 import { ToastContainer, toast } from "react-toast";
 
@@ -860,9 +860,9 @@ footer p {
 
 FacturaComp.getInitialProps = async (ctx) => {
     try {
-        const response3 = await axios.delete('http://localhost:3000/api/compra/?idP=' + parseInt(ctx.query.id[2]));
-        const response2 = await axios.get(`http://localhost:3000/api/Login?id=${parseInt(ctx.query.id[1])}`);
-        const response1 = await axios.get(`http://localhost:3000/api/Login?id=${parseInt(ctx.query.id[0])}`);
+        const response3 = await axios.delete(host + '/api/compra/?idP=' + parseInt(ctx.query.id[2]));
+        const response2 = await axios.get(host + `/api/Login?id=${parseInt(ctx.query.id[1])}`);
+        const response1 = await axios.get(host + `/api/Login?id=${parseInt(ctx.query.id[0])}`);
 
         const data1 = response1.data;
         const data2 = response2.data;

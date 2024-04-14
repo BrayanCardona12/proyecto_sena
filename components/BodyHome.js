@@ -68,9 +68,8 @@ export default function BodyHome() {
                 <h1 className='penetrte_title'>Snak</h1>
               </div>
               <div className="content">
-                <h3 className='content_title'>01. The Entry Fragger</h3>
-                <p className='content_pagraf'>Abhishek Shakya, also known by his in-game name SnakeEye, is the entry fragger of SEC C
-                  Esports.</p>
+                <h3 className='content_title'>The Man</h3>
+                <p className='content_pagraf'>Explorando el Mundo de los Perfumes para Hombres.</p>
                 <Link href="/FormLogin" ><span className='btn_info'>Ver Más</span></Link>
               </div>
             </div>
@@ -88,9 +87,8 @@ export default function BodyHome() {
                 <h1 className='penetrte_title'>Cuidado</h1>
               </div>
               <div className='content'>
-                <h3 className='content_title'>00. Team SEC C Esports</h3>
-                <p className='content_pagraf'>SEC C Esports is a professional esports team based in India. It was founded in 2021 by
-                  Abhishek Shakya, a young entrepreneur and gamer.</p>
+                <h3 className='content_title'>Perfumes</h3>
+                <p className='content_pagraf'>Seduce al mundo con ese poder único que hay dentro de ti ¡Descúbrelo y revélalo con orgullo! .</p>
                 <Link href="/FormLogin" ><span className='btn_info'>Ver Más</span></Link>
               </div>
             </div>
@@ -108,9 +106,8 @@ export default function BodyHome() {
                 <h1 className='penetrte_title'>Ven</h1>
               </div>
               <div className='content'>
-                <h3 className='content_title'>02. The Supporter</h3>
-                <p className='content_pagraf'>Ashish Shakya, in-game name Venom, is the support player of Team SEC C in Battlegrounds
-                  Mobile India (BGMI).</p>
+                <h3 className='content_title'>Mujer y Belleza</h3>
+                <p className='content_pagraf'>Una Edición Limitada de maquillaje de ojos en tonos tostados y cobres, creada especialmente para iluminar la mirada de mamá y para que ella resalte en todo momento y en todo lugar.</p>
                 <Link href='/FormLogin'><span className='btn_info'>Ver Más</span></Link>
               </div>
             </div>
@@ -128,9 +125,8 @@ export default function BodyHome() {
                 <h1 className='penetrte_title'>Fla</h1>
               </div>
               <div className='content'>
-                <h3 className='content_title'>03. The IGL</h3>
-                <p className='content_pagraf'>Pankaj Rajpoot, in-game name Flash, is the in-game leader (IGL) of Team SEC C in
-                  Battlegrounds Mobile India (BGMI).</p>
+                <h3 className='content_title'>Sérum facial</h3>
+                <p className='content_pagraf'>Potencia tu rutina con fórmulas especializadas de alta concentración y eficacia clínica.</p>
                 <Link href='//FormLogin' ><span className='btn_info'>Ver Más</span></Link>
               </div>
             </div>
@@ -147,9 +143,8 @@ export default function BodyHome() {
                 <h1 className='penetrte_title'>Mr. R</h1>
               </div>
               <div className='content'>
-                <h3 className='content_title'>04. The All Rounder</h3>
-                <p className='content_pagraf'>Shivam Rajput, in-game name Mr. Rajput, is an all-rounder of Team SEC C in Battlegrounds
-                  Mobile India (BGMI).</p>
+                <h3 className='content_title'>Brillos del Alma</h3>
+                <p className='content_pagraf'>Una Colección de Joyería para Reflejar tu Elegancia Interior.</p>
                 <Link href='//FormLogin'><span className='btn_info'>Ver Más</span></Link>
               </div>
             </div>
@@ -243,19 +238,12 @@ export default function BodyHome() {
                         <Link className='footer_link' href="#">000 123 567 890</Link>
                     </div>
 
-                    <div className='footer_info'>
-                        <h3 className='footer_title'>Información</h3>
-                        <Link className='footer_link' href="#">Blog</Link>
-                        <Link className='footer_link' href="#">Ventas</Link>
-                        <Link className='footer_link' href="#">Ambiental</Link>
-                        <Link className='footer_link' href="#">Servicio al cliente</Link>
-                    </div>
-
+                   
                     <div className='footer_info'>
                         <h3 className='footer_title'>Calidad e Innovación</h3>
                         <Link className='footer_link' href="#">Estrategias de Innovación</Link>
-                        <Link className='footer_link' href="#">Certificaciones de Calidad</Link>
-                        <Link className='footer_link' href="#">ISO 9001</Link>
+                        <Link className='footer_link' href="#">Resultados de Calidad</Link>
+                        <Link className='footer_link' href="#">Procesos Optimos</Link>
                     </div>
                     <div className='footer_info'>
                         <h3 className='footer_title'>Redes Sociales</h3>
