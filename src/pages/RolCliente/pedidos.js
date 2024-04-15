@@ -73,15 +73,7 @@ function pedidos(props) {
 
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-                {/* 
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-                <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
-                <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
-                <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" /> */}
+             
 
                 <link rel="stylesheet" href="/style/estilosNavBarHome.css" />
             </Head>
@@ -131,57 +123,6 @@ function pedidos(props) {
 
             <NavBarHome home={true} pedidos={true} carrito={false} Change={() => { }} infoCarShop={[]} total={() => { }} textInputFilter={''} parametros={{}} closeSesion={closeSesion} />
 
-            {/* <div className="cont-pedidos">
-                    <h1 style={{ textAlign: 'center' }}>Lista - Pedidos</h1>
-                    <table id="example" className="table table-striped display responsive nowrap" style={{ width: '90%', margin: 'auto' }}>
-                        <tbody>
-                            <tr>
-                                <th>/</th>
-                                <th>ID-Pedido</th>
-                                <th>ID-Vendedor</th>
-                                <th>NomVendedor</th>
-                                <th>Contacto</th>
-                                <th>Total</th>
-                                <th>F-Solicitud</th>
-                                <th>F-Vencimiento</th>
-                                <th>Estado</th>
-                            </tr>
-                            {
-                                datos.map(x => (
-                                    <tr style={{ backgroundColor: `${colores[x.estadoP]}` }} key={x.idPedido}>
-                                        <td >
-                                            <Link className='recibo_icon' href={`/facturaCompra/${x.idC}/${x.idV}/${x.idPedido}`}>
-                                                <i class="fa-regular fa-file">👁‍🗨</i>
-                                            </Link>
-
-
-
-                                        </td>
-                                        <td>{x.idPedido}</td>
-                                        <td>{x.idV}</td>
-                                        <td>{x.nombre}</td>
-                                        <td>
-                                            <div className="social_icons pedido_icon">
-                                                <a className='what' target='_blank' href={`https://api.whatsapp.com/send?phone=${x.codInt}${x.telefono}`}><i className='bx bxl-whatsapp'></i></a>
-                                                <a className="yt" href={`mailto:${x.correo}`}><i className='bx bxl-gmail'></i></a>
-                                            </div>
-
-                                        </td>
-                                        <td>{formatter.format(x.totalP)}</td>
-                                        <td>{x.fechaS}</td>
-                                        <td>{x.fechaV}</td>
-                                        <td style={{ backgroundColor: `${colores[x.estadoP]}` }} className="estado_menu">{x.estadoP}</td>
-                                    </tr>
-                                ))
-                            }
-
-                        </tbody>
-                    </table>
-                    {data.length == 0 ? <h3 style={{ textAlign: 'center' }}>Tabla Vacia...</h3> : ''}
-
-                </div> */}
-
-
 
             <div className='section_Pagin'>
 
@@ -221,7 +162,7 @@ function pedidos(props) {
                                 </thead>
                                 <tbody className="border-x-1 border-gray-400 border-b-1 text-center">
                                     {rowsToShow.map((row, index) => (
-                                        <tr style={{ backgroundColor: `${colores[row.estadoP]}` }}
+                                        <tr 
                                             key={index}>
                                             <td className={`py-2 px-3 font-normal text-base ${index == 0
                                                 ? "border-t-2 border-gray-300"
@@ -254,7 +195,7 @@ function pedidos(props) {
                                             <td>{formatter.format(row.totalP)}</td>
                                             <td>{row.fechaS}</td>
                                             <td>{row.fechaV}</td>
-                                            <td>{row.estadoP}</td>
+                                            <td style={{ backgroundColor: `${colores[row.estadoP]}` }}>{row.estadoP}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -298,7 +239,7 @@ function pedidos(props) {
                 </div>
             </div>
 
-            <ToastContainer delay={8000} position='top-center' />
+            <ToastContainer delay={8000} position='bottom-center' />
 
         </>
     )

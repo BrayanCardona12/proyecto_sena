@@ -8,10 +8,10 @@ body::-webkit-scrollbar {
 }
 
 
-select {
+/* select {
     -webkit-appearance: none;
     -moz-appearance: none;
-}
+} */
 
 body::-webkit-scrollbar-thumb {
     height: 56px;

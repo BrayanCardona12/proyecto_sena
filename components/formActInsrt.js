@@ -23,112 +23,6 @@ function FormActInsrt() {
             </Head>
 
 
-            {/* <main className="form_add">
-                <ToastContainer delay={4000} position="top-right" />
-
-                <div className="formAdd_content">
-                    <div className="form_wrapper--add">
-                        <div className="form_contenido">
-                            <h3>{router.query.id ? 'Actualiza Tu Producto' : 'Inserta tu producto'}</h3>
-
-                            <form onSubmit={Submit}>
-                                <div className="form_file">
-                                    <img style={{ maxWidth: '150px', borderRadius: '10px', margin: 'auto', display: 'block' }} src={`${im}`} />
-                                    <p>Imagen Producto</p>
-                                    <label className='custom-file-upload' htmlFor="imagen" >Subir Archivo</label>
-                                    <input className="input-file" accept="image/*" onChange={(e) => {
-                                        if (e.target.files[0]) {
-                                            setFileImg(e.target.files[0])
-                                            let reader = new FileReader()
-                                            reader.onload = (e) => {
-
-                                                setIm( e.target.result)
-                                            }
-
-                                            reader.readAsDataURL(e.target.files[0])
-
-
-                                        }
-
-                                    }} type="file" id="imagen" name="imagen" />
-                                </div>
-                                <div>
-                                    <label htmlFor="nombre">Nombre</label>
-                                    <input className='form-control' type="text" onChange={Change} name="nombre" id="nombre" value={producto.nombre} />
-
-                                </div>
-                                <div className="form_select">
-                                    <label htmlFor="category">Categoria</label>
-
-                                    <select onChange={Change} value={producto.categoria} name='categoria' className="category">
-                                        <option value="Perfume">Perfume</option>
-                                        <option value="Colonia">Colonia</option>
-                                        <option value="Joyeria">Joyeria</option>
-                                        <option value="Maquillaje">Maquillaje</option>
-                                        <option value="Cuidado de piel">Cuidado de piel</option>
-                                        <option value="Labial">Labial</option>
-                                        <option value="Desodorante">Desodorante</option>
-                                        <option value="Delineador">Delineador</option>
-                                        <option value="Protección Solar">Protección Solar</option>
-                                        <option value="Tratamiento Facial">Tratamiento Facial</option>
-                                    </select>
-                                </div>
-                                <div>
-
-                                    <details>
-                                        <summary>Marca: {producto.marca}</summary>
-                                        <span style={{ display: 'block' }} onClick={changeMarca}>Yanbal</span>
-                                        <span style={{ display: 'block' }} onClick={changeMarca}>Avon</span>
-                                        <span style={{ display: 'block' }} onClick={changeMarca}>Carmel</span>
-                                        <span style={{ display: 'block' }} onClick={changeMarca}>Esika</span>
-                                        <span style={{ display: 'block' }} onClick={changeMarca}>Cyzone</span>
-                                        <span style={{ display: 'block' }} onClick={() => { setInputMarca(true) }}>otro...</span>
-                                    </details>
-                                    <br />
-                                </div>
-                                {inputMarca ? <><input name='marca' value={producto.marca} onChange={Change} /> <span onClick={() => { setInputMarca(false) }}>✅</span></> : ''}
-
-                                <div>
-                                    <label htmlFor="des">Descripción</label>
-                                    <textarea className='form-control' value={producto.descripcion} onChange={Change} name="descripcion" rows="2" />
-                                </div>
-                                <div>
-                                    <label htmlFor="cantidad">Cantidad Disponible</label>
-                                    <input className='form-control' type="number" onChange={Change} name="cantidad" value={producto.cantidad} />
-
-
-                                </div>
-                                <div>
-                                    <label htmlFor="precio">Precio</label>
-                                    <input className='form-control' onChange={Change} type="number" value={producto.precio} name="precio" />
-
-
-                                </div>
-                                <div className="form_send--btn">
-                                    <button>Enviar</button>
-                                </div>
-
-                            </form>
-                        </div>
-
-                        <div className="formAdd_info">
-
-                            <p className="form_texto--add">
-                                <i className="fa-solid fa-pen-nib">{router.query.id ? 'Actualiza Tu Producto' : 'Inserta tu producto'}</i>
-                            </p>
-                            <div className="form_list">
-                                <li>{router.query.id ? 'Actualiza' : 'Inserta '} la información que necesites cambiar, como el nombre, descripción, precio, imágenes, etc.</li>
-                                <li>Asegúrate de que el producto esté asignado a la categoría correcta</li>
-                                <li>{router.query.id ? 'Actualiza' : 'Inserta '} la cantidad disponible en el inventario si es necesario.</li>
-                                <li>Realiza ajustes en detalles adicionales como dimensiones, peso, colores, etc.</li>
-                                <li>Cambia precios, descuentos u ofertas según sea necesario.</li>
-                                <li>Asegúrate de hacer clic en "Enviar" para aplicar los cambios</li>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </main> */}
 
             <NavBarVendedor closeSesion={closeSesion} pedidos={true} />
 
@@ -183,10 +77,10 @@ function FormActInsrt() {
                                             <select onChange={Change} value={producto.categoria} name='categoria' id="category" autoComplete="country-name" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600  sm:text-sm sm:leading-6">
                                                 <option disabled>-- Seleccione la Categoría</option>
                                                 <option value="Perfume">Perfume</option>
-                                                <option value="Colonia">Colonia</option>
+                                                <option value="Colonias">Colonias</option>
                                                 <option value="Joyeria">Joyeria</option>
                                                 <option value="Maquillaje">Maquillaje</option>
-                                                <option value="Cuidado de piel">Cuidado de piel</option>
+                                                <option value="Cuidado Personal">Cuidado Personal</option>
                                                 <option value="Labial">Labial</option>
                                                 <option value="Desodorante">Desodorante</option>
                                                 <option value="Delineador">Delineador</option>
@@ -233,6 +127,8 @@ function FormActInsrt() {
                         </div>
 
                         <div className="mt-6 flex items-center justify-end gap-x-6">
+                        <button onClick={router.back} style={{ color: 'white', fontSize: '20px' }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded">Regresar</button>
+                               
                             <button type="submit" className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Insertar</button>
                         </div>
                     </form>

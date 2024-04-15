@@ -50,7 +50,7 @@ function NavBarHome({ textInputFilter, pedidos ,closeSesion, carrito, Change, in
         <>
 
             <header className='header'>
-                <ToastContainer delay={2000} position="top-center" />
+                <ToastContainer delay={2000} position="bottom-center" />
 
                 <div className='header_contenedor'>
                     <div className='header_info'>
@@ -97,27 +97,6 @@ function NavBarHome({ textInputFilter, pedidos ,closeSesion, carrito, Change, in
                             {[...infoCarShop].length == 0 ? <h2 style={{textAlign:'center'}}>No hay productos disponibles</h2> : [...infoCarShop].map((x) => (
                                 <CardNewCarShop x={x} toast={toast} />
 
-                                // <div className='cart_item'>
-                                //     <div className='cart_image'>
-                                //         <img className='cart_image_client' src={x.imagen} alt='producto' />
-                                //     </div>
-                                //     <div className='cart_name'>
-                                //         <p className='cart_name_text'>{x.nombre}</p>
-                                //     </div>
-                                //     <div className='cart_precio'>
-                                //         <p className='cart_precio_col'>{formatter.format(x.precio)}</p>
-                                //     </div>
-                                //     <div className='cart_cantidad'>
-                                //         <span className='minus'>-</span>
-                                //         <span className='cantidad_lote'>{x.cantidadProducto}</span>
-                                //         <span className='plus'>+</span>
-                                //     </div>
-                                //     <div className='cart_delete'>
-                                //         <button onClick={deleteCrP}><i className='bx bxs-trash delete_icon'></i></button>
-                                //     </div>
-                                // </div>
-
-                                // <CardCarritoCompra key={x.idProducto} datos={x} />
                             )
                             )}
 
@@ -194,13 +173,6 @@ function NavBarHome({ textInputFilter, pedidos ,closeSesion, carrito, Change, in
                                                 </div>
                                             </div>
                                         </div>
-
-
-
-                                        <Link href='' className='nav_link'>
-                                            <i className='bx bx-bookmark nav_icon'></i>
-                                            <span className='nav_name'>Favoritos</span>
-                                        </Link>
                                     </div>
                                 </div>
                             </div>

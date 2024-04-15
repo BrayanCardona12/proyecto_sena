@@ -1,5 +1,6 @@
 import axios from "axios";
 import { formatter, host } from "log/const";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react"
 import { ToastContainer, toast } from "react-toast";
 
@@ -28,13 +29,8 @@ export default function FacturaComp(props) {
         return total
     }
 
-    let {data : {data1, data2, data3}} = props
-  
-
-
-
-
-
+    let { data: { data1, data2, data3 } } = props
+    let router = useRouter()
 
     return (<>
         {data1.length == 0 || data2.length == 0 || data3.length == 0 ? <h1>Error</h1> : <>
@@ -667,16 +663,24 @@ footer p {
 
 
             <div style={{ fontSize: '.8rem' }} role='directory' className='html'>
-                <ToastContainer delay={2000} position="top-right" />
+
                 <main className="hidetax hidenote hidedate body">
+                    <ToastContainer delay={2000} position="bottom-center" />
                     <div className="control-bar">
+                    <button onClick={router.back} style={{ color: 'white', fontSize: '20px', position:'absolute', left:0 }} className="bg-blue-500 hover:bg-blue-700 text-white inline-block font-bold rounded">Regresar</button>
+                               
                         <div className="container">
                             <div className="row">
+                                 
+
+
                                 <div className="col-2-4">
+
                                     <div className="slogan">Comprobante de Compra</div>
 
                                 </div>
                                 <div className="col-4 text-right">
+
                                     <a onClick={() => { window.print() }}>Imprimir</a>
                                 </div>
 
@@ -848,6 +852,7 @@ footer p {
                 </main >
 
             </div>
+
         </>}
 
 

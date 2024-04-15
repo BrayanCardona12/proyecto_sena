@@ -187,7 +187,7 @@ function borrar() {
             </Link>
 
             <form style={{ width: '100%', maxWidth: '920px', margin: 'auto' }}>
-                <ToastContainer delay={6000} position='top-right' />
+                <ToastContainer delay={6000} position='bottom-center' />
 
                 <h1 className='text-center'>Actualizar Información Personal</h1>
 

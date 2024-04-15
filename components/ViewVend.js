@@ -3,6 +3,7 @@ import LogCloseSesion from 'log/logCloseSesion'
 import NavBarVendedor from 'components/NavBarVendedor'
 import logFilterProdUsersInput from 'log/logFilterProdUsersInput'
 import CardProdNew from 'components/CardProdNew'
+import { ToastContainer, toast } from 'react-toast'
 
 function ViewVend({ prod }) {
 
@@ -21,11 +22,12 @@ function ViewVend({ prod }) {
 
             <section className='section_Pagin'>
                 <h1 style={{textAlign:'center', fontSize:'20px'}}>Mis Productos</h1>
+                <ToastContainer delay={7000} position='bottom-center'/>
 
                 {
                     cardFilter.length != 0 ?
                         cardFilter.map((x) => (
-                            <CardProdNew key={x.idProducto} dataCar={[]} cliente={false} x={x} vendedor={true} />
+                            <CardProdNew toast={toast} key={x.idProducto} dataCar={[]} cliente={false} x={x} vendedor={true} />
 
 
 
@@ -33,7 +35,7 @@ function ViewVend({ prod }) {
 
 
 
-                            <CardProdNew key={x.idProducto} dataCar={[]} cliente={false} x={x} vendedor={true} />
+                            <CardProdNew toast={toast}  key={x.idProducto} dataCar={[]} cliente={false} x={x} vendedor={true} />
 
                         ))}
 

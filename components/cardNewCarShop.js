@@ -34,8 +34,12 @@ function CardNewCarShop({ x, toast }) {
                     </div>
 
                     <div className='cart_delete'>
-                        <button onClick={deleteCrP} ><i className='bx bxs-trash delete_icon'></i></button>
                         <button onClick={() => {
+                            toast.info('Cargando...')
+                            deleteCrP()
+                            }} ><i className='bx bxs-trash delete_icon'></i></button>
+                        <button onClick={() => {
+                         
                             setActCard(!actCard)
                             setValorInput(x.cantidadProducto)
                         }} ><i style={{ color: 'orange' }} className='bx bxs-pencil delete_icon'></i></button>
@@ -66,7 +70,11 @@ function CardNewCarShop({ x, toast }) {
 
 
                         <div className='cart_delete'>
-                            {error == '' ? <button onClick={updateCard} className="btnCar-save">✅</button> : (
+                            {error == '' ? <button onClick={() => {
+                                   toast.info('Cargando...')
+                                updateCard()
+                            
+                            }} className="btnCar-save">✅</button> : (
                                 <>
                                     <button onClick={deleteCrP} ><i className='bx bxs-trash delete_icon'></i></button>
                                     <button onClick={() => {

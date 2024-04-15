@@ -54,7 +54,7 @@ function pedidos(props) {
 
     }
 
-let {closeSesion} = LogCloseSesion()
+    let { closeSesion } = LogCloseSesion()
 
     const [rowsLimit] = useState(9);
     const [currentPage, setCurrentPage] = useState(0);
@@ -169,16 +169,16 @@ let {closeSesion} = LogCloseSesion()
             </style>
 
 
-            <NavBarVendedor  closeSesion={closeSesion} pedidos={true} />
+            <NavBarVendedor closeSesion={closeSesion} pedidos={true} />
 
-          
+
 
 
             <div className="html">
-            {data[0] == {error: true} ?
-                toast.error('Ups, ha ocurrido un error en el servidor.')
-                : ''}
-                <ToastContainer delay={8000} position='top-center' />
+                {data[0] == { error: true } ?
+                    toast.error('Ups, ha ocurrido un error en el servidor.')
+                    : ''}
+                <ToastContainer delay={8000} position='bottom-center' />
 
 
 
@@ -196,9 +196,9 @@ let {closeSesion} = LogCloseSesion()
                             setDatos(props.data)
                         }} style={{ backgroundColor: 'darkgray' }} className="Cancelado">Todo</div>
                     </div>
-                    
+
                     <div className="min-h-screen h-full bg-white flex mt-28 justify-center pt-10 pb-14">
-                        <div className="w-full max-w-5xl px-2">
+                        <div className="w-full px-2">
                             <div className='flex justify-between items-center mb-3'>
 
                                 <h1>Tabla Pedidos</h1>
@@ -222,7 +222,7 @@ let {closeSesion} = LogCloseSesion()
                                     </thead>
                                     <tbody className="border-x-1 border-gray-400 border-b-1 text-center">
                                         {rowsToShow.map((row, index) => (
-                                            <tr style={{ backgroundColor: `${colores[row.estadoP]}` }}
+                                            <tr
                                                 key={index}>
                                                 <td className={`py-2 px-3 font-normal text-base ${index == 0
                                                     ? "border-t-2 border-gray-300"
@@ -261,11 +261,11 @@ let {closeSesion} = LogCloseSesion()
                                                 <td style={{ position: 'relative', display: 'block' }}>
 
                                                     <select
-
+                                                        style={{ backgroundColor: `${colores[row.estadoP]}` }}
                                                         value={row.estadoP}
                                                         onChange={(e) => {
-                                                             clickEstado(e, row.idPedido)
-                                                           
+                                                            clickEstado(e, row.idPedido)
+
                                                         }}
                                                         className="border border-gray-300 p-1 rounded-md"
                                                     >
@@ -333,7 +333,7 @@ let {closeSesion} = LogCloseSesion()
                     </div>
                 </div>
 
-               
+
             </div>
 
 
@@ -354,8 +354,10 @@ pedidos.getInitialProps = async (ctx) => {
     } catch (error) {
 
 
-        return { data: [{
-            error: true
-        }] };
+        return {
+            data: [{
+                error: true
+            }]
+        };
     }
 }

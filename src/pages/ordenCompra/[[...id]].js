@@ -11,6 +11,8 @@ function facturaEjem(props) {
 
     let { data: { data1, data2, data3 } } = props;
 
+
+
     const total = (d) => {
         let total = 0
         for (let i of d) {
@@ -101,7 +103,7 @@ function facturaEjem(props) {
                         envio: data2[0].pais != 'CO' ? 'si' : 'no',
                         cant: cantidaddd(data3),
                         valUnit: valorUnitt(data3),
-                        
+
                     })
 
 
@@ -113,7 +115,7 @@ function facturaEjem(props) {
                     setLoading(false)
                 })();
 
-            router.push('/RolCliente/pedidos/?idC='+ parseInt(para.id[1]))
+            router.push('/RolCliente/pedidos/?idC=' + parseInt(para.id[1]))
         }
     }
 
@@ -847,7 +849,14 @@ footer p {
 
                 </main >
 
-                {loading ? <img src="https://i.gifer.com/ZKZg.gif" style={{ maxWidth: '60px' }} /> : <button onClick={comprarr} style={{ display: 'block', margin: 'auto', backgroundColor: '#35e252', fontSize: '3rem', borderRadius: '10px' }}>COMPRAR</button>}
+                {loading ? <img src="https://i.gifer.com/ZKZg.gif" style={{ maxWidth: '60px' }} /> :
+                    <div className="flex justify-evenly items-center m-4">
+                            <button onClick={router.back} style={{ color: 'white', fontSize: '20px' }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-auto block rounded">Regresar</button>
+                
+                        <button onClick={comprarr} style={{ color: 'white', fontSize: '20px' }} className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 m-auto block rounded">COMPRAR</button>
+                        </div>}
+
+
             </div>
 
         </>

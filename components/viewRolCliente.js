@@ -115,7 +115,7 @@ function ViewRolCliente(
 
               </a>
             </div>
-            <ToastContainer delay={2000} position='top-center' />
+            <ToastContainer delay={2000} position='bottom-center' />
             <input value={textInputFilter} onChange={Change} type="text" className="input-filter" placeholder="Ohm Parfum..." />
             <h1 style={{ textAlign: 'center' }}>Lista | Vendedores</h1>
             <div style={{ width: '100%', display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>

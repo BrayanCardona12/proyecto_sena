@@ -193,7 +193,8 @@ function actUser({ data }) {
             </Head>
             <div className='bg_signUp'>
                 <section>
-                   
+                <button onClick={router.back} style={{ color: 'white', fontSize: '20px', position:'absolute', left:0 }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded">Regresar</button>
+                               
                     <div className='center_registro'>
                         <div className='bg_formAdd container_registro'>
                             <h1 className='titulo_registro'>Actualizar Información Personal</h1>

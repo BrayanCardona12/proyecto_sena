@@ -53,7 +53,7 @@ export default function FormLogin() {
 
 
             <div className='bg_signUp'>
-                <ToastContainer delay={8000} position='top-left' />
+                <ToastContainer delay={8000} position='bottom-center' />
                 <div className='center_contenido'>
                     <div className='container_login'>
 
@@ -68,7 +68,7 @@ export default function FormLogin() {
                         <form onSubmit={submit}>
                             <h1 className='titulo'>Inicio de Sesión</h1>
                             <div className='input_box'>
-                                <select style={{padding:'0 0 0 1.2rem'}} name='rol' onChange={changeInput} value={rol} className='rol'>
+                                <select style={{padding:'0 12px'}} name='rol' onChange={changeInput} value={rol} className='rol'>
                                     <option className='color_option' disabled>--Seleccione Su Rol--</option>
                                     <option value={'1'} className='color_option'>Cliente</option>
                                     <option value={'2'} className='color_option'>Vendedor</option>

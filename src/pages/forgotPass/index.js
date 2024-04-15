@@ -127,7 +127,7 @@ function forgotPass() {
 
   return (
     <div style={{ textAlign: 'center', maxWidth: '600px', margin: 'auto', padding: '20px', fontFamily: `monospace` }}>
-      <ToastContainer delay={4000} position="top-left"/>
+      <ToastContainer delay={4000} position="bottom-center"/>
       <h1 style={{ color: '#007bff' }}>Recuperar Tu Contraseña</h1>
       <p>Por favor, introduce el correo electrónico que usabas para iniciar sesión.</p>
       {camposInput.statusChangePass || camposInput.statusCod ? (

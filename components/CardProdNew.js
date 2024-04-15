@@ -4,9 +4,9 @@ import React from 'react'
 import Link from 'next/link'
 import axios  from 'axios'
 
-function CardProdNew({ vendedor, dataCar, cliente, x }) {
+function CardProdNew({ vendedor, dataCar, cliente, x, toast }) {
 
-    let { changeInput, cantidad, error, addCar, statusCar } = logCardProducto(x, dataCar)
+    let { changeInput, cantidad, error, addCar, statusCar } = logCardProducto(x, dataCar, toast)
 
     return (
         <div key={x.idProducto} className='galeria_content'>
@@ -31,7 +31,7 @@ function CardProdNew({ vendedor, dataCar, cliente, x }) {
             ) : ''} */}
 
             <Link href='/cliente/detalleProducto'>
-                <img src={x.imagen} class='galeria_img' alt='imagen producto' />
+                <img src={x.imagen} className='galeria_img' alt='imagen producto' />
               <p className='galeria_marca'>{x.marca}</p>
                 <p className='galeria_categoria'>{x.categoria}</p>
                 <h3 className='galeria_tittle'>{x.nombre}</h3>
@@ -42,7 +42,7 @@ function CardProdNew({ vendedor, dataCar, cliente, x }) {
             
             {vendedor ? (
                 <div style={{width:'100%' , display:'flex', justifyContent:'center', alignContent:'center', margin:'12px 0'}} className="card_header">
-                    <Link class="mx-2 bg-green-500 hover:bg-green-700  text-white font-bold py-2 px-4 rounded" href={"/RolVendedor/actProducto/" + x.idProducto}>
+                    <Link className="mx-2 bg-green-500 hover:bg-green-700  text-white font-bold py-2 px-4 rounded" href={"/RolVendedor/actProducto/" + x.idProducto}>
                         Actualizar
                     </Link>
                    

@@ -330,7 +330,7 @@ function InfoCatalogo(props) {
                 </Link>
               </div>
             </div>
-            <ToastContainer delay={2000} position='top-center' />
+            <ToastContainer delay={2000} position='bottom-center' />
             <input value={textInputFilter} onChange={Change} type="text" className="input-filter" placeholder="Ohm Parfum..." />
             <h1 style={{ textAlign: 'center' }}>Catalogo | {nom}</h1>
             <h4></h4>

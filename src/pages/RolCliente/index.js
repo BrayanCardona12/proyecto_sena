@@ -50,7 +50,7 @@ function ClienteHome({ data }) {
   return (
 
     <>
-      {sesionActive && data[0].error != true ? <div>
+      {sesionActive && data[0] != {error: true} ? <div>
 
         <Head>
           <link rel="stylesheet" href="/style/homeCliente.css" />
@@ -84,9 +84,6 @@ function ClienteHome({ data }) {
 
           <section id='se' className='mt-9'>
             {load ? <svg style={{ maxWidth: '100px', width: '100%', margin: 'auto', position: 'fixed', bottom: 0, right: 0, zIndex: 10 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="#ff7300" stroke="#ff7300" strokeWidth="7" transform-origin="center" d="m148 84.7 13.8-8-10-17.3-13.8 8a50 50 0 0 0-27.4-15.9v-16h-20v16A50 50 0 0 0 63 67.4l-13.8-8-10 17.3 13.8 8a50 50 0 0 0 0 31.7l-13.8 8 10 17.3 13.8-8a50 50 0 0 0 27.5 15.9v16h20v-16a50 50 0 0 0 27.4-15.9l13.8 8 10-17.3-13.8-8a50 50 0 0 0 0-31.7Zm-47.5 50.8a35 35 0 1 1 0-70 35 35 0 0 1 0 70Z"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="0.9" values="0;120" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform></path></svg> : ''}
-
-
-
 
           </section>
           {
@@ -143,7 +140,7 @@ function ClienteHome({ data }) {
                     <div className='aside__contenido'>
                       <h3 className='aside__text'>Paleta Sexy Glam</h3>
                       <p className='aside__info'>El mix perfecto de sombras mate, satinadas y escarchadas</p>
-                      <a href='#se ' style={{ borderRadius: '6px', display: 'block' }} className='aside__button'>Comprar</a>
+                      <a href='#se ' style={{ borderRadius: '6px', display: 'block' }} className='aside__button'>Ver Más</a>
                     </div>
                     <img className='aside_image' src='/img/promo_05.jpg' alt='' />
                   </div>
@@ -154,7 +151,7 @@ function ClienteHome({ data }) {
                     <div className='aside__contenido'>
                       <h3 className='aside__text'>Nueva Joyería</h3>
                       <p className='aside__info'>Celebra con diseños unicos y de la más alta Calidad</p>
-                      <a href='#se ' style={{ borderRadius: '6px', display: 'block' }} className='aside__button'>Más Información</a>
+                      <a href='#se ' style={{ borderRadius: '6px', display: 'block' }} className='aside__button'>Ver Más</a>
                     </div>
                     <img className='aside_image' src='/img/promo_06.webp' alt='' />
                   </div>
