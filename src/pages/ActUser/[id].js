@@ -193,7 +193,7 @@ function actUser({ data }) {
             </Head>
             <div className='bg_signUp'>
                 <section>
-                <button onClick={router.back} style={{ color: 'white', fontSize: '20px', position:'absolute', left:0 }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded">Regresar</button>
+                <button onClick={router.back} style={{ color: 'white', fontSize: '20px', position:'fixed', left:0, bottom:0 }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded m-4">Regresar</button>
                                
                     <div className='center_registro'>
                         <div className='bg_formAdd container_registro'>
@@ -238,7 +238,7 @@ function actUser({ data }) {
                                             <div className="sm:col-span-2">
                                                 <label for="apellido" className="block text-sm font-medium leading-6">Tipo de Documento</label>
                                                 <div className="mt-2">
-                                                    <select className="block w-full rounded-md border-0 py-1.5  ring-1 ring-inset text-gray-300 ring-gray-300 sm:text-sm sm:leading-6 bg-transparent" onChange={changeInput} value={datosInput.tipo} name='tipoDoc' id="tipoDoc">
+                                                    <select className="block w-full rounded-md border-0 py-1.5  ring-1 ring-inset text-gray-300 ring-gray-300 sm:text-sm sm:leading-6 bg-transparent" onChange={changeInput} value={datosInput.tipoDoc} name='tipoDoc' id="tipoDoc">
                                                         <option value="Cédula de Ciudadania">Cedula de Ciudadania</option>
                                                         <option value="Cédula Extranjera">Cédula Extranjera</option>
                                                         <option value="Pasaporte">Pasaporte</option>

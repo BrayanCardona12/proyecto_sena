@@ -10,7 +10,7 @@ function logformActInsrt() {
     const router = useRouter()
 
     let [producto, setProducto] = useState({
-        imagen: "../img/producto_form.svg",
+        imagen: "https://tiiny.host/assets/images/75a18ecf-bb1a-48b1-aec3-b925b8f665ec.png",
         nombre: "",
         categoria: "Perfume",
         marca: "Carmel",
@@ -22,7 +22,7 @@ function logformActInsrt() {
 
     })
 
-    let [im, setIm] = useState('../img/producto_form.svg')
+    let [im, setIm] = useState('https://tiiny.host/assets/images/75a18ecf-bb1a-48b1-aec3-b925b8f665ec.png')
 
     useEffect(() => {
         setProducto({ ...producto, idVendedor: parseInt(localStorage.getItem('inf')) })
@@ -72,6 +72,8 @@ function logformActInsrt() {
                 toast.error(`Error, campo ${k} vacio`)
                 return
             }
+
+           
         }
 
         if (router.query.id) {
@@ -81,6 +83,7 @@ function logformActInsrt() {
                 await axios.put(`/api/Crud/insertUpdate/${router.query.id}`, { ...producto })
                 router.push('/RolVendedor')
             } else {
+
                 toast.warn('⌛ Cargando...')
                 let url = await uploadFile(fileImg)
                 await axios.put(`/api/Crud/insertUpdate/${router.query.id}`, { ...producto, imagen: url })
@@ -90,6 +93,12 @@ function logformActInsrt() {
 
 
         } else {
+
+            if (fileImg == null) {
+                toast.error(`Error, selecciona una imagen valida.`)
+                return
+            }
+            
             toast.warn('⌛ Cargando...')
             let url = await uploadFile(fileImg)
 

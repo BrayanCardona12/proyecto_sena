@@ -30,7 +30,7 @@ function CardProdNew({ vendedor, dataCar, cliente, x, toast }) {
                 </div>
             ) : ''} */}
 
-            <Link href='/cliente/detalleProducto'>
+            <Link href={'/RolCliente/detalleP/'+x.idProducto}>
                 <img src={x.imagen} className='galeria_img' alt='imagen producto' />
               <p className='galeria_marca'>{x.marca}</p>
                 <p className='galeria_categoria'>{x.categoria}</p>

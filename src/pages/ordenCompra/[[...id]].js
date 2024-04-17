@@ -133,10 +133,12 @@ function facturaEjem(props) {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
+  
 }
 
 .body {
-    margin: 0
+    margin: 0;
+
 }
 
 article,
@@ -758,7 +760,7 @@ footer p {
                 <main className="hidetax hidenote hidedate body">
 
                     <div className="col-2">
-                        <h1>Resumen de Compra:</h1>
+                        <h1 style={{color:'black', fontWeight:'700'}}>Resumen de Compra:</h1>
                     </div>
 
                     <div style={{ display: 'flex' }} className="row section">
@@ -828,18 +830,18 @@ footer p {
                             <tbody>
                                 <tr>
                                     <td><strong>Sub-Total:</strong></td>
-                                    <td id="total_price">{total(data3)}</td>
+                                    <td style={{color:'black'}} id="total_price">{total(data3)}</td>
 
                                 </tr>
 
                                 <tr>
                                     <td><strong>Envio:</strong></td>
-                                    <td id="total_price">{data2[0].pais != 'CO' ? formatter.format(25000) : formatter.format(0)}</td>
+                                    <td style={{color:'black'}} id="total_price">{data2[0].pais != 'CO' ? formatter.format(25000) : formatter.format(0)}</td>
                                 </tr>
 
                                 <tr className="borderrr">
                                     <td><strong>T-Pagar:</strong></td>
-                                    <td id="total_price">{data2[0].pais != 'CO' ? formatter.format(parseInt(total2(data3)) + 30000) : total(data3)}</td>
+                                    <td style={{color:'black'}} id="total_price">{data2[0].pais != 'CO' ? formatter.format(parseInt(total2(data3)) + 30000) : total(data3)}</td>
                                 </tr>
 
                             </tbody>

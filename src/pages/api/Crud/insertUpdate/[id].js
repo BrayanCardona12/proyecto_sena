@@ -3,9 +3,8 @@ import { pool } from "database/conexion";
 export default async function getInfoProducto(req, res) {
 
     async function infoP(req, res) {
-
         let { id } = req.query
-
+        // console.log(req.query)
         let [data] = await pool.query("SELECT * FROM producto where idProducto = ?", [id])
         return res.status(200).json(data)
     }
@@ -18,7 +17,7 @@ export default async function getInfoProducto(req, res) {
 
 
 
-        let [data] = await pool.query('UPDATE producto SET nombre = ? , categoria = ? ,  descripcion = ? ,  cantidad = ? , precio = ? , imagen = ? , estado = ?, marca = ?  where idProducto = ?', [nombre, categoria, descripcion, cantidad, precio, imagen, estado, marca ,id])
+        let [data] = await pool.query('UPDATE producto SET nombre = ? , categoria = ? ,  descripcion = ? ,  cantidad = ? , precio = ? , imagen = ? , estado = ?, marca = ?  where idProducto = ?', [nombre, categoria, descripcion, cantidad, precio, imagen, estado, marca, id])
         return res.status(200).json(data)
     }
 

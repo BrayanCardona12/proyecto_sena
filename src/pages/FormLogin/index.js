@@ -58,10 +58,10 @@ export default function FormLogin() {
                     <div className='container_login'>
 
                     <div className='btn__arrow'>
-                        <button className='btn__design--arrow'>
-                            <Link className='' href='/'>
+                        <button onClick={router.back} className='btn__design--arrow'>
+                          
                             <i className="fa-solid fa-arrow-left"></i>
-                            </Link>
+                          
                         </button>
                     </div>
 

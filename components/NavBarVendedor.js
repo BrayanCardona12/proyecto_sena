@@ -100,10 +100,10 @@ export default function NavBarVendedor({textInputFilter, closeSesion, Change, pe
                                 <div className='nav_list'>
                                     <div className='nav_items'>
                                         <h3 className='nav_subtitle'>Menu</h3>
-                                        <Link href="/" className='nav_link'>
+                                        {/* <Link href="/" className='nav_link'>
                                             <i className="bx bx-home nav_icon"></i>
                                             <span className='nav_name'>Home</span>
-                                        </Link>
+                                        </Link> */}
 
                                         <Link href='/RolVendedor' className='nav_link'>
                                             <i className="bx bxs-group nav_icon"></i>

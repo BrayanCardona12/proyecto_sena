@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { formatter, host } from 'log/const';
+import { useRouter } from 'next/router';
 import React from 'react'
 
 function detalleP(props) {
 
     let { data: { data1, data2, data3 } } = props;
+
+    let router = useRouter()
 
     const total = (d) => {
         let total = 0
@@ -656,11 +659,12 @@ border-top: 1px rgb(0, 157, 128) solid ;
 
 
             <div  >
-
+            <button onClick={router.back} style={{ color: 'white', fontSize: '20px', position:'fixed', left:0, bottom:0 }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded m-4">Regresar</button>
                 <main className="hidetax hidenote hidedate body">
 
+              
                     <div className="col-2">
-                        <h1>Detalle - Pedido:</h1>
+                        <h1 style={{color:'black', fontWeight:700}}>Detalle - Pedido:</h1>
                         <h5>ID-Pedido: {data3[0].idPedido}</h5>
                     </div>
 
@@ -696,7 +700,7 @@ border-top: 1px rgb(0, 157, 128) solid ;
                             <thead>
                                 <tr>
                                     <th width="5%">Código</th>
-                                    <th width="60%">Descripción</th>
+                                    <th width="60%">Nombre</th>
                                     <th width="10%">Cant.</th>
                                     <th width="15%">Valor Unit.</th>
                                     <th width="15%">Valor Total.</th>
@@ -728,21 +732,21 @@ border-top: 1px rgb(0, 157, 128) solid ;
 
                     <div className="invoicelist-footer">
                         <table>
-                            <tbody>
+                            <tbody >
                                 <tr>
                                     <td><strong>Sub-Total:</strong></td>
-                                    <td id="total_price">{total(data3)}</td>
+                                    <td style={{color:'black'}} id="total_price">{total(data3)}</td>
 
                                 </tr>
 
                                 <tr>
                                     <td><strong>Envio:</strong></td>
-                                    <td id="total_price">{data2[0].pais != 'CO' ? formatter.format(25000) : formatter.format(0)}</td>
+                                    <td style={{color:'black'}} id="total_price">{data2[0].pais != 'CO' ? formatter.format(25000) : formatter.format(0)}</td>
                                 </tr>
 
                                 <tr className="borderrr">
                                     <td><strong>T-Pagar:</strong></td>
-                                    <td id="total_price">{data2[0].pais != 'CO' ? formatter.format(parseInt(total2(data3)) + 30000) : total(data3)}</td>
+                                    <td style={{color:'black'}} id="total_price">{data2[0].pais != 'CO' ? formatter.format(parseInt(total2(data3)) + 30000) : total(data3)}</td>
                                 </tr>
 
                             </tbody>

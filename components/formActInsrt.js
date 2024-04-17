@@ -1,7 +1,7 @@
 import logformActInsrt from "log/logformActInsrt"
 import Head from "next/head"
 
-import { ToastContainer } from "react-toast"
+import { ToastContainer, toast } from "react-toast"
 import NavBarVendedor from "./NavBarVendedor"
 import LogCloseSesion from "log/logCloseSesion"
 
@@ -67,7 +67,7 @@ function FormActInsrt() {
                                     <div className="sm:col-span-2">
                                         <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">Nombre Producto</label>
                                         <div className="mt-2">
-                                            <input type="text" onChange={Change} name="nombre" value={producto.nombre} id="first-name" autoComplete="given-name" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                            <input type="text" onChange={Change} name="nombre" value={producto.nombre} id="first-name" autoComplete="given-name" minLength={1} maxLength={49} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                         </div>
                                     </div>
 
@@ -95,7 +95,7 @@ function FormActInsrt() {
 
                                         <div className="mt-2">
                                             
-                                        <input name='marca' className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" value={producto.marca} onChange={Change} />
+                                        <input minLength={2} maxLength={29} name='marca' className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" value={producto.marca} onChange={Change} />
                                         </div>
 
                                     </div>
@@ -103,21 +103,21 @@ function FormActInsrt() {
                                     <div className="sm:col-span-6">
                                         <label htmlFor="message" className="block text-sm font-medium leading-6 text-gray-900">Descripción</label>
                                         <div className="mt-2">
-                                            <textarea value={producto.descripcion} onChange={Change} name="descripcion" id="message" rows="4" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Escribe aquí..."></textarea>
+                                            <textarea minLength={10} maxLength={400} value={producto.descripcion} onChange={Change} name="descripcion" id="message" rows="4" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Escribe aquí..."></textarea>
                                         </div>
                                     </div>
 
                                     <div className="sm:col-span-3">
                                         <label htmlFor="cantidad" className="block text-sm font-medium leading-6 text-gray-900">Cantidad</label>
                                         <div className="mt-2">
-                                            <input type="number" onChange={Change} name="cantidad" value={producto.cantidad} id="cantidad" autoComplete="family-name" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                            <input type="number" max={500} min={1} onChange={Change} name="cantidad" value={producto.cantidad} id="cantidad" autoComplete="family-name" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                         </div>
                                     </div>
 
                                     <div className="sm:col-span-3">
                                         <label htmlFor="precio" className="block text-sm font-medium leading-6 text-gray-900">Precio</label>
                                         <div className="mt-2">
-                                            <input type="number" value={producto.precio} onChange={Change} name="precio" id="precio" autoComplete="family-name" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                            <input type="number" max={999999} min={1} value={producto.precio} onChange={Change} name="precio" id="precio" autoComplete="family-name" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                         </div>
                                     </div>
                                 </div>

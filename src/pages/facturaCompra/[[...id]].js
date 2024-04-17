@@ -44,8 +44,10 @@ export default function FacturaComp(props) {
     -webkit-text-size-adjust: 100%
 }
 
+
 .body {
-    margin: 0
+    margin: 0;
+
 }
 
 article,
@@ -423,7 +425,7 @@ p {
 header {
     margin: 1rem 0 0;
     padding: 0 0 2rem 0;
-    border-bottom: 3pt solid #009688
+    border-bottom: 3pt solid black
 }
 
 header p {
@@ -658,30 +660,31 @@ footer p {
     border-top: 1px rgb(0, 157, 128) solid ;
 }
 `
+
             }</style>
 
 
 
-            <div style={{ fontSize: '.8rem' }} role='directory' className='html'>
+            <div style={{ fontSize: '.8rem', color:'black' }} role='directory' className='html'>
 
                 <main className="hidetax hidenote hidedate body">
                     <ToastContainer delay={2000} position="bottom-center" />
-                    <div className="control-bar">
-                    <button onClick={router.back} style={{ color: 'white', fontSize: '20px', position:'absolute', left:0 }} className="bg-blue-500 hover:bg-blue-700 text-white inline-block font-bold rounded">Regresar</button>
+                    <div style={{backgroundColor:'#6f6f6f'}} className="control-bar">
+                    <span onClick={router.back} style={{ color: 'white', fontSize: '17px', position:'absolute', left:0, top:0, cursor:'pointer'}} className="bg-black-500 hover:bg-black-700 text-white inline-block font-bold rounded mx-4">Regresar</span>
                                
                         <div className="container">
-                            <div className="row">
+                            <div  className="row">
                                  
 
 
                                 <div className="col-2-4">
 
-                                    <div className="slogan">Comprobante de Compra</div>
+                                    <div  className="slogan">Comprobante de Compra</div>
 
                                 </div>
-                                <div className="col-4 text-right">
+                                <div  className="col-4 text-right">
 
-                                    <a onClick={() => { window.print() }}>Imprimir</a>
+                                    <a style={{color:'white', backgroundColor:'black'}} onClick={() => { window.print() }}>Imprimir</a>
                                 </div>
 
                             </div>
@@ -692,7 +695,7 @@ footer p {
 
                     <header className="row">
                         <div className="logoholder text-center">
-                            <img src="https://obedalvarado.pw/demo/sales_invoice/assets/img/logo.png" />
+                            <img src="https://cdn-icons-png.flaticon.com/512/1011/1011322.png" />
                         </div>
 
 
@@ -729,7 +732,7 @@ footer p {
                     <div className="row section">
 
                         <div className="col-2">
-                            <h1>Detalle de Venta</h1>
+                            <h1 style={{color:'black'}}>Detalle de Venta</h1>
                         </div>
 
 
@@ -799,7 +802,7 @@ footer p {
                     </div>
 
 
-                    <h2>Metodos de Pago:</h2>
+                    <h2 style={{color:'black'}}>Metodos de Pago:</h2>
                     <div className="cont-qrr">
 
                         {data2[0].imgDavi == 'vacio' ? '' : (
@@ -824,18 +827,18 @@ footer p {
                             <tbody>
                                 <tr>
                                     <td><strong>Sub-Total:</strong></td>
-                                    <td id="total_price">{total(data3)}</td>
+                                    <td style={{color:'black'}} id="total_price">{total(data3)}</td>
 
                                 </tr>
 
                                 <tr>
                                     <td><strong>Envio:</strong></td>
-                                    <td id="total_price">{data1[0].pais != 'CO' ? formatter.format(25000) : formatter.format(0)}</td>
+                                    <td style={{color:'black'}} id="total_price">{data1[0].pais != 'CO' ? formatter.format(25000) : formatter.format(0)}</td>
                                 </tr>
 
                                 <tr className="borderrr">
                                     <td><strong>T-Pagar:</strong></td>
-                                    <td id="total_price">{data1[0].pais != 'CO' ? formatter.format(parseInt(total2(data3)) + 30000) : total(data3)}</td>
+                                    <td style={{color:'black'}} id="total_price">{data1[0].pais != 'CO' ? formatter.format(parseInt(total2(data3)) + 30000) : total(data3)}</td>
                                 </tr>
 
                             </tbody>
@@ -884,7 +887,13 @@ FacturaComp.getInitialProps = async (ctx) => {
         };
 
     } catch (e) {
-
+        return {
+            data: JSON.parse(JSON.stringify({
+                data1: [],
+                data2: [],
+                data3: []
+            }))
+        }
     }
 
 }
