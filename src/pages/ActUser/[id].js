@@ -70,6 +70,60 @@ function actUser({ data }) {
         //---------------------------------------
         //.....
 
+        for (const k in datosInput) {
+
+            if (datosInput[k] == '') {
+
+                setError(`Error, campo ${k} vacio`)
+               
+                toast.error(`⚠ Error, campo ${k} vacio`)
+                return
+            }
+
+            if (k != 'imagen' && k != 'imgDavi' && k != 'imgNequi' && k != 'correo' && k != 'direccion' && datosInput[k].toString().length >= 50) {
+
+                toast.error(`⚠ Error, verfica que el campo " ${k} " no supere o iguale a 50 caracteres`)
+               
+                return
+            }
+
+            if (k == 'numDoc' && !parseInt(datosInput[k]) ||
+                k == 'telefono' && !parseInt(datosInput[k]) ||
+                k == 'edad' && !parseInt(datosInput[k]) ||
+                k == 'codInt' && !parseInt(datosInput[k])
+
+            ) {
+
+                toast.error(`⚠ Error, verfica que el campo " ${k} " sea un numero valido.`)
+                toast.error(`Verfica que el campo este diligenciado y no tenga puntos, comas, o algun caracter.`)
+               
+                return
+            }
+
+            if (k == 'correo' && !datosInput[k].includes('@') ||
+                k == 'correo' && !datosInput[k].includes('.')
+            ) {
+                toast.error('Ingresa un correo valido')
+               
+                return
+            }
+
+            if (k == 'contrasena' && datosInput[k].length > 8) {
+               
+                toast.error('Contraseña Invalida, por favor ingresa un contraseña con maximo 8 caracteres')
+                return
+            }
+
+            if (datosInput['rol'] == '2' && k == 'imgDavi' && datosInput['imgDavi'] == 'vacio' && datosInput['imgNequi'] == 'vacio' ||
+                datosInput['rol'] == '2' && k == 'imgNequi' && datosInput['imgNequi'] == 'vacio' && datosInput['imgDavi'] == 'vacio'
+            ) {
+            
+                toast.info('Por favor ingresa al menos un metodo de pago.')
+                return
+            }
+
+
+        }
 
         // ⬆ se hace la validacion de los campos. (💡, puede ser una funcion aparte, para que se pueda usar en el otro onclick...)
         if (correo.current == datosInput.correo) {
@@ -193,7 +247,7 @@ function actUser({ data }) {
             </Head>
             <div className='bg_signUp'>
                 <section>
-                <button onClick={router.back} style={{ color: 'white', fontSize: '20px', position:'fixed', left:0, bottom:0 }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded m-4">Regresar</button>
+                <button onClick={router.back} style={{ color: 'white', fontSize: '16px', position:'fixed', left:0, bottom:0 }} className="bg-blue-500 hover:bg-blue-700 text-white rounded m-4 p-2">Regresar</button>
                                
                     <div className='center_registro'>
                         <div className='bg_formAdd container_registro'>
@@ -205,7 +259,7 @@ function actUser({ data }) {
                                         <label for="photo" className="block text-xl font-medium leading-6">Foto</label>
                                         <div className="mt-2 flex items-center gap-x-3">
                                             <img src={datosInput.imagen} className=' rounded-full w-20 h-20' />
-                                            <input type="file" onChange={(e) => { setFile(e.target.files[0]) }} name="imagen" className=' w-10/12 file:bg-gradient-to-b file:from-green-500 file:to-green-600 file:px-6 file:py-3 file:m-5 file:border-none file:rounded-full file:text-white file:cursor-pointer file:shadow-lg file:shadow-green-600/50' />
+                                            <input accept='image/*' type="file" onChange={(e) => { setFile(e.target.files[0]) }} name="imagen" className=' w-10/12 file:bg-gradient-to-b file:from-green-500 file:to-green-600 file:px-6 file:py-3 file:m-5 file:border-none file:rounded-full file:text-white file:cursor-pointer file:shadow-lg file:shadow-green-600/50' />
                                         </div>
                                     </div>
 
@@ -221,14 +275,14 @@ function actUser({ data }) {
                                             <div className="sm:col-span-2">
                                                 <label for="first-name" className="block text-sm font-medium leading-6">Nombre</label>
                                                 <div className="mt-2">
-                                                    <input type="text" onChange={changeInput} value={datosInput.nombre} name="nombre" id="first-name" autoComplete="given-name" className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-white bg-transparent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder='Nombre' />
+                                                    <input minLength={1} maxLength={48} type="text" onChange={changeInput} value={datosInput.nombre} name="nombre" id="first-name" autoComplete="given-name" className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-white bg-transparent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder='Nombre' />
                                                 </div>
                                             </div>
 
                                             <div className="sm:col-span-2">
                                                 <label for="apellido" className="block text-sm font-medium leading-6">Apellido</label>
                                                 <div className="mt-2">
-                                                    <input type="text" onChange={changeInput} value={datosInput.apellido} name="apellido" id="apellido" autoComplete="given-name" className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset bg-transparent ring-gray-300 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder='Apellido' />
+                                                    <input  minLength={1} maxLength={48} type="text" onChange={changeInput} value={datosInput.apellido} name="apellido" id="apellido" autoComplete="given-name" className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset bg-transparent ring-gray-300 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder='Apellido' />
                                                 </div>
 
 

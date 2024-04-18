@@ -127,7 +127,7 @@ export default function BodyHome() {
               <div className='content'>
                 <h3 className='content_title'>Sérum facial</h3>
                 <p className='content_pagraf'>Potencia tu rutina con fórmulas especializadas de alta concentración y eficacia clínica.</p>
-                <Link href='//FormLogin' ><span className='btn_info'>Ver Más</span></Link>
+                <Link href='/FormLogin' ><span className='btn_info'>Ver Más</span></Link>
               </div>
             </div>
             <div className='right_info'>
@@ -145,7 +145,7 @@ export default function BodyHome() {
               <div className='content'>
                 <h3 className='content_title'>Brillos del Alma</h3>
                 <p className='content_pagraf'>Una Colección de Joyería para Reflejar tu Elegancia Interior.</p>
-                <Link href='//FormLogin'><span className='btn_info'>Ver Más</span></Link>
+                <Link href='/FormLogin'><span className='btn_info'>Ver Más</span></Link>
               </div>
             </div>
             <div className='right_info'>
@@ -224,7 +224,7 @@ export default function BodyHome() {
 
         <div className='explorar_catalogo'>
           <Link href='/FormLogin'>
-            <img className='link_catalogo' src='/img/catalogo.jpg' alt='catalogo' />
+            <img className='link_catalogo' src='/img/Catalogo.jpg' alt='catalogo' />
           </Link>
         </div>
       </section>

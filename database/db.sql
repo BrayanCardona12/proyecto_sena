@@ -5,12 +5,10 @@ CREATE TABLE usuarios(
     imagen text not null,
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
-
     tipoDoc VARCHAR(50) NOT NULL,
     numDoc text NOT NULL,
     imgDavi text,
     imgNequi text,
-
     codInt int(7) NOT NULL,
     telefono bigint,
     edad int(2),

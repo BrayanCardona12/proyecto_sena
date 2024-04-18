@@ -120,7 +120,7 @@ let router = useRouter()
             <h1 style={{ textAlign: 'center' }}>Mi Negocio</h1>
             <div>
 
-            <button onClick={router.back} style={{ color: 'white', fontSize: '20px', position:'fixed', left:0, bottom:0 }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded m-4">Regresar</button>
+            <button onClick={router.back} style={{ color: 'white', fontSize: '16px', position:'fixed', left:'5px', top:'5px', padding:'5px' }} className="bg-orange-500 hover:bg-orange-700 text-white rounded m-4 p-2">Regresar</button>
                 <div style={{width:'100%',display:'flex' ,justifyContent: 'space-evenly', alignItems:'center' ,flexWrap: 'wrap'}}>
                   
                   

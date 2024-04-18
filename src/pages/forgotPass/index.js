@@ -98,35 +98,9 @@ function forgotPass() {
 
 
 
-  // return (
-  //   <div>
-  //     <h1>Recuperar Tu Contraseña</h1>
-  //     <p>Por favor introduce el correo electrónico que usabas para iniciar sesión.</p>
-  //     {camposInput.statusChangePass || camposInput.statusCod ? <input name="email" disabled value={camposInput.email} onChange={Change} type="email" placeholder="pedrito123@gmail.com..." /> : <input name="email" value={camposInput.email} onChange={Change} type="email" placeholder="pedrito123@gmail.com..." />} <br />
-  //     {camposInput.statusChangePass || camposInput.statusCod ? '' : <button onClick={Recuperar}>Recuperar</button>}
-
-
-  //     {camposInput.statusCod ? <div>
-  //       <i>acabamos de enviar un codigo de verificación al correo indicado, por favor ingresalo:</i><br />
-  //       <input name="cod" value={camposInput.cod} onChange={Change} type="number" placeholder="1234" /> <br />
-  //       <button onClick={Enviar}>Enviar</button>
-
-  //     </div> : ''}
-
-  //     {camposInput.statusChangePass ? <div>
-  //       <h3>Excelente, hemos confirmado que eres tu</h3>
-  //       <p>Por favor, ingresa una nueva contraseña: <br />
-  //         <input name="newPass" value={camposInput.newPass} onChange={Change} type="text" placeholder="$Br4512Asz$" /> <br />
-  //         <button onClick={Cambiar}>Cambiar</button>
-  //       </p>
-  //     </div> : ''}
-  //     {error != '' ? <b>{error}</b> : ''}
-  //     {error == 'Error, este usuario no se encuentra registrado en nuestra BD, por favor registrece.' ? <Link href='/Registro_Usuarios'>Registrece</Link> : ''}
-  //   </div>
-  // )
-
   return (
     <div style={{ textAlign: 'center', maxWidth: '600px', margin: 'auto', padding: '20px', fontFamily: `monospace` }}>
+      <button onClick={router.back} style={{ color: 'white', fontSize: '16px', position:'fixed', left:0, top:0 }} className="bg-orange-500 hover:bg-orange-700 text-white rounded m-2 p-2">Regresar</button>
       <ToastContainer delay={4000} position="bottom-center"/>
       <h1 style={{ color: '#007bff' }}>Recuperar Tu Contraseña</h1>
       <p>Por favor, introduce el correo electrónico que usabas para iniciar sesión.</p>

@@ -30,7 +30,7 @@ export default function RegistroUsuarios() {
       <div className='bg_signUp'>
 
         <section>
-        <button onClick={router.back} style={{ color: 'white', fontSize: '20px', position:'absolute', left:0 }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded">Regresar</button>
+        <button onClick={router.back} style={{ color: 'white', fontSize: '16px', position:'fixed', left:0 }} className="bg-orange-500 hover:bg-orange-700 text-white rounded m-4 p-2">Regresar</button>
                                
           <div className='center_registro'>
             <div className='bg_formAdd container_registro'>

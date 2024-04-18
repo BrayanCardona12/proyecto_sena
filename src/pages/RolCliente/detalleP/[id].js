@@ -28,7 +28,7 @@ export default function DetalleP({ data }) {
                 <title>Detalle Producto</title>
             </Head>
 
-            <button onClick={router.back} style={{ color: 'white', fontSize: '20px', position: 'fixed', right: 0, bottom: 0 }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded">Regresar</button>
+            <button onClick={router.back} style={{ color: 'white', fontSize: '16px', position: 'fixed', right: 0, bottom: 0 }} className="bg-orange-500 hover:bg-orange-700 text-white rounded m-4 p-2">Regresar</button>
 
             <NavBarHome closeSesion={closeSesion} carrito={false} pedidos={true} />
 

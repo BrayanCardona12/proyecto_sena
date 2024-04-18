@@ -659,7 +659,7 @@ border-top: 1px rgb(0, 157, 128) solid ;
 
 
             <div  >
-            <button onClick={router.back} style={{ color: 'white', fontSize: '20px', position:'fixed', left:0, bottom:0 }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded m-4">Regresar</button>
+            <button onClick={router.back} style={{ color: 'white', fontSize: '20px', position:'fixed', padding: '6px', left:'10px', bottom:'10px' }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded m-4">Regresar</button>
                 <main className="hidetax hidenote hidedate body">
 
               

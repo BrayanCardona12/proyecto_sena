@@ -22,8 +22,10 @@ function NavBarHome({ textInputFilter, pedidos ,closeSesion, carrito, Change, in
         if (document.getElementById('acr')) {  document.getElementById('acr').href = `${!localStorage.getItem('inf') ? '/' : '/ActUser/' + localStorage.getItem('inf')}` }
         
         if (document.getElementById('ped')) {  document.getElementById('ped').href = `${!localStorage.getItem('inf') ? '/' : '/RolCliente/pedidos?idC=' + localStorage.getItem('inf')}` }
-        
 
+        if (document.getElementById('nombreeee') && localStorage.getItem('inf') != '2') {  document.getElementById('nombreeee').innerText = 'Cliente' } 
+        
+        if (document.getElementById('nombreeee') && localStorage.getItem('inf') == '2') {  document.getElementById('nombreeee').innerText = 'Vendedor' }
     
         document.getElementById('nombrePerfil').innerText = localStorage.getItem('theName') ? localStorage.getItem('theName') : 'unknown'
 
@@ -56,7 +58,7 @@ function NavBarHome({ textInputFilter, pedidos ,closeSesion, carrito, Change, in
                     <div className='header_info'>
                         <div className='header_datos'>
                             <p className='header_datos_per'>Hola, <span id="nombrePerfil"></span></p>
-                            <p className='header_cliente'>Cliente</p>
+                            <p id="nombreeee" className='header_cliente'>Cliente</p>
                         </div>
                         <a id="actUser" style={{ position: 'relative' }} className="foto_perfil">
                             <img id="fotoPerfil" alt='foto cliente' className='header_img' />
